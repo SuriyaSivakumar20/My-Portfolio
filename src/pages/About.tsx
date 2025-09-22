@@ -42,7 +42,7 @@ const About: React.FC = () => {
             >
               <div className="aspect-square w-full max-w-md mx-auto overflow-hidden rounded-2xl neon-border">
                 <img 
-                  src="src\su.jpg" 
+                  src="su.jpg" 
                   alt="Suriya Sivakumar" 
                   className="w-full h-full object-cover"
                 />
@@ -90,7 +90,7 @@ const About: React.FC = () => {
                 <p>
                   Beyond coding, I'm deeply interested in the startup ecosystem and how technology can drive 
                   innovation. I believe that the intersection of AI and entrepreneurship holds tremendous 
-                  potential for creating impactful solutions.
+                  {/* potential for creating impactful solutions. wsdrtyuiolkjhgfdfghjk */}
                 </p>
               </motion.div>
 
