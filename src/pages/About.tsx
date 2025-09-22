@@ -90,7 +90,7 @@ const About: React.FC = () => {
                 <p>
                   Beyond coding, I'm deeply interested in the startup ecosystem and how technology can drive 
                   innovation. I believe that the intersection of AI and entrepreneurship holds tremendous 
-                  {/* potential for creating impactful solutions. wsdrtyuiolkjhgfdfghjk */}
+                  potential for creating impactful solutions.
                 </p>
               </motion.div>
 
