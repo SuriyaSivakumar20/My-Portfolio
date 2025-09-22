@@ -42,7 +42,7 @@ const About: React.FC = () => {
             >
               <div className="aspect-square w-full max-w-md mx-auto overflow-hidden rounded-2xl neon-border">
                 <img 
-                    src="su.jpg" 
+                    src="/su.jpg" 
                     alt="Suriya Sivakumar" 
                     className="w-full h-full object-cover"
 />
