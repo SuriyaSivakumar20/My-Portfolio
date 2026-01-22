@@ -7,10 +7,17 @@ import { Download, Award, BookOpen, Briefcase } from 'lucide-react';
 const Resume: React.FC = () => {
   const experiences = [
     {
+      title: "Software Developer Intern",
+      company: "CARATLANE - A TATA PRODUCT",
+      period: "Dec 2025 - Ongoing",
+      description: "Working on real-world backend systems in a production environment, contributing to feature development and system optimization while collaborating with experienced engineers.",
+      skills: ["SQL", "Node", "js", "Go"]
+    },
+    {
       title: "Softskill training Intern",
       company: "LSE GLOBAL ACADEMY",
-      period: "Aug 2025 - Till Date",
-      description: "Pursuing a comprehensive soft skills training program covering communication, teamwork, problem-solving, and leadership. Conducting in workshops and group activities to enhance interpersonal skills.",
+      period: "Aug 2025 - Dec 2025",
+      description: "Pursued a comprehensive soft skills training program covering communication, teamwork, problem-solving, and leadership. Conducting in workshops and group activities to enhance interpersonal skills.",
       skills: ["Communication", "Teamwork", "Problem-solving", "Leadership"]
     },
     {
@@ -27,7 +34,6 @@ const Resume: React.FC = () => {
       description: "Developed and maintained web applications using React and Node.js. Collaborated with senior developers to implement new features and improve existing codebase.",
       skills: ["HTML", "CSS", "js", "MongoDB"]
     },
-
     {
       title: "Hackathon Participant",
       company: "YI Innovate Hackathon,SIH, And various",

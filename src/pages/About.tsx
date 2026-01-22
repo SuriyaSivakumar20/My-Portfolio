@@ -27,7 +27,7 @@ const About: React.FC = () => {
     <PageTransition style="slide">
       <div className="min-h-screen pt-28 pb-16">
         <div className="container mx-auto px-4">
-          <SectionTitle 
+          <SectionTitle
             title="About Me"
             subtitle="Get to know me better"
           />
@@ -41,14 +41,14 @@ const About: React.FC = () => {
               viewport={{ once: true }}
             >
               <div className="aspect-square w-full max-w-md mx-auto overflow-hidden rounded-2xl neon-border">
-                <img 
-                    src="/su.jpg" 
-                    alt="Suriya Sivakumar" 
-                    className="w-full h-full object-cover"
-/>
+                <img
+                  src="/su1.jpeg"
+                  alt="Suriya Sivakumar"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              
-              <motion.div 
+
+              <motion.div
                 className="absolute -bottom-6 -right-6 glass-card p-4 rounded-lg neon-border"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -72,34 +72,34 @@ const About: React.FC = () => {
                 </h3>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="space-y-4 text-white/80 mb-8"
                 variants={itemVariants}
               >
                 <p>
-                  I'm a Computer Science Engineering student with a keen interest in artificial intelligence, 
-                  machine learning, and innovative startups. My journey in tech began with a simple curiosity 
-                  about how computers work, which quickly evolved into a passion for creating solutions that 
+                  I'm a Computer Science Engineering student with a keen interest in artificial intelligence,
+                  machine learning, and innovative startups. My journey in tech began with a simple curiosity
+                  about how computers work, which quickly evolved into a passion for creating solutions that
                   can make a difference.
                 </p>
                 <p>
-                  My academic focus has been on developing AI solutions that can solve real-world problems. 
-                  I've worked on projects ranging from natural language processing to computer vision, always 
+                  My academic focus has been on developing AI solutions that can solve real-world problems.
+                  I've worked on projects ranging from natural language processing to computer vision, always
                   with an eye toward practical applications.
                 </p>
                 <p>
-                  Beyond coding, I'm deeply interested in the startup ecosystem and how technology can drive 
-                  innovation. I believe that the intersection of AI and entrepreneurship holds tremendous 
+                  Beyond coding, I'm deeply interested in the startup ecosystem and how technology can drive
+                  innovation. I believe that the intersection of AI and entrepreneurship holds tremendous
                   potential for creating impactful solutions.
                 </p>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="flex flex-wrap gap-4 mt-6"
                 variants={itemVariants}
               >
                 <Link to="/resume">
-                  <motion.button 
+                  <motion.button
                     className="primary-button flex items-center gap-2"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -109,12 +109,12 @@ const About: React.FC = () => {
                   </motion.button>
                 </Link>
 
-                <a 
-                  href="https://github.com/SuriyaSivakumar20" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/SuriyaSivakumar20"
+                  target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <motion.button 
+                  <motion.button
                     className="secondary-button flex items-center gap-2"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -124,12 +124,12 @@ const About: React.FC = () => {
                   </motion.button>
                 </a>
 
-                <a 
-                  href="https://www.linkedin.com/in/suriya-sivakumar-483735258/" 
-                  target="_blank" 
+                <a
+                  href="https://www.linkedin.com/in/suriya-sivakumar-483735258/"
+                  target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <motion.button 
+                  <motion.button
                     className="secondary-button flex items-center gap-2"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -143,7 +143,7 @@ const About: React.FC = () => {
           </div>
 
           {/* Fun Facts Section */}
-          <motion.div 
+          <motion.div
             className="mt-24"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -151,20 +151,20 @@ const About: React.FC = () => {
             viewport={{ once: true }}
           >
             <SectionTitle title="Fun Facts" />
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { 
-                  title: "AI Hackathon Participant", 
-                  description: "Won two appreciation in a national AI hackathon with a solution for the projects." 
+                {
+                  title: "AI Hackathon Participant",
+                  description: "Won two appreciation in a national AI hackathon with a solution for the projects."
                 },
-                { 
-                  title: "Startup Enthusiast", 
-                  description: "Participated in three startup incubation programs while still in college." 
+                {
+                  title: "Startup Enthusiast",
+                  description: "Participated in three startup incubation programs while still in college."
                 },
-                { 
-                  title: "Open Source Contributor", 
-                  description: "Actively contributes to AI open source projects with over 10+ contributions." 
+                {
+                  title: "Open Source Contributor",
+                  description: "Actively contributes to AI open source projects with over 10+ contributions."
                 }
               ].map((fact, index) => (
                 <motion.div

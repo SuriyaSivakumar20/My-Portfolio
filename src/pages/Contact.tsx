@@ -11,15 +11,15 @@ const Contact: React.FC = () => {
     subject: '',
     message: ''
   });
-  
-  const [errors, setErrors] = useState<{[key: string]: string}>({});
+
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prevData => ({ ...prevData, [name]: value }));
-    
+
     // Clear error on change
     if (errors[name]) {
       setErrors(prevErrors => {
@@ -29,40 +29,40 @@ const Contact: React.FC = () => {
       });
     }
   };
-  
+
   const validateForm = () => {
-    const newErrors: {[key: string]: string} = {};
-    
+    const newErrors: { [key: string]: string } = {};
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Email is invalid';
     }
-    
+
     if (!formData.subject.trim()) {
       newErrors.subject = 'Subject is required';
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     } else if (formData.message.length < 10) {
       newErrors.message = 'Message must be at least 10 characters';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       setIsSubmitting(true);
-      
+
       // Simulate API call
       setTimeout(() => {
         setIsSubmitting(false);
@@ -73,7 +73,7 @@ const Contact: React.FC = () => {
           subject: '',
           message: ''
         });
-        
+
         // Reset success message after 5 seconds
         setTimeout(() => {
           setSubmitSuccess(false);
@@ -81,7 +81,7 @@ const Contact: React.FC = () => {
       }, 1500);
     }
   };
-  
+
   const contactInfo = [
     {
       icon: <Mail size={24} />,
@@ -102,7 +102,7 @@ const Contact: React.FC = () => {
       link: 'https://maps.google.com/?q=Chennai,Tamil+Nadu,India'
     }
   ];
-  
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -113,21 +113,21 @@ const Contact: React.FC = () => {
       },
     },
   };
-  
+
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   };
-  
+
   return (
     <PageTransition style="slide">
       <div className="min-h-screen pt-28 pb-16">
         <div className="container mx-auto px-4">
-          <SectionTitle 
+          <SectionTitle
             title="Contact Me"
             subtitle="Let's get in touch"
           />
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <motion.div
@@ -136,7 +136,7 @@ const Contact: React.FC = () => {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <motion.div 
+              <motion.div
                 className="glass-card p-8"
                 variants={itemVariants}
               >
@@ -156,7 +156,7 @@ const Contact: React.FC = () => {
                     </p>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit}>
+                  <form method='post' action='https://formspree.io/f/xaqqrlbb'>
                     <div className="mb-6">
                       <label htmlFor="name" className="block mb-2 text-white/90">
                         Name
@@ -167,9 +167,8 @@ const Contact: React.FC = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className={`w-full p-3 bg-dark-lighter rounded-lg ${
-                          errors.name ? 'border-error focus:border-error' : 'border-transparent'
-                        }`}
+                        className={`w-full p-3 bg-dark-lighter rounded-lg ${errors.name ? 'border-error focus:border-error' : 'border-transparent'
+                          }`}
                         placeholder="Your name"
                         whileFocus={{ borderColor: '#00FFFF', boxShadow: '0 0 0 2px rgba(0, 255, 255, 0.2)' }}
                       />
@@ -177,7 +176,7 @@ const Contact: React.FC = () => {
                         <p className="mt-1 text-error text-sm">{errors.name}</p>
                       )}
                     </div>
-                    
+
                     <div className="mb-6">
                       <label htmlFor="email" className="block mb-2 text-white/90">
                         Email
@@ -188,9 +187,8 @@ const Contact: React.FC = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`w-full p-3 bg-dark-lighter rounded-lg ${
-                          errors.email ? 'border-error focus:border-error' : 'border-transparent'
-                        }`}
+                        className={`w-full p-3 bg-dark-lighter rounded-lg ${errors.email ? 'border-error focus:border-error' : 'border-transparent'
+                          }`}
                         placeholder="Your email"
                         whileFocus={{ borderColor: '#00FFFF', boxShadow: '0 0 0 2px rgba(0, 255, 255, 0.2)' }}
                       />
@@ -198,7 +196,7 @@ const Contact: React.FC = () => {
                         <p className="mt-1 text-error text-sm">{errors.email}</p>
                       )}
                     </div>
-                    
+
                     <div className="mb-6">
                       <label htmlFor="subject" className="block mb-2 text-white/90">
                         Subject
@@ -209,9 +207,8 @@ const Contact: React.FC = () => {
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        className={`w-full p-3 bg-dark-lighter rounded-lg ${
-                          errors.subject ? 'border-error focus:border-error' : 'border-transparent'
-                        }`}
+                        className={`w-full p-3 bg-dark-lighter rounded-lg ${errors.subject ? 'border-error focus:border-error' : 'border-transparent'
+                          }`}
                         placeholder="Subject of your message"
                         whileFocus={{ borderColor: '#00FFFF', boxShadow: '0 0 0 2px rgba(0, 255, 255, 0.2)' }}
                       />
@@ -219,7 +216,7 @@ const Contact: React.FC = () => {
                         <p className="mt-1 text-error text-sm">{errors.subject}</p>
                       )}
                     </div>
-                    
+
                     <div className="mb-6">
                       <label htmlFor="message" className="block mb-2 text-white/90">
                         Message
@@ -230,9 +227,8 @@ const Contact: React.FC = () => {
                         value={formData.message}
                         onChange={handleChange}
                         rows={5}
-                        className={`w-full p-3 bg-dark-lighter rounded-lg ${
-                          errors.message ? 'border-error focus:border-error' : 'border-transparent'
-                        }`}
+                        className={`w-full p-3 bg-dark-lighter rounded-lg ${errors.message ? 'border-error focus:border-error' : 'border-transparent'
+                          }`}
                         placeholder="Your message"
                         whileFocus={{ borderColor: '#00FFFF', boxShadow: '0 0 0 2px rgba(0, 255, 255, 0.2)' }}
                       />
@@ -240,7 +236,7 @@ const Contact: React.FC = () => {
                         <p className="mt-1 text-error text-sm">{errors.message}</p>
                       )}
                     </div>
-                    
+
                     <motion.button
                       type="submit"
                       className="primary-button w-full flex items-center justify-center gap-2"
@@ -267,7 +263,7 @@ const Contact: React.FC = () => {
                 )}
               </motion.div>
             </motion.div>
-            
+
             {/* Contact Info */}
             <motion.div
               variants={containerVariants}
@@ -275,12 +271,12 @@ const Contact: React.FC = () => {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <motion.div 
+              <motion.div
                 className="glass-card p-8 h-full flex flex-col"
                 variants={itemVariants}
               >
                 <h3 className="text-2xl font-bold font-poppins mb-8">Get In Touch</h3>
-                
+
                 <div className="space-y-8 mb-8">
                   {contactInfo.map((info, index) => (
                     <motion.a
@@ -307,7 +303,7 @@ const Contact: React.FC = () => {
                     </motion.a>
                   ))}
                 </div>
-                
+
                 <div className="mt-auto">
                   <h4 className="text-lg font-medium mb-4">Follow Me</h4>
                   <div className="flex space-x-4">
@@ -322,8 +318,8 @@ const Contact: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-10 h-10 rounded-full bg-dark-lighter flex items-center justify-center text-white/80 hover:text-secondary transition-colors"
-                        whileHover={{ 
-                          scale: 1.1, 
+                        whileHover={{
+                          scale: 1.1,
                           backgroundColor: 'rgba(138, 43, 226, 0.2)'
                         }}
                         whileTap={{ scale: 0.95 }}

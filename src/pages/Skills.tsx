@@ -18,8 +18,8 @@ const Skills: React.FC = () => {
     { name: "Python", level: 85 },
     { name: "Flask", level: 80 },
     { name: "Node.js", level: 80 },
-    { name: "MongoDB", level: 75 },
-    { name: "Java", level: 75 },
+    { name: "Go", level: 60 },
+    { name: "Java", level: 65 },
     { name: "SQL", level: 70 }
   ];
   
@@ -147,8 +147,9 @@ const Skills: React.FC = () => {
               {[
                 { name: "Python", level: 85, color: "#8A2BE2" },
                 { name: "JavaScript", level: 60, color: "#00FFFF" },
-                { name: "C++", level: 75, color: "#FF00FF" },
-                { name: "Java", level: 75, color: "#10B981" },
+                { name: "C++", level: 65, color: "#FF00FF" },
+                { name: "Java", level: 65, color: "#10B981" },
+                { name: "Go", level: 60, color: "#10B981" },
                 { name: "SQL", level: 70, color: "#F59E0B" }
               ].map((lang, index) => (
                 <motion.div

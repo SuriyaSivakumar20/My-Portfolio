@@ -13,14 +13,17 @@ import Resume from './pages/Resume';
 import Projects from './pages/Projects';
 import Skills from './pages/Skills';
 import Contact from './pages/Contact';
-import Articles from './pages/Articles';
+import Achievements from './pages/Achievements';
 import CodingProfiles from './pages/CodingProfiles';
+
+import GalaxyBackground from './components/common/GalaxyBackground';
 
 function App() {
   const location = useLocation();
 
   return (
-    <div className="app-container bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 min-h-screen">
+    <div className="app-container bg-transparent min-h-screen relative text-white">
+      <GalaxyBackground />
       <Navigation />
       <main>
         <AnimatePresence mode="wait">
@@ -31,7 +34,7 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/skills" element={<Skills />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/articles" element={<Articles />} />
+            <Route path="/achievements" element={<Achievements />} />
             <Route path="/coding-profiles" element={<CodingProfiles />} />
           </Routes>
         </AnimatePresence>
