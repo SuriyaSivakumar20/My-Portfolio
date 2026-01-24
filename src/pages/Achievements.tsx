@@ -16,52 +16,60 @@ const Achievements: React.FC = () => {
   const achievements: Achievement[] = [
     {
       id: 1,
-      title: "LSE Internship",
-      description: "Spent an amazing winter at LSE, where I developed my interpersonal skills as well i trained students to openup the concept of English is just a language. The team spirit was incredible!",
-      image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      title: "CARATLANE - A TATA PRODUCT Internship",
+      description: "A Real World Experience at Tata Product, where I worked on a project to improve the user experience of the Tata Product app, and also working on the main working concept of the app.", 
+      image: "/caratlane.jpeg",
       date: "Dec 2025",
       rotation: -2
     },
     {
       id: 2,
-      title: "Hackathon Victory",
-      description: "Winner of the Global AI Hackathon 2023! We built a vision-based accessibility tool for the visually impaired in 48 sleepless hours.",
-      image: "https://images.pexels.com/photos/3153198/pexels-photo-3153198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      date: "Oct 2023",
+       title: "LSE Internship",
+      description: "Spent an amazing winter at LSE, where I developed my interpersonal skills as well i trained students to openup the concept of English is just a language. The team spirit was incredible!",
+      image: "/lse-internship.jpeg",
+      date: "Dec 2025",
       rotation: 1.5
     },
     {
       id: 3,
-      title: "Innovation Prize",
-      description: "Honored to receive the Best Student Innovation Award for my research project on sustainable computing.",
-      image: "https://images.pexels.com/photos/7005041/pexels-photo-7005041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      date: "Dec 2023",
+      title: "Hackathon Victory",
+      description: "Selected in one of the Global AI Hackathon 2025! We built a vision-based accessibility tool for the visually impaired in 48 hours.",
+      image: "/hackathon-victory.jpeg",
+      date: "Nov 2025",
       rotation: -1.5
     },
     {
       id: 4,
-      title: "First Tech Talk",
-      description: "Gave my first public talk on React Performance at the local developer meetup. Nervous but thrilled!",
-      image: "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      date: "Feb 2024",
+      title: "Innovation Prize",
+      description: "Honored to receive the Best event Innovation Award for non technical event conducted in our own college.",
+      image: "/innovation-award.jpeg",
+      date: "Dec 2023",
       rotation: 2
     },
     {
       id: 5,
-      title: "Open Source Journey",
-      description: "My pull request was merged into a major open source library. Contributing to the community feels great.",
-      image: "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      date: "Mar 2024",
+      title: "First Tech Talk",
+      description: "Gave my first public talk on React Performance at the university level paper presentation. Nervous but thrilled!",
+      image: "/tech-talk.jpeg",
+      date: "Oct 2024",
       rotation: -1
     },
     {
       id: 6,
-      title: "Graduation Day",
-      description: "Simply a memorable day celebrating 4 years of hard work, coding late nights, and amazing friendships.",
-      image: "https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      date: "May 2024",
+      title: "Open Source Journey",
+      description: "Participated in hackathon with my team and learned many new concepts, other fellow team members idea on different projects.",
+      image: "/open-source.jpeg",
+      date: "Mar 2025",
       rotation: 1
-    }
+    },
+    {
+      id: 7,
+      title: "My First offer letter",
+      description: "Simply a memorable day celebrating 4 years of hard work, coding late nights, and amazing friendships.",
+      image: "/offer-letter.jpeg",
+      date: "Sept 2025",      
+      rotation: -2
+    },
   ];
 
   return (

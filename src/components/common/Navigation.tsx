@@ -67,7 +67,7 @@ const Navigation: React.FC = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold font-poppins">
-          <span className="gradient-text">Suriya</span>
+          <span className="gradient-text">Suriya Sivakumar</span>
         </Link>
 
         {/* Desktop Navigation */}
