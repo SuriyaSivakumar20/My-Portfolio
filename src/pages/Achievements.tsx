@@ -17,14 +17,14 @@ const Achievements: React.FC = () => {
     {
       id: 1,
       title: "CARATLANE - A TATA PRODUCT Internship",
-      description: "A Real World Experience at Tata Product, where I worked on a project to improve the user experience of the Tata Product app, and also working on the main working concept of the app.", 
-      image: "/caratlane.jpeg",
+      description: "A Real World Experience at Tata Product, where I worked on a project to improve the user experience of the Tata Product app, and also working on the main working concept of the app.",
+      image: "/caratlane.jpg",
       date: "Dec 2025",
       rotation: -2
     },
     {
       id: 2,
-       title: "LSE Internship",
+      title: "LSE Internship",
       description: "Spent an amazing winter at LSE, where I developed my interpersonal skills as well i trained students to openup the concept of English is just a language. The team spirit was incredible!",
       image: "/lse-internship.jpeg",
       date: "Dec 2025",
@@ -41,7 +41,7 @@ const Achievements: React.FC = () => {
     {
       id: 4,
       title: "Innovation Prize",
-      description: "Honored to receive the Best event Innovation Award for non technical event conducted in our own college.",
+      description: "Honored to receive the Best event Innovation Award for non technical event conducted in our own college, It was the 1st time we all conducted a event in our college, and it was a great experience.",
       image: "/innovation-award.jpeg",
       date: "Dec 2023",
       rotation: 2
@@ -67,8 +67,16 @@ const Achievements: React.FC = () => {
       title: "My First offer letter",
       description: "Simply a memorable day celebrating 4 years of hard work, coding late nights, and amazing friendships.",
       image: "/offer-letter.jpeg",
-      date: "Sept 2025",      
+      date: "Sept 2025",
       rotation: -2
+    },
+    {
+      id: 8,
+      title: "Motivation Session",
+      description: "Conducted a motivation session for new 1st year students at my college, sharing my journey and insights to inspire them, along with my friends.",
+      image: "/motivation-session.jpg",
+      date: "Oct 2025",
+      rotation: 1.5
     },
   ];
 
@@ -93,7 +101,7 @@ const Achievements: React.FC = () => {
               >
                 {/* Polaroid Card */}
                 <motion.div
-                  className="bg-white p-4 pb-20 shadow-2xl relative max-w-sm w-full"
+                  className="bg-white p-4 shadow-2xl relative max-w-sm w-full flex flex-col"
                   style={{ rotate: item.rotation }}
                   whileHover={{
                     rotate: 0,
@@ -112,7 +120,7 @@ const Achievements: React.FC = () => {
                   */}
 
                   {/* Image */}
-                  <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100 mb-4 border border-gray-100">
+                  <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100 mb-4 border border-gray-100 shrink-0">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -121,9 +129,9 @@ const Achievements: React.FC = () => {
                   </div>
 
                   {/* Handwritten-style Text */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 h-24 flex flex-col justify-center items-center text-center">
-                    <h3 className="text-gray-900 font-bold text-lg font-serif mb-1 leading-tight">{item.title}</h3>
-                    <p className="text-gray-600 font-serif text-sm italic leading-snug px-2 line-clamp-2">
+                  <div className="pt-2 pb-6 px-2 flex flex-col justify-center items-center text-center min-h-[5rem]">
+                    <h3 className="text-gray-900 font-bold text-lg font-serif mb-2 leading-tight">{item.title}</h3>
+                    <p className="text-gray-600 font-serif text-sm italic leading-snug px-1 mb-6">
                       {item.description}
                     </p>
                     <span className="absolute bottom-2 right-4 text-[10px] text-gray-400 font-mono">{item.date}</span>
