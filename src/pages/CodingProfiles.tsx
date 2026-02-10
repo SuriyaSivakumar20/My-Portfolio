@@ -32,7 +32,7 @@ const CodingProfiles: React.FC = () => {
         { label: "Global Rank", value: "Top 5%" }
       ],
       description: "Regular participant in LeetCode contests with a focus on algorithms and data structures.",
-      color: "#FFA116"
+      color: "#E50914" // Netflix Red
     },
     {
       id: 2,
@@ -46,7 +46,7 @@ const CodingProfiles: React.FC = () => {
         { label: "Contests", value: "46" }
       ],
       description: "Active competitive programmer with consistent participation in Codeforces rounds.",
-      color: "#318CE7"
+      color: "#B81D24" // Dark Red
     },
     {
       id: 3,
@@ -60,7 +60,7 @@ const CodingProfiles: React.FC = () => {
         { label: "Points", value: "2540" }
       ],
       description: "5-star coder in Problem Solving, Python, and Java with multiple certifications.",
-      color: "#2EC866"
+      color: "#FFFFFF" // White
     },
     {
       id: 4,
@@ -74,10 +74,10 @@ const CodingProfiles: React.FC = () => {
         { label: "Contributions", value: "750+" }
       ],
       description: "Open source contributor with projects focusing on AI, web development, and utilities.",
-      color: "#6e5494"
+      color: "#E50914" // Red
     }
   ];
-  
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -88,21 +88,21 @@ const CodingProfiles: React.FC = () => {
       },
     },
   };
-  
+
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
-  
+
   return (
     <PageTransition style="scale">
       <div className="min-h-screen pt-28 pb-16">
         <div className="container mx-auto px-4">
-          <SectionTitle 
+          <SectionTitle
             title="Coding Profiles"
             subtitle="My competitive programming and development platforms"
           />
-          
+
           <div className="flex justify-center items-center mb-12">
             <motion.div
               className="glass-card p-6 inline-flex items-center gap-3 max-w-lg text-center"
@@ -116,7 +116,7 @@ const CodingProfiles: React.FC = () => {
               </p>
             </motion.div>
           </div>
-          
+
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
             variants={containerVariants}
@@ -134,31 +134,31 @@ const CodingProfiles: React.FC = () => {
                 variants={itemVariants}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div 
-                  className="glass-card p-6 h-full relative overflow-hidden" 
+                <div
+                  className="glass-card p-6 h-full relative overflow-hidden"
                   style={{ borderLeft: `4px solid ${profile.color}` }}
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div 
+                    <div
                       className="w-10 h-10 rounded-full flex items-center justify-center"
                       style={{ backgroundColor: `${profile.color}30` }}
                     >
                       <span style={{ color: profile.color }}>{profile.icon}</span>
                     </div>
-                    
+
                     <div>
                       <h3 className="text-xl font-bold text-white">{profile.name}</h3>
                       <p className="text-sm text-white/70">@{profile.username}</p>
                     </div>
                   </div>
-                  
+
                   <p className="text-white/80 mb-6">{profile.description}</p>
-                  
+
                   <div className="grid grid-cols-3 gap-4 mb-4">
                     {profile.stats.map((stat, index) => (
                       <div key={index} className="text-center">
-                        <div 
-                          className="text-xl font-bold mb-1" 
+                        <div
+                          className="text-xl font-bold mb-1"
                           style={{ color: profile.color }}
                         >
                           {stat.value}
@@ -167,9 +167,9 @@ const CodingProfiles: React.FC = () => {
                       </div>
                     ))}
                   </div>
-                  
+
                   <div className="flex justify-end">
-                    <motion.div 
+                    <motion.div
                       className="flex items-center gap-1 text-sm"
                       style={{ color: profile.color }}
                       whileHover={{ x: 5 }}

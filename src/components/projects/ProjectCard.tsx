@@ -19,7 +19,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   return (
-    <motion.div 
+    <motion.div
       className="glass-card overflow-hidden flex flex-col h-full"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -28,19 +28,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       whileHover={{ y: -10, transition: { duration: 0.3 } }}
     >
       <div className="relative overflow-hidden h-48">
-        <img 
-          src={project.image} 
+        <img
+          src={project.image}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark-DEFAULT to-transparent opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-70" />
       </div>
-      
+
       <div className="p-6 flex-grow flex flex-col">
         <h3 className="text-xl font-bold font-poppins mb-2 text-white">{project.title}</h3>
-        
+
         <p className="text-white/70 mb-4 flex-grow">{project.description}</p>
-        
+
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map((tag, i) => (
             <span
@@ -51,7 +51,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             </span>
           ))}
         </div>
-        
+
         <div className="flex gap-3 mt-auto">
           {project.liveUrl && (
             <motion.a
@@ -66,7 +66,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
               Live Demo
             </motion.a>
           )}
-          
+
           {project.githubUrl && (
             <motion.a
               href={project.githubUrl}

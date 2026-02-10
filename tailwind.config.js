@@ -5,24 +5,24 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#8A2BE2',
-          light: '#A35FEB',
-          dark: '#6A1CB2',
+          DEFAULT: '#E50914', // Netflix Red
+          light: '#FF1F1F',
+          dark: '#B20710',
         },
         secondary: {
-          DEFAULT: '#00FFFF', 
-          light: '#66FFFF',
-          dark: '#00CCCC',
+          DEFAULT: '#FFFFFF', // White text/accents
+          light: '#F5F5F1',
+          dark: '#E5E5E5',
         },
         accent: {
-          DEFAULT: '#FF00FF',
-          light: '#FF66FF',
-          dark: '#CC00CC',
+          DEFAULT: '#000000', // Deep Black
+          light: '#141414',   // Netflix Background
+          dark: '#000000',
         },
         success: {
-          DEFAULT: '#10B981',
-          light: '#34D399',
-          dark: '#059669',
+          DEFAULT: '#46D369',
+          light: '#6CE88B',
+          dark: '#1F9D40',
         },
         warning: {
           DEFAULT: '#F59E0B',
@@ -30,15 +30,15 @@ export default {
           dark: '#D97706',
         },
         error: {
-          DEFAULT: '#EF4444',
-          light: '#F87171',
-          dark: '#DC2626',
+          DEFAULT: '#E50914',
+          light: '#FF1F1F',
+          dark: '#B20710',
         },
         dark: {
-          DEFAULT: '#0F0F1A',
-          light: '#191928',
-          lighter: '#25253A',
-          card: 'rgba(25, 25, 40, 0.6)',
+          DEFAULT: '#141414',
+          light: '#181818',
+          lighter: '#2F2F2F',
+          card: 'rgba(20, 20, 20, 0.85)', // Darker, more opaque cards
         },
       },
       fontFamily: {

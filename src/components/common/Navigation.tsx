@@ -82,8 +82,8 @@ const Navigation: React.FC = () => {
               <Link
                 to={link.path}
                 className={`flex items-center space-x-1 px-2 py-1 rounded-md transition-all ${location.pathname === link.path
-                    ? 'text-secondary font-medium'
-                    : 'text-white/80 hover:text-white'
+                  ? 'text-secondary font-medium'
+                  : 'text-white/80 hover:text-white'
                   }`}
               >
                 {link.icon}
@@ -123,8 +123,8 @@ const Navigation: React.FC = () => {
                 <Link
                   to={link.path}
                   className={`flex items-center space-x-3 py-2 ${location.pathname === link.path
-                      ? 'text-secondary font-medium'
-                      : 'text-white/80'
+                    ? 'text-secondary font-medium'
+                    : 'text-white/80'
                     }`}
                 >
                   {link.icon}

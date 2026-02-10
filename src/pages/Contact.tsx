@@ -170,7 +170,7 @@ const Contact: React.FC = () => {
                         className={`w-full p-3 bg-dark-lighter rounded-lg ${errors.name ? 'border-error focus:border-error' : 'border-transparent'
                           }`}
                         placeholder="Your name"
-                        whileFocus={{ borderColor: '#00FFFF', boxShadow: '0 0 0 2px rgba(0, 255, 255, 0.2)' }}
+                        whileFocus={{ borderColor: '#E50914', boxShadow: '0 0 0 2px rgba(229, 9, 20, 0.4)' }}
                       />
                       {errors.name && (
                         <p className="mt-1 text-error text-sm">{errors.name}</p>
@@ -190,7 +190,7 @@ const Contact: React.FC = () => {
                         className={`w-full p-3 bg-dark-lighter rounded-lg ${errors.email ? 'border-error focus:border-error' : 'border-transparent'
                           }`}
                         placeholder="Your email"
-                        whileFocus={{ borderColor: '#00FFFF', boxShadow: '0 0 0 2px rgba(0, 255, 255, 0.2)' }}
+                        whileFocus={{ borderColor: '#E50914', boxShadow: '0 0 0 2px rgba(229, 9, 20, 0.4)' }}
                       />
                       {errors.email && (
                         <p className="mt-1 text-error text-sm">{errors.email}</p>
@@ -210,7 +210,7 @@ const Contact: React.FC = () => {
                         className={`w-full p-3 bg-dark-lighter rounded-lg ${errors.subject ? 'border-error focus:border-error' : 'border-transparent'
                           }`}
                         placeholder="Subject of your message"
-                        whileFocus={{ borderColor: '#00FFFF', boxShadow: '0 0 0 2px rgba(0, 255, 255, 0.2)' }}
+                        whileFocus={{ borderColor: '#E50914', boxShadow: '0 0 0 2px rgba(229, 9, 20, 0.4)' }}
                       />
                       {errors.subject && (
                         <p className="mt-1 text-error text-sm">{errors.subject}</p>
@@ -230,7 +230,7 @@ const Contact: React.FC = () => {
                         className={`w-full p-3 bg-dark-lighter rounded-lg ${errors.message ? 'border-error focus:border-error' : 'border-transparent'
                           }`}
                         placeholder="Your message"
-                        whileFocus={{ borderColor: '#00FFFF', boxShadow: '0 0 0 2px rgba(0, 255, 255, 0.2)' }}
+                        whileFocus={{ borderColor: '#E50914', boxShadow: '0 0 0 2px rgba(229, 9, 20, 0.4)' }}
                       />
                       {errors.message && (
                         <p className="mt-1 text-error text-sm">{errors.message}</p>
@@ -320,7 +320,7 @@ const Contact: React.FC = () => {
                         className="w-10 h-10 rounded-full bg-dark-lighter flex items-center justify-center text-white/80 hover:text-secondary transition-colors"
                         whileHover={{
                           scale: 1.1,
-                          backgroundColor: 'rgba(138, 43, 226, 0.2)'
+                          backgroundColor: 'rgba(229, 9, 20, 0.8)'
                         }}
                         whileTap={{ scale: 0.95 }}
                       >

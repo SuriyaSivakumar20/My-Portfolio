@@ -47,7 +47,7 @@ const Resume: React.FC = () => {
     {
       degree: "B.Tech in Computer Science and Engineering",
       institution: "Manakula Vinayagar Institute of Technology",
-      period: "2022 - 2026",      
+      period: "2022 - 2026",
       description: "Specializing in Computer Science Softwares and Other Recent Softwares. Maintaining a CGPA of 8.4/10.",
       courses: ["Data Structures & Algorithms", "Database Management System", "Artificial Intelligence", "Computer Networks"]
     },
@@ -65,14 +65,14 @@ const Resume: React.FC = () => {
     "TensorFlow Developer Certification - Google",
     "AWS Certified Machine Learning - Specialty",
     "Full Stack Web Development - Udemy",
-    "Python & C Programming (Edusphere)",   
-"Cyber Security Certificate (Forage)",   
-"NLP with Deep Learning (Coursera)",
-"Google Cyber Security Certificate (Coursera)",
-"UI/UX Design (VEI Technologies)",
-"HTML/CSS - Free Code Camp (Datanerdz.ai)", 
-"Workshops: AI & LLM (NIT Puducherry), Cyber Security (IIT Madras). ",
-"Participation in Hackathons such as Yi-innovation, Unisys, and Smart India Hackathon.  ",
+    "Python & C Programming (Edusphere)",
+    "Cyber Security Certificate (Forage)",
+    "NLP with Deep Learning (Coursera)",
+    "Google Cyber Security Certificate (Coursera)",
+    "UI/UX Design (VEI Technologies)",
+    "HTML/CSS - Free Code Camp (Datanerdz.ai)",
+    "Workshops: AI & LLM (NIT Puducherry), Cyber Security (IIT Madras). ",
+    "Participation in Hackathons such as Yi-innovation, Unisys, and Smart India Hackathon.  ",
   ];
 
   // Animation variants
@@ -97,12 +97,12 @@ const Resume: React.FC = () => {
       <div className="min-h-screen pt-28 pb-16">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
-            <SectionTitle 
+            <SectionTitle
               title="Resume"
               subtitle="My professional background"
               align="left"
             />
-            
+
             <motion.a
               href="src\resume\resume.pdf"
               download="Gotcha!.pdf"
@@ -119,7 +119,7 @@ const Resume: React.FC = () => {
           </div>
 
           {/* Experience Section */}
-          <motion.section 
+          <motion.section
             className="mb-16"
             variants={containerVariants}
             initial="hidden"
@@ -130,17 +130,17 @@ const Resume: React.FC = () => {
               <Briefcase size={24} className="text-secondary" />
               <h2 className="text-2xl font-bold font-poppins">Work Experience</h2>
             </div>
-            
+
             <div className="space-y-8">
               {experiences.map((exp, index) => (
                 <motion.div
                   key={index}
                   className="glass-card p-6 relative overflow-hidden"
                   variants={itemVariants}
-                  whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(138, 43, 226, 0.2)' }}
+                  whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(229, 9, 20, 0.4)' }}
                 >
                   <div className="absolute top-0 left-0 h-full w-1 bg-gradient-to-b from-primary to-secondary" />
-                  
+
                   <div className="ml-2">
                     <div className="flex flex-wrap justify-between items-start gap-2 mb-2">
                       <h3 className="text-xl font-bold text-white">{exp.title}</h3>
@@ -148,14 +148,14 @@ const Resume: React.FC = () => {
                         {exp.period}
                       </span>
                     </div>
-                    
+
                     <h4 className="text-lg text-secondary mb-3">{exp.company}</h4>
                     <p className="text-white/80 mb-4">{exp.description}</p>
-                    
+
                     <div className="flex flex-wrap gap-2">
                       {exp.skills.map((skill, i) => (
-                        <span 
-                          key={i} 
+                        <span
+                          key={i}
                           className="text-xs px-3 py-1 bg-dark-lighter rounded-full text-white/70"
                         >
                           {skill}
@@ -169,7 +169,7 @@ const Resume: React.FC = () => {
           </motion.section>
 
           {/* Education Section */}
-          <motion.section 
+          <motion.section
             className="mb-16"
             variants={containerVariants}
             initial="hidden"
@@ -180,17 +180,17 @@ const Resume: React.FC = () => {
               <BookOpen size={24} className="text-secondary" />
               <h2 className="text-2xl font-bold font-poppins">Education</h2>
             </div>
-            
+
             <div className="space-y-8">
               {education.map((edu, index) => (
                 <motion.div
                   key={index}
                   className="glass-card p-6 relative overflow-hidden"
                   variants={itemVariants}
-                  whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(138, 43, 226, 0.2)' }}
+                  whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(229, 9, 20, 0.4)' }}
                 >
                   <div className="absolute top-0 left-0 h-full w-1 bg-gradient-to-b from-secondary to-accent" />
-                  
+
                   <div className="ml-2">
                     <div className="flex flex-wrap justify-between items-start gap-2 mb-2">
                       <h3 className="text-xl font-bold text-white">{edu.degree}</h3>
@@ -198,14 +198,14 @@ const Resume: React.FC = () => {
                         {edu.period}
                       </span>
                     </div>
-                    
+
                     <h4 className="text-lg text-secondary mb-3">{edu.institution}</h4>
                     <p className="text-white/80 mb-4">{edu.description}</p>
-                    
+
                     <div className="flex flex-wrap gap-2">
                       {edu.courses.map((course, i) => (
-                        <span 
-                          key={i} 
+                        <span
+                          key={i}
                           className="text-xs px-3 py-1 bg-dark-lighter rounded-full text-white/70"
                         >
                           {course}
@@ -229,14 +229,14 @@ const Resume: React.FC = () => {
               <Award size={24} className="text-secondary" />
               <h2 className="text-2xl font-bold font-poppins">Certifications</h2>
             </div>
-            
-            <motion.div 
+
+            <motion.div
               className="glass-card p-6"
               variants={itemVariants}
             >
               <ul className="space-y-4">
                 {certifications.map((cert, index) => (
-                  <motion.li 
+                  <motion.li
                     key={index}
                     className="flex items-start gap-3"
                     initial={{ opacity: 0, x: -10 }}

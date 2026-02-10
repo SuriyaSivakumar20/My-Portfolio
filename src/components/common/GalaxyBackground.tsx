@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import anime from 'animejs';
+import Antigravity from './Antigravity';
 
 const GalaxyBackground: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -14,15 +15,13 @@ const GalaxyBackground: React.FC = () => {
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
 
-        // Resize handler
         const handleResize = () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         };
         window.addEventListener('resize', handleResize);
 
-        // Star generation
-        const colors = ['#FFF', '#8A2BE2', '#00FFFF', '#FF00FF'];
+        const colors = ['#FFF', '#E50914', '#B20710', '#FFFFFF'];
         const stars: any[] = [];
         const numStars = 400;
 
@@ -37,33 +36,25 @@ const GalaxyBackground: React.FC = () => {
             });
         }
 
-        // Animation Loop
         const animate = () => {
             ctx.clearRect(0, 0, width, height);
-
             stars.forEach(star => {
                 ctx.globalAlpha = star.alpha;
                 ctx.fillStyle = star.color;
                 ctx.beginPath();
                 ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
                 ctx.fill();
-
-                // Basic movement
                 star.y -= star.speed;
-
-                // Reset if off screen
                 if (star.y < 0) {
                     star.y = height;
                     star.x = Math.random() * width;
                 }
             });
-
             requestAnimationFrame(animate);
         };
 
         const animFrame = requestAnimationFrame(animate);
 
-        // Anime.js integration for "Pulse" effect on random stars
         const animation = anime({
             targets: stars,
             radius: [
@@ -77,17 +68,12 @@ const GalaxyBackground: React.FC = () => {
             delay: anime.stagger(100),
             loop: true,
             easing: 'easeInOutSine',
-            update: () => {
-                // This empty update ensures animejs values are applied to the objects
-                // The canvas loop reads these updated values
-            }
+            update: () => { }
         });
 
-        // Unique Scroll Interaction: Warp Speed Effect
         const handleScroll = () => {
             const scrollY = window.scrollY;
-            const speedMultiplier = 1 + (scrollY / 1000); // Speed up as you scroll down
-
+            const speedMultiplier = 1 + (scrollY / 1000);
             stars.forEach(star => {
                 star.speed = (Math.random() * 0.5 + 0.1) * speedMultiplier;
             });
@@ -103,10 +89,34 @@ const GalaxyBackground: React.FC = () => {
     }, []);
 
     return (
-        <canvas
-            ref={canvasRef}
-            className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none bg-dark"
-        />
+        <div className="fixed inset-0 -z-10 bg-dark overflow-hidden">
+            {/* 3D Antigravity Layer */}
+            <div className="absolute inset-0 z-0 opacity-60">
+                <Antigravity
+                    count={300}
+                    magnetRadius={14}
+                    ringRadius={7}
+                    waveSpeed={0.4}
+                    waveAmplitude={1}
+                    particleSize={1.5}
+                    lerpSpeed={0.05}
+                    color="#E50914" // Changed to Netflix Red
+                    autoAnimate
+                    particleVariance={1}
+                    rotationSpeed={0}
+                    depthFactor={1}
+                    pulseSpeed={3}
+                    particleShape="capsule"
+                    fieldStrength={10}
+                />
+            </div>
+
+            {/* 2D Star Layer (Galaxy) */}
+            <canvas
+                ref={canvasRef}
+                className="absolute inset-0 z-10 pointer-events-none"
+            />
+        </div>
     );
 };
 

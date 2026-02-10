@@ -174,7 +174,7 @@ const About: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(138, 43, 226, 0.2)' }}
+                  whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(229, 9, 20, 0.4)' }}
                 >
                   <h3 className="text-xl font-bold font-poppins mb-3 text-secondary">{fact.title}</h3>
                   <p className="text-white/70">{fact.description}</p>

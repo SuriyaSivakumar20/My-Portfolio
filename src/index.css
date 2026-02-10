@@ -5,14 +5,18 @@
 @tailwind utilities;
 
 :root {
-  --primary: #8A2BE2;
-  --secondary: #00FFFF;
-  --accent: #FF00FF;
-  --success: #10B981;
+  --primary: #E50914;
+  /* Netflix Red */
+  --secondary: #FFFFFF;
+  /* White */
+  --accent: #000000;
+  /* Black */
+  --success: #46D369;
   --warning: #F59E0B;
-  --error: #EF4444;
-  --dark-bg: #0F0F1A;
-  --card-bg: rgba(25, 25, 40, 0.4);
+  --error: #E50914;
+  --dark-bg: #141414;
+  /* Netflix Background */
+  --card-bg: rgba(20, 20, 20, 0.85);
 }
 
 * {
@@ -38,15 +42,20 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--primary), var(--secondary));
+  background: var(--primary);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(var(--accent), var(--secondary));
+  background: #B20710;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Poppins', sans-serif;
   line-height: 1.2;
 }
@@ -76,7 +85,7 @@ p {
   bottom: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+  background: linear-gradient(45deg, var(--primary), #B20710);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -85,11 +94,8 @@ p {
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
 }
 
 .app-container {
@@ -108,7 +114,8 @@ main {
   padding: 0 24px;
 }
 
-button, .button {
+button,
+.button {
   cursor: pointer;
   padding: 12px 24px;
   border-radius: 8px;
@@ -119,29 +126,30 @@ button, .button {
 }
 
 .primary-button {
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: var(--primary);
   color: white;
-  box-shadow: 0 4px 10px rgba(138, 43, 226, 0.3);
+  box-shadow: 0 4px 10px rgba(229, 9, 20, 0.3);
 }
 
 .primary-button:hover {
+  background: #B20710;
+  box-shadow: 0 6px 15px rgba(229, 9, 20, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(138, 43, 226, 0.4);
 }
 
 .secondary-button {
   background: transparent;
   color: white;
-  border: 1px solid var(--secondary);
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .secondary-button:hover {
-  background: rgba(0, 255, 255, 0.1);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: white;
 }
 
-input, textarea {
+input,
+textarea {
   background: rgba(15, 15, 26, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
@@ -150,9 +158,10 @@ input, textarea {
   transition: all 0.3s ease;
 }
 
-input:focus, textarea:focus {
-  border-color: var(--secondary);
-  box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2);
+input:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
   outline: none;
 }
 
