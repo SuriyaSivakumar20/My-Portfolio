@@ -6,7 +6,7 @@ import ProjectCard, { ProjectType } from '../components/projects/ProjectCard';
 
 const Projects: React.FC = () => {
   const [filter, setFilter] = useState<string>('all');
-  
+
   const projects: ProjectType[] = [
     {
       id: 1,
@@ -20,7 +20,7 @@ const Projects: React.FC = () => {
     {
       id: 2,
       title: "Movie_Hub",
-      description: "A platform that aggregates Movie Watching wiht the friends and families on a local host.A entertaining platform that allows to upload a video or the movie you want to watch with your loved ones!.",
+      description: "A platform that aggregates Movie Watching with the friends and families on a local host. A entertaining platform that allows to upload a video or the movie you want to watch with your loved ones!.",
       image: "https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["React", "Node.js", "Python", "Html", "CSS"],
       liveUrl: "https://suriyasivakumar20.github.io/Watch_Hub/",
@@ -60,52 +60,50 @@ const Projects: React.FC = () => {
       githubUrl: "https://github.com/SuriyaSivakumar20/Transition-Mechanism-of-IPV4-to-IPV6"
     }
   ];
-  
+
   // Get unique tags for filter buttons
   const allTags = Array.from(new Set(projects.flatMap(project => project.tags)));
-  
+
   // Filter projects based on selected filter
-  const filteredProjects = filter === 'all' 
-    ? projects 
+  const filteredProjects = filter === 'all'
+    ? projects
     : projects.filter(project => project.tags.includes(filter));
-  
+
   return (
     <PageTransition style="rotate">
       <div className="min-h-screen pt-28 pb-16">
         <div className="container mx-auto px-4">
-          <SectionTitle 
+          <SectionTitle
             title="Projects"
             subtitle="Check out some of my recent work"
           />
-          
+
           {/* Filter Buttons */}
-          <motion.div 
+          <motion.div
             className="flex flex-wrap justify-center gap-3 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             <motion.button
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                filter === 'all' 
-                  ? 'bg-primary text-white' 
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filter === 'all'
+                  ? 'bg-primary text-white'
                   : 'bg-dark-lighter text-white/70 hover:text-white'
-              }`}
+                }`}
               onClick={() => setFilter('all')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               All
             </motion.button>
-            
+
             {allTags.map((tag, index) => (
               <motion.button
                 key={index}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  filter === tag 
-                    ? 'bg-primary text-white' 
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filter === tag
+                    ? 'bg-primary text-white'
                     : 'bg-dark-lighter text-white/70 hover:text-white'
-                }`}
+                  }`}
                 onClick={() => setFilter(tag)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -114,7 +112,7 @@ const Projects: React.FC = () => {
               </motion.button>
             ))}
           </motion.div>
-          
+
           {/* Projects Grid */}
           <AnimatePresence mode="wait">
             <motion.div
@@ -130,17 +128,17 @@ const Projects: React.FC = () => {
               ))}
             </motion.div>
           </AnimatePresence>
-          
+
           {/* No Results Message */}
           {filteredProjects.length === 0 && (
-            <motion.div 
+            <motion.div
               className="text-center py-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
               <p className="text-white/70 text-lg">No projects found with the selected filter.</p>
-              <button 
+              <button
                 className="mt-4 secondary-button"
                 onClick={() => setFilter('all')}
               >

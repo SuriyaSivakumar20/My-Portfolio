@@ -53,11 +53,11 @@ const Home: React.FC = () => {
             initial="hidden"
             animate="visible"
           >
-            <motion.div 
+            <motion.div
               className="mb-6"
               variants={itemVariants}
             >
-              <motion.h1 
+              <motion.h1
                 className="text-4xl md:text-6xl font-bold font-poppins mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -66,31 +66,31 @@ const Home: React.FC = () => {
                 Hi, I'm <span className="gradient-text">Suriya Sivakumar</span> 👋
               </motion.h1>
 
-              <motion.h2 
+              <motion.h2
                 className="text-xl md:text-2xl text-white/90 mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                CS Engineer | AI Enthusiast | Startup Visionary
+                CS Engineer | AI Enthusiast | Freelance Developer
               </motion.h2>
             </motion.div>
 
-            <motion.p 
+            <motion.p
               className="text-lg text-white/80 mb-8 leading-relaxed"
               variants={itemVariants}
             >
-              Welcome to my digital portfolio. I'm passionate about artificial intelligence, 
-              innovative startups, and cutting-edge technologies that shape our future. 
-              Explore my projects and discover how I'm working to make a difference in the tech world.
+              Welcome to my digital portfolio. I'm passionate about artificial intelligence,
+              innovative solutions, and cutting-edge technologies that shape our future.
+              Explore my freelance projects and discover how I'm helping businesses thrive in the tech world.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               className="flex flex-wrap gap-4"
               variants={itemVariants}
             >
               <Link to="/projects">
-                <motion.button 
+                <motion.button
                   className="primary-button flex items-center gap-2"
                   whileHover={{ scale: 1.05, x: 5 }}
                   whileTap={{ scale: 0.95 }}
@@ -101,7 +101,7 @@ const Home: React.FC = () => {
               </Link>
 
               <Link to="/contact">
-                <motion.button 
+                <motion.button
                   className="secondary-button"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

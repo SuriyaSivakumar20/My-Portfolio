@@ -12,13 +12,13 @@ const Footer: React.FC = () => {
 
   const footerVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         staggerChildren: 0.1,
-        duration: 0.5 
-      } 
+        duration: 0.5
+      }
     }
   };
 
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <motion.footer 
+    <motion.footer
       className="bg-dark-light/90 backdrop-blur-md py-8 mt-16"
       variants={footerVariants}
       initial="hidden"
@@ -42,16 +42,16 @@ const Footer: React.FC = () => {
               <span className="gradient-text">Suriya Sivakumar</span>
             </h3>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="flex space-x-4"
             variants={itemVariants}
           >
             {socialLinks.map((link) => (
-              <a 
+              <a
                 key={link.name}
-                href={link.url} 
-                target="_blank" 
+                href={link.url}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/70 hover:text-secondary transition-colors duration-300"
                 aria-label={link.name}
@@ -66,13 +66,13 @@ const Footer: React.FC = () => {
             ))}
           </motion.div>
         </div>
-        
-        <motion.div 
+
+        <motion.div
           className="mt-8 pt-6 border-t border-white/10 text-center text-white/60 text-sm"
           variants={itemVariants}
         >
           <p>© {new Date().getFullYear()} Suriya Sivakumar. All rights reserved.</p>
-          <p className="mt-2">CS Engineer | AI Enthusiast | Startup Visionary</p>
+          <p className="mt-2">CS Engineer | AI Enthusiast | Freelance Developer</p>
         </motion.div>
       </div>
     </motion.footer>

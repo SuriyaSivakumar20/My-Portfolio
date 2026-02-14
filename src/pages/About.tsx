@@ -78,19 +78,19 @@ const About: React.FC = () => {
               >
                 <p>
                   I'm a Computer Science Engineering student with a keen interest in artificial intelligence,
-                  machine learning, and innovative startups. My journey in tech began with a simple curiosity
+                  machine learning, and freelance development. My journey in tech began with a simple curiosity
                   about how computers work, which quickly evolved into a passion for creating solutions that
-                  can make a difference.
+                  solve real business problems.
                 </p>
                 <p>
-                  My academic focus has been on developing AI solutions that can solve real-world problems.
+                  My academic focus has been on developing AI solutions that can be applied to real-world scenarios.
                   I've worked on projects ranging from natural language processing to computer vision, always
-                  with an eye toward practical applications.
+                  with an eye toward practical implementation and client needs.
                 </p>
                 <p>
-                  Beyond coding, I'm deeply interested in the startup ecosystem and how technology can drive
-                  innovation. I believe that the intersection of AI and entrepreneurship holds tremendous
-                  potential for creating impactful solutions.
+                  Beyond coding, I'm deeply interested in the freelance ecosystem and how technology can drive
+                  business growth. I believe that professional software development holds tremendous
+                  potential for transforming ideas into reality.
                 </p>
               </motion.div>
 
@@ -159,8 +159,8 @@ const About: React.FC = () => {
                   description: "Won two appreciation in a national AI hackathon with a solution for the projects."
                 },
                 {
-                  title: "Startup Enthusiast",
-                  description: "Participated in three startup incubation programs while still in college."
+                  title: "Freelance Developer",
+                  description: "Delivering high-quality software solutions for clients while pursuing my degree."
                 },
                 {
                   title: "Open Source Contributor",
