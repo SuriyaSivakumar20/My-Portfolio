@@ -73,7 +73,7 @@ const Home: React.FC = () => {
                 >
                   Suriya Sivakumar
                 </span>
-                {' '}👋
+                {''}👋
               </motion.h1>
 
               <motion.h2

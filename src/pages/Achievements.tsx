@@ -17,9 +17,9 @@ const Achievements: React.FC = () => {
     {
       id: 1,
       title: "CARATLANE - A TATA PRODUCT Internship",
-      description: "A Real World Experience at Tata Product, where I worked on a project to improve the user experience of the Tata Product app, and also working on the main working concept of the app.",
+      description: "A Real World Experience at Tata Product, where I worked on a project to improve the user experience of the EZ Sales app, and also working on the backend working concept of the app, along with the internal team dependency automation scripts.",
       image: "/caratlane.jpg",
-      date: "Dec 2025",
+      date: "Dec 2025 - Ongoing",
       rotation: -2
     },
     {
@@ -27,13 +27,13 @@ const Achievements: React.FC = () => {
       title: "LSE Internship",
       description: "Spent an amazing winter at LSE, where I developed my interpersonal skills as well i trained students to openup the concept of English is just a language. The team spirit was incredible!",
       image: "/lse-internship.jpeg",
-      date: "Dec 2025",
+      date: "Sept 2025 - Dec 2025",
       rotation: 1.5
     },
     {
       id: 3,
       title: "Hackathon Victory",
-      description: "Selected in one of the Global AI Hackathon 2025! We built a vision-based accessibility tool for the visually impaired in 48 hours.",
+      description: "Selected in one of the Global AI Hackathon 2025! We built a vision-based accessibility tool for the visually impaired in 48 hours. The real-time world problem to the productive solution of the productivity.",
       image: "/hackathon-victory.jpeg",
       date: "Nov 2025",
       rotation: -1.5
@@ -49,7 +49,7 @@ const Achievements: React.FC = () => {
     {
       id: 5,
       title: "First Tech Talk",
-      description: "Gave my first public talk on React Performance at the university level paper presentation. Nervous but thrilled!",
+      description: "Gave my first public talk on Business Intelligence at the university level paper presentation. Nervous but thrilled!",
       image: "/tech-talk.jpeg",
       date: "Oct 2024",
       rotation: -1
