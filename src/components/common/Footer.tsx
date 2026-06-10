@@ -4,10 +4,10 @@ import { Github, Linkedin, Instagram, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const socialLinks = [
-    { name: 'GitHub', icon: <Github size={20} />, url: 'https://github.com/SuriyaSivakumar20' },
-    { name: 'LinkedIn', icon: <Linkedin size={20} />, url: 'https://www.linkedin.com/in/suriya-sivakumar-483735258/' },
-    { name: 'Instagram', icon: <Instagram size={20} />, url: 'https://www.instagram.com/iam.suriyaa._/' },
-    { name: 'Email', icon: <Mail size={20} />, url: 'mailto:suriyasivakumar08@gmail.com' }
+    { name: 'GitHub', icon: <Github size={18} />, url: 'https://github.com/SuriyaSivakumar20' },
+    { name: 'LinkedIn', icon: <Linkedin size={18} />, url: 'https://www.linkedin.com/in/suriya-sivakumar-483735258/' },
+    { name: 'Instagram', icon: <Instagram size={18} />, url: 'https://www.instagram.com/iam.suriyaa._/' },
+    { name: 'Email', icon: <Mail size={18} />, url: 'mailto:suriyasivakumar08@gmail.com' }
   ];
 
   const footerVariants = {
@@ -15,10 +15,7 @@ const Footer: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        staggerChildren: 0.1,
-        duration: 0.5
-      }
+      transition: { staggerChildren: 0.1, duration: 0.5 }
     }
   };
 
@@ -29,50 +26,95 @@ const Footer: React.FC = () => {
 
   return (
     <motion.footer
-      className="bg-dark-light/90 backdrop-blur-md py-8 mt-16"
+      className="bg-black border-t-2 border-white/20 py-10 mt-16 relative"
       variants={footerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
     >
+      {/* Top pixel divider line with game-panel feel */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-white/10" />
+
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <motion.div variants={itemVariants}>
-            <h3 className="text-xl font-bold font-poppins mb-4 md:mb-0">
-              <span className="gradient-text">Suriya Sivakumar</span>
-            </h3>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+
+          {/* Brand */}
+          <motion.div variants={itemVariants} className="flex flex-col items-center md:items-start gap-2">
+            <span
+              style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: '11px',
+                color: '#FFFFFF',
+                textShadow: '2px 2px 0px #444',
+                letterSpacing: '0.08em',
+              }}
+            >
+              SURIYA SIVAKUMAR
+            </span>
+            <span
+              style={{
+                fontFamily: "'Share Tech Mono', monospace",
+                fontSize: '11px',
+                color: '#888888',
+                letterSpacing: '0.06em',
+              }}
+            >
+              CS Engineer | AI Enthusiast | Freelance Developer
+            </span>
           </motion.div>
 
-          <motion.div
-            className="flex space-x-4"
-            variants={itemVariants}
-          >
+          {/* Social Icons */}
+          <motion.div className="flex items-center gap-3" variants={itemVariants}>
             {socialLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-secondary transition-colors duration-300"
                 aria-label={link.name}
+                className="group"
               >
                 <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-10 h-10 border-2 border-white/30 flex items-center justify-center text-white/50
+                             hover:border-white hover:text-white hover:bg-white hover:text-black
+                             transition-all duration-150"
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
+                  style={{ color: 'inherit' }}
                 >
-                  {link.icon}
+                  <span className="group-hover:text-black transition-colors">{link.icon}</span>
                 </motion.div>
               </a>
             ))}
           </motion.div>
         </div>
 
+        {/* Bottom bar */}
         <motion.div
-          className="mt-8 pt-6 border-t border-white/10 text-center text-white/60 text-sm"
+          className="mt-8 pt-6 border-t border-white/10 text-center"
           variants={itemVariants}
         >
-          <p>© {new Date().getFullYear()} Suriya Sivakumar. All rights reserved.</p>
-          <p className="mt-2">CS Engineer | AI Enthusiast | Freelance Developer</p>
+          <p
+            style={{
+              fontFamily: "'Share Tech Mono', monospace",
+              fontSize: '11px',
+              color: '#555555',
+              letterSpacing: '0.06em',
+            }}
+          >
+            © {new Date().getFullYear()} SURIYA SIVAKUMAR &nbsp;|&nbsp; ALL RIGHTS RESERVED
+          </p>
+          <p
+            className="mt-2"
+            style={{
+              fontFamily: "'Share Tech Mono', monospace",
+              fontSize: '10px',
+              color: '#333333',
+              letterSpacing: '0.04em',
+            }}
+          >
+            [ PRESS START TO COLLABORATE ]
+          </p>
         </motion.div>
       </div>
     </motion.footer>

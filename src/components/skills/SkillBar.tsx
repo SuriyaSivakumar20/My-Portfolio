@@ -15,7 +15,7 @@ interface SkillBarProps {
 const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
   const barVariants = {
     initial: { width: 0 },
-    animate: { 
+    animate: {
       width: `${skill.level}%`,
       transition: {
         duration: 1,
@@ -27,31 +27,35 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
 
   const labelVariants = {
     initial: { opacity: 0, x: -20 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       x: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.5,
         delay: 0.1 + (index * 0.1),
       }
     }
   };
 
-  const getColorClass = () => {
-    if (skill.color) return skill.color;
-    
-    if (skill.level >= 90) return 'from-secondary to-primary';
-    if (skill.level >= 75) return 'from-primary to-secondary';
-    if (skill.level >= 60) return 'from-accent to-primary';
-    if (skill.level >= 40) return 'from-primary-light to-accent';
-    return 'from-gray-400 to-gray-600';
+  // Monochrome fill based on level: brighter = higher level
+  const getFill = () => {
+    if (skill.level >= 90) return '#FFFFFF';
+    if (skill.level >= 75) return '#DDDDDD';
+    if (skill.level >= 60) return '#BBBBBB';
+    if (skill.level >= 40) return '#999999';
+    return '#666666';
   };
 
   return (
-    <div className="mb-6">
+    <div className="mb-5">
       <div className="flex justify-between mb-2">
-        <motion.span 
-          className="font-medium text-white"
+        <motion.span
+          style={{
+            fontFamily: "'Share Tech Mono', monospace",
+            fontSize: '12px',
+            color: '#EEEEEE',
+            letterSpacing: '0.05em',
+          }}
           variants={labelVariants}
           initial="initial"
           whileInView="animate"
@@ -59,8 +63,12 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
         >
           {skill.name}
         </motion.span>
-        <motion.span 
-          className="text-white/70"
+        <motion.span
+          style={{
+            fontFamily: "'Press Start 2P', monospace",
+            fontSize: '9px',
+            color: '#888888',
+          }}
           variants={labelVariants}
           initial="initial"
           whileInView="animate"
@@ -69,10 +77,21 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
           {skill.level}%
         </motion.span>
       </div>
-      
-      <div className="h-3 bg-dark-lighter rounded-full overflow-hidden">
+
+      {/* Track */}
+      <div
+        className="overflow-hidden"
+        style={{
+          height: '8px',
+          background: '#1a1a1a',
+          border: '1px solid #333333',
+        }}
+      >
         <motion.div
-          className={`h-full bg-gradient-to-r ${getColorClass()} rounded-full`}
+          style={{
+            height: '100%',
+            background: getFill(),
+          }}
           variants={barVariants}
           initial="initial"
           whileInView="animate"

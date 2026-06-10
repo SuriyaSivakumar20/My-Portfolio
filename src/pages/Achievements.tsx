@@ -99,42 +99,91 @@ const Achievements: React.FC = () => {
                 viewport={{ once: true }}
                 className="relative flex justify-center"
               >
-                {/* Polaroid Card */}
+                {/* Polaroid Card — monochrome: white card on black background */}
                 <motion.div
-                  className="bg-white p-4 shadow-2xl relative max-w-sm w-full flex flex-col"
-                  style={{ rotate: item.rotation }}
+                  className="relative max-w-sm w-full flex flex-col"
+                  style={{
+                    rotate: item.rotation,
+                    background: '#F8F8F8',
+                    padding: '16px 16px 24px 16px',
+                    boxShadow: '8px 8px 0px rgba(255,255,255,0.12)',
+                    border: '1px solid #E0E0E0',
+                  }}
                   whileHover={{
                     rotate: 0,
-                    scale: 1.05,
+                    scale: 1.04,
                     zIndex: 20,
+                    boxShadow: '12px 12px 0px rgba(255,255,255,0.25)',
                     transition: { duration: 0.3 }
                   }}
                 >
-                  {/* Pin Effect */}
+                  {/* Pin Effect — monochrome gray pin */}
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
-                    <div className="w-4 h-4 rounded-full bg-red-500 shadow-md border-2 border-white/50"></div>
-                  </div>
-
-                  {/* Tape Effect (Alternative to pin, uncomment if preferred)
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-24 h-8 bg-white/30 backdrop-blur-sm rotate-2 shadow-sm border border-white/20"></div>
-                  */}
-
-                  {/* Image */}
-                  <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100 mb-4 border border-gray-100 shrink-0">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover filter brightness-[1.02] contrast-[1.05]"
+                    <div
+                      style={{
+                        width: '16px',
+                        height: '16px',
+                        borderRadius: '50%',
+                        background: '#555555',
+                        border: '2px solid #999999',
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.5)',
+                      }}
                     />
                   </div>
 
-                  {/* Handwritten-style Text */}
+                  {/* Image — grayscale */}
+                  <div
+                    className="w-full overflow-hidden mb-4 shrink-0"
+                    style={{
+                      aspectRatio: '4/3',
+                      background: '#CCCCCC',
+                      border: '1px solid #DDDDDD',
+                    }}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Text area */}
                   <div className="pt-2 pb-6 px-2 flex flex-col justify-center items-center text-center min-h-[5rem]">
-                    <h3 className="text-gray-900 font-bold text-lg font-serif mb-2 leading-tight">{item.title}</h3>
-                    <p className="text-gray-600 font-serif text-sm italic leading-snug px-1 mb-6">
+                    <h3
+                      className="mb-2 leading-tight"
+                      style={{
+                        fontFamily: "'Press Start 2P', monospace",
+                        fontSize: '9px',
+                        color: '#111111',
+                        letterSpacing: '0.03em',
+                        lineHeight: '1.7',
+                      }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p
+                      className="leading-snug px-1 mb-6"
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: '12px',
+                        color: '#555555',
+                        fontStyle: 'italic',
+                        lineHeight: '1.6',
+                      }}
+                    >
                       {item.description}
                     </p>
-                    <span className="absolute bottom-2 right-4 text-[10px] text-gray-400 font-mono">{item.date}</span>
+                    <span
+                      className="absolute bottom-2 right-4"
+                      style={{
+                        fontFamily: "'Share Tech Mono', monospace",
+                        fontSize: '10px',
+                        color: '#999999',
+                        letterSpacing: '0.08em',
+                      }}
+                    >
+                      {item.date}
+                    </span>
                   </div>
                 </motion.div>
               </motion.div>

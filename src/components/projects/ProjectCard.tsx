@@ -20,50 +20,129 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   return (
     <motion.div
-      className="glass-card overflow-hidden flex flex-col h-full"
+      className="flex flex-col h-full"
+      style={{
+        background: '#0a0a0a',
+        border: '2px solid rgba(255,255,255,0.25)',
+        boxShadow: '5px 5px 0px rgba(255,255,255,0.15)',
+      }}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.4, delay: index * 0.08 }}
       viewport={{ once: true }}
-      whileHover={{ y: -10, transition: { duration: 0.3 } }}
+      whileHover={{
+        y: -6,
+        borderColor: 'rgba(255,255,255,0.8)',
+        boxShadow: '8px 8px 0px rgba(255,255,255,0.4)',
+        transition: { duration: 0.2 }
+      }}
     >
-      <div className="relative overflow-hidden h-48">
+      {/* Image section */}
+      <div className="relative overflow-hidden" style={{ height: '180px' }}>
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-70" />
+        {/* Overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%)',
+          }}
+        />
+        {/* Project number badge */}
+        <div
+          className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center border border-white/50"
+          style={{
+            fontFamily: "'Press Start 2P', monospace",
+            fontSize: '9px',
+            color: 'rgba(255,255,255,0.6)',
+            background: 'rgba(0,0,0,0.7)',
+          }}
+        >
+          {String(index + 1).padStart(2, '0')}
+        </div>
       </div>
 
-      <div className="p-6 flex-grow flex flex-col">
-        <h3 className="text-xl font-bold font-poppins mb-2 text-white">{project.title}</h3>
+      {/* Content section */}
+      <div className="p-5 flex-grow flex flex-col border-t border-white/10">
+        <h3
+          className="mb-3"
+          style={{
+            fontFamily: "'Press Start 2P', monospace",
+            fontSize: 'clamp(9px, 1.5vw, 11px)',
+            color: '#FFFFFF',
+            lineHeight: '1.6',
+            letterSpacing: '0.02em',
+          }}
+        >
+          {project.title}
+        </h3>
 
-        <p className="text-white/70 mb-4 flex-grow">{project.description}</p>
+        <p
+          className="mb-4 flex-grow"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: '13px',
+            color: 'rgba(255,255,255,0.65)',
+            lineHeight: '1.7',
+          }}
+        >
+          {project.description}
+        </p>
 
+        {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map((tag, i) => (
             <span
               key={i}
-              className="text-xs px-2 py-1 rounded-full bg-dark-lighter text-secondary"
+              style={{
+                fontFamily: "'Share Tech Mono', monospace",
+                fontSize: '10px',
+                padding: '3px 8px',
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.3)',
+                color: 'rgba(255,255,255,0.6)',
+                letterSpacing: '0.04em',
+              }}
             >
               {tag}
             </span>
           ))}
         </div>
 
+        {/* Buttons */}
         <div className="flex gap-3 mt-auto">
           {project.liveUrl && (
             <motion.a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="primary-button text-sm py-2 px-4 flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 flex-1 justify-center"
+              style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: '8px',
+                padding: '9px 12px',
+                background: '#FFFFFF',
+                color: '#000000',
+                border: '2px solid #FFFFFF',
+                boxShadow: '3px 3px 0px #888888',
+                letterSpacing: '0.04em',
+                transition: 'all 0.15s ease',
+                textDecoration: 'none',
+              }}
+              whileHover={{
+                background: '#000000',
+                color: '#FFFFFF',
+                boxShadow: '5px 5px 0px #FFFFFF',
+                x: -2,
+                y: -2,
+              }}
+              whileTap={{ scale: 0.97, x: 2, y: 2 }}
             >
-              <ExternalLink size={16} />
-              Live Demo
+              <ExternalLink size={12} />
+              DEMO
             </motion.a>
           )}
 
@@ -72,12 +151,31 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="secondary-button text-sm py-2 px-4 flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 flex-1 justify-center"
+              style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: '8px',
+                padding: '9px 12px',
+                background: 'transparent',
+                color: '#FFFFFF',
+                border: '2px solid rgba(255,255,255,0.5)',
+                boxShadow: '3px 3px 0px #444444',
+                letterSpacing: '0.04em',
+                transition: 'all 0.15s ease',
+                textDecoration: 'none',
+              }}
+              whileHover={{
+                background: '#FFFFFF',
+                color: '#000000',
+                borderColor: '#FFFFFF',
+                boxShadow: '5px 5px 0px #AAAAAA',
+                x: -2,
+                y: -2,
+              }}
+              whileTap={{ scale: 0.97, x: 2, y: 2 }}
             >
-              <Github size={16} />
-              GitHub
+              <Github size={12} />
+              CODE
             </motion.a>
           )}
         </div>

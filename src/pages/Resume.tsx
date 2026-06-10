@@ -92,6 +92,33 @@ const Resume: React.FC = () => {
     visible: { opacity: 1, y: 0 },
   };
 
+  const cardStyle = {
+    background: '#0a0a0a',
+    border: '2px solid rgba(255,255,255,0.18)',
+    boxShadow: '5px 5px 0px rgba(255,255,255,0.08)',
+    padding: '24px',
+    position: 'relative' as const,
+    overflow: 'hidden' as const,
+  };
+
+  const sectionHeadingStyle = {
+    fontFamily: "'Press Start 2P', monospace",
+    fontSize: 'clamp(10px, 1.5vw, 13px)',
+    color: '#FFFFFF',
+    textShadow: '2px 2px 0px #333333',
+    letterSpacing: '0.04em',
+  };
+
+  const badgeStyle = {
+    fontFamily: "'Share Tech Mono', monospace",
+    fontSize: '10px',
+    padding: '4px 10px',
+    background: 'transparent',
+    border: '1px solid rgba(255,255,255,0.25)',
+    color: 'rgba(255,255,255,0.6)',
+    letterSpacing: '0.04em',
+  };
+
   return (
     <PageTransition style="scale">
       <div className="min-h-screen pt-28 pb-16">
@@ -107,13 +134,14 @@ const Resume: React.FC = () => {
               href="src\resume\resume.pdf"
               download="Gotcha!.pdf"
               className="primary-button flex items-center gap-2 mt-6 md:mt-0 self-start md:self-auto"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              style={{ textDecoration: 'none' }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <Download size={18} />
+              <Download size={14} />
               Download Resume
             </motion.a>
           </div>
@@ -127,39 +155,70 @@ const Resume: React.FC = () => {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-3 mb-8">
-              <Briefcase size={24} className="text-secondary" />
-              <h2 className="text-2xl font-bold font-poppins">Work Experience</h2>
+              <Briefcase size={18} className="text-white opacity-50" />
+              <h2 style={sectionHeadingStyle}>Work Experience</h2>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-6">
               {experiences.map((exp, index) => (
                 <motion.div
                   key={index}
-                  className="glass-card p-6 relative overflow-hidden"
+                  style={cardStyle}
                   variants={itemVariants}
-                  whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(229, 9, 20, 0.4)' }}
+                  whileHover={{
+                    y: -4,
+                    borderColor: 'rgba(255,255,255,0.45)',
+                    boxShadow: '8px 8px 0px rgba(255,255,255,0.2)',
+                  }}
                 >
-                  <div className="absolute top-0 left-0 h-full w-1 bg-gradient-to-b from-primary to-secondary" />
+                  {/* Left accent bar — monochrome */}
+                  <div
+                    className="absolute top-0 left-0 h-full"
+                    style={{ width: '3px', background: '#FFFFFF', opacity: 0.5 }}
+                  />
 
-                  <div className="ml-2">
+                  <div className="ml-4">
                     <div className="flex flex-wrap justify-between items-start gap-2 mb-2">
-                      <h3 className="text-xl font-bold text-white">{exp.title}</h3>
-                      <span className="text-sm font-medium px-3 py-1 bg-dark-lighter rounded-full text-secondary">
-                        {exp.period}
-                      </span>
+                      <h3
+                        style={{
+                          fontFamily: "'Press Start 2P', monospace",
+                          fontSize: 'clamp(9px, 1.2vw, 11px)',
+                          color: '#FFFFFF',
+                          lineHeight: '1.6',
+                          letterSpacing: '0.02em',
+                        }}
+                      >
+                        {exp.title}
+                      </h3>
+                      <span style={badgeStyle}>{exp.period}</span>
                     </div>
 
-                    <h4 className="text-lg text-secondary mb-3">{exp.company}</h4>
-                    <p className="text-white/80 mb-4">{exp.description}</p>
+                    <h4
+                      className="mb-3"
+                      style={{
+                        fontFamily: "'Share Tech Mono', monospace",
+                        fontSize: '13px',
+                        color: '#AAAAAA',
+                        letterSpacing: '0.06em',
+                      }}
+                    >
+                      {exp.company}
+                    </h4>
+                    <p
+                      className="mb-4"
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: '14px',
+                        color: 'rgba(255,255,255,0.65)',
+                        lineHeight: '1.7',
+                      }}
+                    >
+                      {exp.description}
+                    </p>
 
                     <div className="flex flex-wrap gap-2">
                       {exp.skills.map((skill, i) => (
-                        <span
-                          key={i}
-                          className="text-xs px-3 py-1 bg-dark-lighter rounded-full text-white/70"
-                        >
-                          {skill}
-                        </span>
+                        <span key={i} style={badgeStyle}>{skill}</span>
                       ))}
                     </div>
                   </div>
@@ -177,39 +236,69 @@ const Resume: React.FC = () => {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-3 mb-8">
-              <BookOpen size={24} className="text-secondary" />
-              <h2 className="text-2xl font-bold font-poppins">Education</h2>
+              <BookOpen size={18} className="text-white opacity-50" />
+              <h2 style={sectionHeadingStyle}>Education</h2>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-6">
               {education.map((edu, index) => (
                 <motion.div
                   key={index}
-                  className="glass-card p-6 relative overflow-hidden"
+                  style={cardStyle}
                   variants={itemVariants}
-                  whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(229, 9, 20, 0.4)' }}
+                  whileHover={{
+                    y: -4,
+                    borderColor: 'rgba(255,255,255,0.45)',
+                    boxShadow: '8px 8px 0px rgba(255,255,255,0.2)',
+                  }}
                 >
-                  <div className="absolute top-0 left-0 h-full w-1 bg-gradient-to-b from-secondary to-accent" />
+                  <div
+                    className="absolute top-0 left-0 h-full"
+                    style={{ width: '3px', background: '#888888', opacity: 0.7 }}
+                  />
 
-                  <div className="ml-2">
+                  <div className="ml-4">
                     <div className="flex flex-wrap justify-between items-start gap-2 mb-2">
-                      <h3 className="text-xl font-bold text-white">{edu.degree}</h3>
-                      <span className="text-sm font-medium px-3 py-1 bg-dark-lighter rounded-full text-secondary">
-                        {edu.period}
-                      </span>
+                      <h3
+                        style={{
+                          fontFamily: "'Press Start 2P', monospace",
+                          fontSize: 'clamp(9px, 1.2vw, 11px)',
+                          color: '#FFFFFF',
+                          lineHeight: '1.6',
+                          letterSpacing: '0.02em',
+                        }}
+                      >
+                        {edu.degree}
+                      </h3>
+                      <span style={badgeStyle}>{edu.period}</span>
                     </div>
 
-                    <h4 className="text-lg text-secondary mb-3">{edu.institution}</h4>
-                    <p className="text-white/80 mb-4">{edu.description}</p>
+                    <h4
+                      className="mb-3"
+                      style={{
+                        fontFamily: "'Share Tech Mono', monospace",
+                        fontSize: '13px',
+                        color: '#AAAAAA',
+                        letterSpacing: '0.06em',
+                      }}
+                    >
+                      {edu.institution}
+                    </h4>
+                    <p
+                      className="mb-4"
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: '14px',
+                        color: 'rgba(255,255,255,0.65)',
+                        lineHeight: '1.7',
+                      }}
+                    >
+                      {edu.description}
+                    </p>
 
                     <div className="flex flex-wrap gap-2">
                       {edu.courses.map((course, i) => (
-                        <span
-                          key={i}
-                          className="text-xs px-3 py-1 bg-dark-lighter rounded-full text-white/70"
-                        >
-                          {course}
-                        </span>
+                        <span key={i} style={badgeStyle}>{course}</span>
                       ))}
                     </div>
                   </div>
@@ -226,14 +315,11 @@ const Resume: React.FC = () => {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-3 mb-8">
-              <Award size={24} className="text-secondary" />
-              <h2 className="text-2xl font-bold font-poppins">Certifications</h2>
+              <Award size={18} className="text-white opacity-50" />
+              <h2 style={sectionHeadingStyle}>Certifications</h2>
             </div>
 
-            <motion.div
-              className="glass-card p-6"
-              variants={itemVariants}
-            >
+            <motion.div style={cardStyle} variants={itemVariants}>
               <ul className="space-y-4">
                 {certifications.map((cert, index) => (
                   <motion.li
@@ -241,11 +327,23 @@ const Resume: React.FC = () => {
                     className="flex items-start gap-3"
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    transition={{ duration: 0.3, delay: index * 0.07 }}
                     viewport={{ once: true }}
                   >
-                    <div className="h-2 w-2 rounded-full bg-secondary mt-2.5" />
-                    <span className="text-white/90">{cert}</span>
+                    <div
+                      className="flex-shrink-0 mt-1.5"
+                      style={{ width: '6px', height: '6px', background: '#FFFFFF', opacity: 0.6 }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: '14px',
+                        color: 'rgba(255,255,255,0.80)',
+                        lineHeight: '1.6',
+                      }}
+                    >
+                      {cert}
+                    </span>
                   </motion.li>
                 ))}
               </ul>

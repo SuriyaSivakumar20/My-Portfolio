@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import anime from 'animejs';
 import Antigravity from './Antigravity';
 
 const GalaxyBackground: React.FC = () => {
@@ -21,61 +20,59 @@ const GalaxyBackground: React.FC = () => {
         };
         window.addEventListener('resize', handleResize);
 
-        const colors = ['#FFF', '#E50914', '#B20710', '#FFFFFF'];
+        // Monochrome star colors — only white/gray tones
+        const colors = ['#FFFFFF', '#CCCCCC', '#888888', '#AAAAAA', '#EEEEEE'];
         const stars: any[] = [];
-        const numStars = 400;
+        const numStars = 220;
 
         for (let i = 0; i < numStars; i++) {
+            // Use square pixel dots instead of circles for retro feel
             stars.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                radius: Math.random() * 1.5,
+                x: Math.floor(Math.random() * (width / 2)) * 2, // snap to even pixels
+                y: Math.floor(Math.random() * (height / 2)) * 2,
+                size: Math.random() < 0.7 ? 1 : 2,              // 1px or 2px squares
                 color: colors[Math.floor(Math.random() * colors.length)],
-                alpha: Math.random(),
-                speed: Math.random() * 0.5 + 0.1
+                alpha: Math.random() * 0.6 + 0.2,
+                speed: Math.random() * 0.25 + 0.05,
+                blinkRate: Math.random() * 0.02 + 0.005,
+                blinkDir: 1,
             });
         }
 
+        let animFrame: number;
+
         const animate = () => {
             ctx.clearRect(0, 0, width, height);
+
             stars.forEach(star => {
+                // Subtle alpha blink
+                star.alpha += star.blinkDir * star.blinkRate;
+                if (star.alpha > 0.9) { star.alpha = 0.9; star.blinkDir = -1; }
+                if (star.alpha < 0.1) { star.alpha = 0.1; star.blinkDir = 1; }
+
                 ctx.globalAlpha = star.alpha;
                 ctx.fillStyle = star.color;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fill();
+                // Square pixel dot
+                ctx.fillRect(star.x, star.y, star.size, star.size);
+
                 star.y -= star.speed;
-                if (star.y < 0) {
+                if (star.y < -2) {
                     star.y = height;
-                    star.x = Math.random() * width;
+                    star.x = Math.floor(Math.random() * (width / 2)) * 2;
                 }
             });
-            requestAnimationFrame(animate);
+
+            ctx.globalAlpha = 1;
+            animFrame = requestAnimationFrame(animate);
         };
 
-        const animFrame = requestAnimationFrame(animate);
-
-        const animation = anime({
-            targets: stars,
-            radius: [
-                { value: (s: any) => s.radius * 1.5, duration: 1000 },
-                { value: (s: any) => s.radius, duration: 1000 }
-            ],
-            alpha: [
-                { value: 0.2, duration: 1000 },
-                { value: 1, duration: 1000 }
-            ],
-            delay: anime.stagger(100),
-            loop: true,
-            easing: 'easeInOutSine',
-            update: () => { }
-        });
+        animFrame = requestAnimationFrame(animate);
 
         const handleScroll = () => {
             const scrollY = window.scrollY;
-            const speedMultiplier = 1 + (scrollY / 1000);
+            const speedMultiplier = 1 + (scrollY / 1500);
             stars.forEach(star => {
-                star.speed = (Math.random() * 0.5 + 0.1) * speedMultiplier;
+                star.speed = (Math.random() * 0.25 + 0.05) * speedMultiplier;
             });
         };
         window.addEventListener('scroll', handleScroll);
@@ -84,34 +81,33 @@ const GalaxyBackground: React.FC = () => {
             window.removeEventListener('resize', handleResize);
             window.removeEventListener('scroll', handleScroll);
             cancelAnimationFrame(animFrame);
-            animation.pause();
         };
     }, []);
 
     return (
-        <div className="fixed inset-0 -z-10 bg-dark overflow-hidden">
-            {/* 3D Antigravity Layer */}
-            <div className="absolute inset-0 z-0 opacity-60">
+        <div className="fixed inset-0 -z-10 bg-black overflow-hidden">
+            {/* Monochrome Antigravity particle field */}
+            <div className="absolute inset-0 z-0 opacity-30">
                 <Antigravity
-                    count={300}
-                    magnetRadius={14}
-                    ringRadius={7}
-                    waveSpeed={0.4}
-                    waveAmplitude={1}
-                    particleSize={1.5}
-                    lerpSpeed={0.05}
-                    color="#E50914" // Changed to Netflix Red
+                    count={200}
+                    magnetRadius={12}
+                    ringRadius={6}
+                    waveSpeed={0.3}
+                    waveAmplitude={0.8}
+                    particleSize={1}
+                    lerpSpeed={0.04}
+                    color="#FFFFFF"
                     autoAnimate
                     particleVariance={1}
                     rotationSpeed={0}
                     depthFactor={1}
-                    pulseSpeed={3}
+                    pulseSpeed={2}
                     particleShape="capsule"
-                    fieldStrength={10}
+                    fieldStrength={8}
                 />
             </div>
 
-            {/* 2D Star Layer (Galaxy) */}
+            {/* 2D Pixel Star Layer */}
             <canvas
                 ref={canvasRef}
                 className="absolute inset-0 z-10 pointer-events-none"

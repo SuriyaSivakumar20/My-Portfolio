@@ -10,12 +10,12 @@ const Projects: React.FC = () => {
   const projects: ProjectType[] = [
     {
       id: 1,
-      title: "B.I.R.D. - AI Chatbot for VCs & Startups",
+      title: "FoundersAICircle - AI for VCs & Startups",
       description: "An AI-powered chatbot that helps venture capitalists identify promising startups by analyzing market trends and founder backgrounds.",
       image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["Python", "NLP", "Machine Learning", "Flask"],
-      liveUrl: "https://suriyasivakumar20.github.io/B.I.R.D./",
-      githubUrl: "https://github.com/SuriyaSivakumar20/B.I.R.D."
+      liveUrl: "https://founderscircleai.vercel.app",
+      githubUrl: "https://github.com/SuriyaSivakumar20/founderscircleai"
     },
     {
       id: 2,
@@ -83,30 +83,37 @@ const Projects: React.FC = () => {
             className="flex flex-wrap justify-center gap-3 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
+            {/* All button */}
             <motion.button
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filter === 'all'
-                  ? 'bg-primary text-white'
-                  : 'bg-dark-lighter text-white/70 hover:text-white'
-                }`}
+              className={filter === 'all' ? 'filter-active' : 'secondary-button'}
+              style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: '9px',
+                padding: '8px 16px',
+                letterSpacing: '0.06em',
+              }}
               onClick={() => setFilter('all')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
             >
-              All
+              ALL
             </motion.button>
 
             {allTags.map((tag, index) => (
               <motion.button
                 key={index}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filter === tag
-                    ? 'bg-primary text-white'
-                    : 'bg-dark-lighter text-white/70 hover:text-white'
-                  }`}
+                className={filter === tag ? 'filter-active' : 'secondary-button'}
+                style={{
+                  fontFamily: "'Share Tech Mono', monospace",
+                  fontSize: '10px',
+                  padding: '8px 14px',
+                  letterSpacing: '0.05em',
+                }}
                 onClick={() => setFilter(tag)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
                 {tag}
               </motion.button>
@@ -120,7 +127,7 @@ const Projects: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.4 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               {filteredProjects.map((project, index) => (
@@ -135,11 +142,20 @@ const Projects: React.FC = () => {
               className="text-center py-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.4 }}
             >
-              <p className="text-white/70 text-lg">No projects found with the selected filter.</p>
+              <p
+                style={{
+                  fontFamily: "'Share Tech Mono', monospace",
+                  fontSize: '14px',
+                  color: 'rgba(255,255,255,0.5)',
+                  letterSpacing: '0.08em',
+                }}
+              >
+                No projects found with the selected filter.
+              </p>
               <button
-                className="mt-4 secondary-button"
+                className="mt-6 secondary-button"
                 onClick={() => setFilter('all')}
               >
                 Show All Projects

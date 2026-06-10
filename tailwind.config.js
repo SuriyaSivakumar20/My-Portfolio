@@ -5,77 +5,71 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#E50914', // Netflix Red
-          light: '#FF1F1F',
-          dark: '#B20710',
+          DEFAULT: '#FFFFFF',
+          light: '#F0F0F0',
+          dark: '#CCCCCC',
         },
         secondary: {
-          DEFAULT: '#FFFFFF', // White text/accents
-          light: '#F5F5F1',
-          dark: '#E5E5E5',
-        },
-        accent: {
-          DEFAULT: '#000000', // Deep Black
-          light: '#141414',   // Netflix Background
+          DEFAULT: '#000000',
+          light: '#111111',
           dark: '#000000',
         },
+        accent: {
+          DEFAULT: '#888888',
+          light: '#AAAAAA',
+          dark: '#555555',
+        },
         success: {
-          DEFAULT: '#46D369',
-          light: '#6CE88B',
-          dark: '#1F9D40',
+          DEFAULT: '#FFFFFF',
+          light: '#EEEEEE',
+          dark: '#BBBBBB',
         },
         warning: {
-          DEFAULT: '#F59E0B',
-          light: '#FBBF24',
-          dark: '#D97706',
+          DEFAULT: '#AAAAAA',
+          light: '#CCCCCC',
+          dark: '#888888',
         },
         error: {
-          DEFAULT: '#E50914',
-          light: '#FF1F1F',
-          dark: '#B20710',
+          DEFAULT: '#FFFFFF',
+          light: '#EEEEEE',
+          dark: '#CCCCCC',
         },
         dark: {
-          DEFAULT: '#141414',
-          light: '#181818',
-          lighter: '#2F2F2F',
-          card: 'rgba(20, 20, 20, 0.85)', // Darker, more opaque cards
+          DEFAULT: '#000000',
+          light: '#0a0a0a',
+          lighter: '#1a1a1a',
+          card: 'rgba(10, 10, 10, 0.95)',
         },
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
+        pixel: ['"Press Start 2P"', 'monospace'],
+        mono: ['"Share Tech Mono"', 'monospace'],
+        body: ['"Inter"', 'sans-serif'],
+        poppins: ['"Press Start 2P"', 'monospace'],
+        inter: ['"Inter"', 'sans-serif'],
       },
       animation: {
-        'gradient-x': 'gradient-x 15s ease infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'cursor-blink': 'cursor-blink 1s step-end infinite',
+        'pixel-float': 'pixel-float 4s ease-in-out infinite',
+        'scanline': 'scanline 8s linear infinite',
+        'march': 'march 1s step-start infinite',
       },
       keyframes: {
-        'gradient-x': {
-          '0%, 100%': {
-            'background-position': '0% 50%',
-          },
-          '50%': {
-            'background-position': '100% 50%',
-          },
+        'cursor-blink': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' },
         },
-        'float': {
-          '0%, 100%': {
-            transform: 'translateY(0)',
-          },
-          '50%': {
-            transform: 'translateY(-10px)',
-          },
+        'pixel-float': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
         },
-        'pulse-glow': {
-          '0%, 100%': {
-            opacity: '1',
-            boxShadow: '0 0 20px rgba(138, 43, 226, 0.7)',
-          },
-          '50%': {
-            opacity: '0.8',
-            boxShadow: '0 0 10px rgba(138, 43, 226, 0.3)',
-          },
+        'scanline': {
+          '0%': { backgroundPosition: '0 0' },
+          '100%': { backgroundPosition: '0 100vh' },
+        },
+        'march': {
+          '0%': { strokeDashoffset: '0' },
+          '100%': { strokeDashoffset: '-16' },
         },
       },
       backdropBlur: {
