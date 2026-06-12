@@ -8,8 +8,10 @@ import { Code, Server, Database, PenTool as Tool } from 'lucide-react';
 const Skills: React.FC = () => {
   const frontendSkills: SkillType[] = [
     { name: "HTML", level: 95 },
-    { name: "JavaScript", level: 70 },
     { name: "CSS", level: 85 },
+    { name: "JavaScript", level: 70 },
+    { name: "TypeScript", level: 65 },
+    { name: "React", level: 70 },
   ];
 
   const backendSkills: SkillType[] = [
@@ -18,24 +20,24 @@ const Skills: React.FC = () => {
     { name: "Node.js", level: 80 },
     { name: "Go", level: 60 },
     { name: "Java", level: 65 },
-    { name: "SQL", level: 70 }
+    { name: "SQL", level: 70 },
+    { name: "Computer Networks", level: 75 }
   ];
 
   const aiMlSkills: SkillType[] = [
     { name: "Scikit-learn", level: 90 },
     { name: "TensorFlow", level: 85 },
     { name: "NLP", level: 80 },
-    { name: "Computer Networks", level: 75 },
     { name: "Prompt Engineering", level: 90 }
   ];
 
   const toolsSkills: SkillType[] = [
     { name: "Git", level: 95 },
     { name: "Figma", level: 85 },
-    { name: "StarUML", level: 75 },
     { name: "Docker", level: 70 },
+    { name: "AWS", level: 65 },
     { name: "Canva", level: 90 },
-    { name: "AWS", level: 65 }
+    { name: "StarUML", level: 75 }
   ];
 
   const containerVariants = {

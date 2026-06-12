@@ -102,9 +102,9 @@ const Home: React.FC = () => {
               }}
               variants={itemVariants}
             >
-              Welcome to my digital portfolio. I'm passionate about artificial intelligence,
-              innovative solutions, and cutting-edge technologies that shape our future.
-              Explore my freelance projects and discover how I'm helping businesses thrive in the tech world.
+              CS Engineering student (Class of 2026) who has shipped 6+ projects spanning AI, NLP, and
+              full-stack web — including a hackathon-selected accessibility tool for the visually impaired.
+              Currently interning at CaratLane (A Tata Product) and open to freelance collaborations.
             </motion.p>
 
             <motion.div
@@ -133,12 +133,14 @@ const Home: React.FC = () => {
               </Link>
             </motion.div>
 
-            {/* Subtle pixel scroll hint */}
-            <motion.div
-              className="mt-16 flex items-center gap-3"
+            {/* Scroll hint — scrolls to projects */}
+            <motion.button
+              className="mt-16 flex items-center gap-3 cursor-pointer bg-transparent border-none p-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 0.6 }}
+              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+              aria-label="Scroll to explore"
             >
               <div style={{ width: '32px', height: '2px', background: '#333333' }} />
               <span
@@ -151,7 +153,7 @@ const Home: React.FC = () => {
               >
                 SCROLL TO EXPLORE
               </span>
-            </motion.div>
+            </motion.button>
           </motion.div>
         </div>
       </div>

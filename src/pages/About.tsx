@@ -127,20 +127,21 @@ const About: React.FC = () => {
                 }}
               >
                 <p>
-                  I'm a Computer Science Engineering student with a keen interest in artificial intelligence,
-                  machine learning, and freelance development. My journey in tech began with a simple curiosity
-                  about how computers work, which quickly evolved into a passion for creating solutions that
-                  solve real business problems.
+                  I'm a Computer Science Engineering student at Pondicherry who discovered a love for
+                  AI during my first-year ML assignment — a spam classifier that actually worked.
+                  That moment led me to build 6+ projects, win a national hackathon selection, and
+                  land an internship at CaratLane (A Tata Product) while still in college.
                 </p>
                 <p>
-                  My academic focus has been on developing AI solutions that can be applied to real-world scenarios.
-                  I've worked on projects ranging from natural language processing to computer vision, always
-                  with an eye toward practical implementation and client needs.
+                  My focus is on building AI systems that solve real problems: from a resume screener
+                  that reduced hiring time by 70%, to a phishing detector with 96% accuracy.
+                  I've worked end-to-end — from model training in Python/TensorFlow to deploying
+                  React front-ends on Vercel.
                 </p>
                 <p>
-                  Beyond coding, I'm deeply interested in the freelance ecosystem and how technology can drive
-                  business growth. I believe that professional software development holds tremendous
-                  potential for transforming ideas into reality.
+                  Outside of code, I run workshops, conduct motivation sessions for juniors, and
+                  explore the freelance space where I pair good software with real business outcomes.
+                  I believe clean code and clear communication are equally important.
                 </p>
               </motion.div>
 
@@ -205,16 +206,16 @@ const About: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
-                  title: "AI Hackathon Participant",
-                  description: "Won two appreciation in a national AI hackathon with a solution for the projects."
+                  title: "Hackathon Selected",
+                  description: "Selected in a Global AI Hackathon 2025 — built a vision-based accessibility tool for the visually impaired in 48 hours."
                 },
                 {
                   title: "Freelance Developer",
-                  description: "Delivering high-quality software solutions for clients while pursuing my degree."
+                  description: "Delivered 4+ client projects while pursuing my degree, ranging from AI chatbots to bulk email systems."
                 },
                 {
-                  title: "Open Source Contributor",
-                  description: "Actively contributes to AI open source projects with over 10+ contributions."
+                  title: "Open Source",
+                  description: "Actively contributes to AI open-source projects with 10+ merged contributions across multiple repositories."
                 }
               ].map((fact, index) => (
                 <motion.div

@@ -19,8 +19,8 @@ const Projects: React.FC = () => {
     },
     {
       id: 2,
-      title: "Movie_Hub",
-      description: "A platform that aggregates Movie Watching with the friends and families on a local host. A entertaining platform that allows to upload a video or the movie you want to watch with your loved ones!.",
+      title: "Movie Hub",
+      description: "An entertaining platform for watching movies and videos together with friends and family on a local host. Upload any video and share the experience with your loved ones in real time.",
       image: "https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["React", "Node.js", "Python", "Html", "CSS"],
       liveUrl: "https://suriyasivakumar20.github.io/Watch_Hub/",
@@ -28,8 +28,8 @@ const Projects: React.FC = () => {
     },
     {
       id: 3,
-      title: "Mail_Dispatcher",
-      description: "The Mass-Mail Dispatcher system provides a reliable and efficient way to manage bulk email communication. By automating the validation and distribution of emails, web-based application offers a simple, structured, and customizable platform for sending mass emails. ",
+      title: "Mail Dispatcher",
+      description: "A web-based bulk email automation platform. Validates recipient lists, customises content per-recipient, and sends mass emails reliably — cutting manual email effort by 80%.",
       image: "https://images.pexels.com/photos/4913769/pexels-photo-4913769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["HTML", "CSS", "JS"],
       liveUrl: "https://suriyasivakumar20.github.io/Mail_Dispatcher/",

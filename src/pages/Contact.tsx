@@ -59,26 +59,28 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (validateForm()) {
       setIsSubmitting(true);
-
-      // Simulate API call
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setSubmitSuccess(true);
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
+      const data = new FormData(e.target as HTMLFormElement);
+      fetch('https://formspree.io/f/xaqqrlbb', {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      })
+        .then((res) => {
+          setIsSubmitting(false);
+          if (res.ok) {
+            setSubmitSuccess(true);
+            setFormData({ name: '', email: '', subject: '', message: '' });
+            setTimeout(() => setSubmitSuccess(false), 5000);
+          } else {
+            alert('Oops! Something went wrong. Please try again.');
+          }
+        })
+        .catch(() => {
+          setIsSubmitting(false);
+          alert('Network error. Please try again.');
         });
-
-        // Reset success message after 5 seconds
-        setTimeout(() => {
-          setSubmitSuccess(false);
-        }, 5000);
-      }, 1500);
     }
   };
 
@@ -99,7 +101,7 @@ const Contact: React.FC = () => {
       icon: <MapPin size={20} />,
       title: 'Location',
       value: 'Pondicherry, Puducherry, India',
-      link: 'https://maps.google.com/?q=Chennai,Tamil+Nadu,India'
+      link: 'https://maps.google.com/?q=Pondicherry,Puducherry,India'
     }
   ];
 
@@ -205,7 +207,7 @@ const Contact: React.FC = () => {
                     </p>
                   </motion.div>
                 ) : (
-                  <form method='post' action='https://formspree.io/f/xaqqrlbb'>
+                  <form onSubmit={handleSubmit}>
                     {/* Terminal prompt header */}
                     <div
                       className="mb-6 pb-4"
@@ -414,15 +416,16 @@ const Contact: React.FC = () => {
                   </h4>
                   <div className="flex space-x-3">
                     {[
-                      { name: 'GH', url: 'https://github.com/SuriyaSivakumar20' },
-                      { name: 'LN', url: 'https://www.linkedin.com/in/suriya-sivakumar-483735258/' },
-                      { name: 'IG', url: 'https://www.instagram.com/iam.suriyaa._/' }
+                      { name: 'GitHub', abbr: 'GH', url: 'https://github.com/SuriyaSivakumar20' },
+                      { name: 'LinkedIn', abbr: 'LN', url: 'https://www.linkedin.com/in/suriya-sivakumar-483735258/' },
+                      { name: 'Instagram', abbr: 'IG', url: 'https://www.instagram.com/iam.suriyaa._/' }
                     ].map((social, index) => (
                       <motion.a
                         key={index}
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={social.name}
                         className="w-10 h-10 flex items-center justify-center transition-all duration-150"
                         style={{
                           border: '2px solid rgba(255,255,255,0.3)',
@@ -439,7 +442,7 @@ const Contact: React.FC = () => {
                         }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        {social.name}
+                        {social.abbr}
                       </motion.a>
                     ))}
                   </div>

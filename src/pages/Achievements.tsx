@@ -41,7 +41,7 @@ const Achievements: React.FC = () => {
     {
       id: 4,
       title: "Innovation Prize",
-      description: "Honored to receive the Best event Innovation Award for non technical event conducted in our own college, It was the 1st time we all conducted a event in our college, and it was a great experience.",
+      description: "Received the Best Innovation Award at our college's first-ever inter-departmental event for a gamified learning concept that engaged 50+ students.",
       image: "/innovation-award.jpeg",
       date: "Dec 2023",
       rotation: 2
@@ -57,7 +57,7 @@ const Achievements: React.FC = () => {
     {
       id: 6,
       title: "Open Source Journey",
-      description: "Participated in hackathon with my team and learned many new concepts, other fellow team members idea on different projects.",
+      description: "Contributed to multiple AI open-source repositories, submitting 10+ merged PRs across projects in NLP tooling and ML utilities.",
       image: "/open-source.jpeg",
       date: "Mar 2025",
       rotation: 1
