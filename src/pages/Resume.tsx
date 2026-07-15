@@ -131,8 +131,8 @@ const Resume: React.FC = () => {
             />
 
             <motion.a
-              href="src\resume\resume.pdf"
-              download="Gotcha!.pdf"
+              href="/resume.pdf"
+              download="Suriya_Sivakumar_Resume.pdf"
               className="primary-button flex items-center gap-2 mt-6 md:mt-0 self-start md:self-auto"
               style={{ textDecoration: 'none' }}
               whileHover={{ scale: 1.02 }}
