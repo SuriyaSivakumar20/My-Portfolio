@@ -15,7 +15,6 @@ const Projects: React.FC = () => {
       image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["Python", "NLP", "Machine Learning", "Flask"],
       liveUrl: "https://founderscircleai.vercel.app",
-      githubUrl: "https://github.com/SuriyaSivakumar20/founderscircleai"
     },
     {
       id: 2,
@@ -24,7 +23,6 @@ const Projects: React.FC = () => {
       image: "https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["React", "Node.js", "Python", "Html", "CSS"],
       liveUrl: "https://suriyasivakumar20.github.io/Watch_Hub/",
-      githubUrl: "https://github.com/SuriyaSivakumar20/Watch_Hub"
     },
     {
       id: 3,
@@ -33,7 +31,6 @@ const Projects: React.FC = () => {
       image: "https://images.pexels.com/photos/4913769/pexels-photo-4913769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["HTML", "CSS", "JS"],
       liveUrl: "https://suriyasivakumar20.github.io/Mail_Dispatcher/",
-      githubUrl: "https://github.com/SuriyaSivakumar20/Mail_Dispatcher"
     },
     {
       id: 4,
@@ -41,7 +38,6 @@ const Projects: React.FC = () => {
       description: "Hackathon-winning project that uses AI to match resumes with job descriptions, reducing hiring time by 70%. By uploading the resumes and job descriptions, the AI model analyzes and ranks candidates based on their fit for the role.",
       image: "https://images.pexels.com/photos/3760072/pexels-photo-3760072.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["Python", "ML", "NLP", "React"],
-      githubUrl: "https://github.com/SuriyaSivakumar20/AI_Resume_Screener"
     },
     {
       id: 5,
@@ -49,7 +45,6 @@ const Projects: React.FC = () => {
       description: "A machine learning model that detects phishing attempts in emails and messages with 96% accuracy using natural language processing.",
       image: "https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["Python", "TensorFlow", "Cybersecurity", "NLP"],
-      githubUrl: "https://github.com/SuriyaSivakumar20/AI-Phishing_detection"
     },
     {
       id: 6,
@@ -57,7 +52,6 @@ const Projects: React.FC = () => {
       description: "A novel approach to IPv6 packet transmission that improves efficiency in mixed IPv4/IPv6 networks by 35%.",
       image: "https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["Networking", "Python", "Protocol Design"],
-      githubUrl: "https://github.com/SuriyaSivakumar20/Transition-Mechanism-of-IPV4-to-IPV6"
     }
   ];
 

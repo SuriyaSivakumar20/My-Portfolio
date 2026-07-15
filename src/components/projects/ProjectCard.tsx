@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 export interface ProjectType {
   id: number;
@@ -113,13 +113,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-3 mt-auto">
-          {project.liveUrl && (
+        {project.liveUrl && (
+          <div className="mt-auto">
             <motion.a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 flex-1 justify-center"
+              className="flex items-center gap-2 w-full justify-center"
               style={{
                 fontFamily: "'Press Start 2P', monospace",
                 fontSize: '8px',
@@ -142,43 +142,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
               whileTap={{ scale: 0.97, x: 2, y: 2 }}
             >
               <ExternalLink size={12} />
-              DEMO
+              LIVE DEMO
             </motion.a>
-          )}
-
-          {project.githubUrl && (
-            <motion.a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 flex-1 justify-center"
-              style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: '8px',
-                padding: '9px 12px',
-                background: 'transparent',
-                color: '#FFFFFF',
-                border: '2px solid rgba(255,255,255,0.5)',
-                boxShadow: '3px 3px 0px #444444',
-                letterSpacing: '0.04em',
-                transition: 'all 0.15s ease',
-                textDecoration: 'none',
-              }}
-              whileHover={{
-                background: '#FFFFFF',
-                color: '#000000',
-                borderColor: '#FFFFFF',
-                boxShadow: '5px 5px 0px #AAAAAA',
-                x: -2,
-                y: -2,
-              }}
-              whileTap={{ scale: 0.97, x: 2, y: 2 }}
-            >
-              <Github size={12} />
-              CODE
-            </motion.a>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </motion.div>
   );
