@@ -19,7 +19,7 @@ const Projects: React.FC = () => {
     {
       id: 2,
       title: "Movie Hub",
-      description: "An entertaining platform for watching movies and videos together with friends and family on a local host. Upload any video and share the experience with your loved ones in real time.",
+      description: "An entertaining platform  for watching movies and videos together with friends and family on a local host. Upload any video and share the experience with your loved ones in real time.",
       image: "https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       tags: ["React", "Node.js", "Python", "Html", "CSS"],
       liveUrl: "https://suriyasivakumar20.github.io/Watch_Hub/",
