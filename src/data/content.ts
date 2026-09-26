@@ -12,10 +12,10 @@ export const profile = {
   subline: 'Building Systems • Automation • Applications',
   headline: 'CS Engineer | AI Enthusiast | Freelance Developer',
   tagline:
-    'CS Engineering student (Class of 2026) who has shipped 6+ projects spanning AI, NLP, and full-stack web — including a hackathon-selected accessibility tool for the visually impaired. Currently interning at CaratLane (A Tata Product) and open to freelance collaborations.',
+    'CS Engineering student (Class of 2026) who has shipped 6+ projects spanning AI, NLP, and full-stack web — including a hackathon-selected accessibility tool for the visually impaired. Currently working at CaratLane (A Tata Product) and open to freelance collaborations.',
   location: 'Pondicherry, Puducherry, India',
   education: 'B.Tech CSE, Class of 2026',
-  status: 'Interning @ CaratLane (A Tata Product)',
+  status: 'Working @ CaratLane (A Tata Product)',
   focus: 'AI systems · Backend · Automation · Full-stack',
   available: true,
 };
