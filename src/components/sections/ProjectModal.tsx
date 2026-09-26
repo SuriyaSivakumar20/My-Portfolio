@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import anime from 'animejs';
 import { prefersReducedMotion } from '../../lib/anim/reduced';
-import { Project } from '../../data/content';
+import { Project, projects } from '../../data/content';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -79,6 +79,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   if (!rendered || !project) return null;
 
+  // Technologies this project shares with the rest of the portfolio
+  const shared = projects.filter(
+    (p) => p.id !== project.id && p.stack.some((t) => project.stack.includes(t)),
+  );
+
   return (
     <div
       className="fixed inset-0 z-[75] bg-[#04060a]/80 backdrop-blur-[3px] flex items-center justify-center p-4 sm:p-8"
@@ -115,7 +120,15 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         <div className="px-5 sm:px-8 py-6 sm:py-8">
           {/* Image */}
           <div className="relative aspect-[16/9] overflow-hidden mb-7 bg-[#0a0d11]" data-modal-part>
-            <img src={project.image} alt="" loading="lazy" className="w-full h-full object-cover" />
+            <img
+              src={project.image}
+              alt=""
+              width={900}
+              height={600}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d11] via-[#0a0d11]/20 to-transparent" />
           </div>
 
@@ -141,6 +154,15 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <div className="font-mono text-[12px] text-[var(--ink)]">{project.stack.join(' · ')}</div>
             </div>
           </div>
+
+          {/* Cross-links: technologies shared with other projects */}
+          {shared.length > 0 && (
+            <div className="mt-4 os-label" style={{ fontSize: 10, opacity: 0.6 }} data-modal-part>
+              SHARED STACK · USED IN {shared.length} OTHER {shared.length === 1 ? 'PROJECT' : 'PROJECTS'} —{' '}
+              {shared.slice(0, 3).map((p) => p.title).join(' · ')}
+              {shared.length > 3 ? ' …' : ''}
+            </div>
+          )}
 
           {/* Description */}
           <div className="mt-8" data-modal-part>
@@ -179,6 +201,17 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 className="inline-flex items-center gap-2 border border-[var(--accent-line)] bg-[var(--accent-soft)] px-5 py-3 font-mono text-[11px] tracking-[0.16em] uppercase text-[var(--accent)] hover:bg-[rgba(99,211,242,0.18)] transition-colors"
               >
                 ↗ LIVE DEMO
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="open"
+                className="inline-flex items-center gap-2 border border-[#1c232c] px-5 py-3 font-mono text-[11px] tracking-[0.16em] uppercase text-[var(--ink-muted)] hover:text-[var(--accent)] hover:border-[var(--accent-line)] hover:bg-[var(--accent-soft)] transition-colors"
+              >
+                ⇓ VIEW SOURCE
               </a>
             )}
             <button

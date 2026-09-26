@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import anime from 'animejs';
-import { prefersReducedMotion } from '../../lib/anim/reduced';
+import { animationDuration, prefersReducedMotion } from '../../lib/anim/reduced';
 
-type CursorState = 'default' | 'view' | 'open';
+type CursorState = 'default' | 'view' | 'open' | 'text';
 
 const LABEL: Record<CursorState, string> = {
   default: '',
   view: 'VIEW',
   open: 'OPEN',
+  text: 'TEXT',
 };
 
 /**
@@ -66,7 +67,7 @@ export default function Cursor() {
         targets: { s: grow ? 1 : 0, v: grow ? 1 : 0 },
         s: grow ? 0.9 : 1,
         v: grow ? 1 : 0,
-        duration: 320,
+        duration: animationDuration(320),
         easing: grow ? 'easeOutExpo' : 'easeInOutQuad',
         update: (a) => {
           const v = Number(a.animations[0].currentValue);
@@ -75,6 +76,8 @@ export default function Cursor() {
           ring.style.height = `${42 + v * 34}px`;
           ring.style.background = state === 'view'
             ? 'rgba(99, 211, 242, 0.08)'
+            : state === 'text'
+            ? 'rgba(94, 230, 140, 0.08)'
             : 'rgba(99, 211, 242, 0.04)';
           ring.style.borderColor = state === 'default'
             ? 'rgba(99, 211, 242, 0.55)'
@@ -94,9 +97,16 @@ export default function Cursor() {
 
     const onOver = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
-      const el = t.closest('[data-cursor] , a, button') as HTMLElement | null;
-      if (el) setState(el.dataset.cursor === 'view' ? 'view' : 'open');
-      else setState('default');
+      const el = t.closest('[data-cursor] , a, button, input, textarea, select') as HTMLElement | null;
+      if (el) {
+        const cursorType = el.dataset.cursor;
+        if (cursorType === 'view') setState('view');
+        else if (cursorType === 'open') setState('open');
+        else if (t.closest('input, textarea, select')) setState('text');
+        else setState('open');
+      } else {
+        setState('default');
+      }
     };
 
     const onOut = () => {
@@ -109,15 +119,34 @@ export default function Cursor() {
       anime({
         targets: dot,
         scale: 0.6,
-        duration: 120,
+        duration: animationDuration(120),
         easing: 'easeOutQuad',
       });
+      // Click ripple — keyframes live in index.css (.os-cursor-ripple)
+      const ripple = document.createElement('div');
+      ripple.style.cssText = `
+        position: fixed;
+        pointer-events: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid var(--accent);
+        opacity: 0.6;
+        z-index: 9998;
+        transform: translate(-50%, -50%) scale(0);
+      `;
+      ripple.style.left = `${target.x}px`;
+      ripple.style.top = `${target.y}px`;
+      ripple.style.animation = 'os-cursor-ripple 0.5s ease-out forwards';
+      document.documentElement.appendChild(ripple);
+      // Clean up after animation
+      setTimeout(() => ripple.remove(), 500);
     };
     const onUp = () => {
       anime({
         targets: dot,
         scale: 1,
-        duration: 200,
+        duration: animationDuration(200),
         easing: 'easeOutQuad',
       });
     };

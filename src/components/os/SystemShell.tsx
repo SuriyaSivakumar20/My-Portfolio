@@ -1,12 +1,28 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import anime from 'animejs';
 import { prefersReducedMotion } from '../../lib/anim/reduced';
+import { siteMeta } from '../../data/content';
 
 export interface NavTarget {
   id: string;
   label: string;
   primary?: boolean;
 }
+
+const BASE_TITLE = siteMeta.title;
+const BASE_DESCRIPTION = siteMeta.description;
+
+/** DOM section id → human label, used for dynamic document metadata. */
+const SECTION_LABEL: Record<string, string> = {
+  top: '',
+  about: 'About',
+  experience: 'Experience',
+  projects: 'Projects',
+  stack: 'Stack',
+  skills: 'Skills',
+  career: 'Education & Achievements',
+  contact: 'Contact',
+};
 
 interface SystemShellProps {
   booted: boolean;
@@ -72,6 +88,19 @@ export default function SystemShell({
     sections.forEach((s) => io.observe(s));
     return () => io.disconnect();
   }, [booted]);
+
+  // Dynamic document metadata for the section in view
+  useEffect(() => {
+    const label = SECTION_LABEL[active];
+    document.title = label ? `${label} — Suriya Sivakumar | SURIYA.OS` : BASE_TITLE;
+    const desc = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    if (desc) {
+      desc.setAttribute(
+        'content',
+        label ? `${label} — part of SURIYA.OS, the interactive portfolio of Suriya Sivakumar. ${BASE_DESCRIPTION}` : BASE_DESCRIPTION,
+      );
+    }
+  }, [active]);
 
   const primary = navTargets.filter((t) => t.primary);
 

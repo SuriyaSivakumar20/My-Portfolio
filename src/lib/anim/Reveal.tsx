@@ -45,7 +45,7 @@ export default function Reveal({
   x = 0,
   scale = 1,
   delay = 0,
-  duration = 900,
+  duration = 720,
   easing = 'cubicBezier(0.16, 1, 0.3, 1)',
   once = true,
   visibleOnLeave = false,

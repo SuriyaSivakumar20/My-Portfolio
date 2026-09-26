@@ -9,6 +9,8 @@ interface Command {
   name: string;
   hint: string;
   run: Run;
+  /** Keeps the panel open (in-panel utilities like help/clear). */
+  sticky?: boolean;
 }
 
 export default function CommandPanel({
@@ -23,10 +25,15 @@ export default function CommandPanel({
   const [rendered, setRendered] = useState(false);
   const [query, setQuery] = useState('');
   const [cursor, setCursor] = useState(0);
+  const [history, setHistory] = useState<string[]>([]);
+  /** -1 = live input; otherwise the index in `history` being recalled. */
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [hint, setHint] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const closedByRef = useRef(false);
+  const draftRef = useRef('');
 
   const reduced = prefersReducedMotion();
 
@@ -42,8 +49,9 @@ export default function CommandPanel({
     { name: 'resume', hint: 'Download resume.pdf', run: () => onNavigate('resume') },
     { name: 'github', hint: 'Open GitHub ↗', run: () => window.open(links.github, '_blank') },
     { name: 'linkedin', hint: 'Open LinkedIn ↗', run: () => window.open(links.linkedin, '_blank') },
-    { name: 'email', hint: 'suriyasivakumar08@gmail.com', run: () => window.location.href = links.email },
-    { name: 'help', hint: 'Show all available commands', run: () => setQuery('') },
+    { name: 'email', hint: 'suriyasivakumar08@gmail.com', run: () => (window.location.href = links.email) },
+    { name: 'help', hint: 'Show all available commands', sticky: true, run: () => { setQuery(''); setHistoryIndex(-1); setHint('all commands listed below'); } },
+    { name: 'clear', hint: 'Clear command history', sticky: true, run: () => { setHistory([]); setHistoryIndex(-1); setQuery(''); setHint('history cleared'); } },
   ];
 
   const filtered = query.trim()
@@ -59,6 +67,8 @@ export default function CommandPanel({
       setRendered(true);
       setQuery('');
       setCursor(0);
+      setHistoryIndex(-1);
+      setHint('');
       document.body.classList.add('no-scroll');
       const t = window.setTimeout(() => inputRef.current?.focus(), reduced ? 0 : 80);
       const panel = panelRef.current;
@@ -116,6 +126,13 @@ export default function CommandPanel({
 
   useEffect(() => setCursor(0), [query]);
 
+  // Transient hint (Tab completion remainder, help/clear feedback) auto-dismisses
+  useEffect(() => {
+    if (!open || !hint) return;
+    const t = window.setTimeout(() => setHint(''), 2400);
+    return () => window.clearTimeout(t);
+  }, [hint, open]);
+
   const close = () => {
     closedByRef.current = true;
     onClose();
@@ -123,38 +140,81 @@ export default function CommandPanel({
 
   const runCommand = (cmd: Command) => {
     cmd.run();
-    close();
+    if (!cmd.sticky) close();
   };
 
+  const moveCursor = (delta: number) =>
+    setCursor((c) => (c + delta + Math.max(filtered.length, 1)) % Math.max(filtered.length, 1));
+
   const onKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      close();
-    }
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setCursor((c) => (c + 1) % Math.max(filtered.length, 1));
+      if (historyIndex >= 0) {
+        const next = historyIndex - 1;
+        if (next >= 0) {
+          setHistoryIndex(next);
+          setQuery(history[next]);
+        } else {
+          // Back out of recall mode to whatever was typed before
+          setHistoryIndex(-1);
+          setQuery(draftRef.current);
+        }
+        return;
+      }
+      moveCursor(1);
+      return;
     }
     if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setCursor((c) => (c - 1 + Math.max(filtered.length, 1)) % Math.max(filtered.length, 1));
+      // Recall mode: input empty, or already walking history
+      if (history.length > 0 && (historyIndex >= 0 || !query.trim())) {
+        if (historyIndex === -1) draftRef.current = query;
+        const next = historyIndex === -1 ? 0 : Math.min(historyIndex + 1, history.length - 1);
+        setHistoryIndex(next);
+        setQuery(history[next]);
+        return;
+      }
+      moveCursor(-1);
+      return;
+    }
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      // Autocomplete: complete the first command that starts with what's typed
+      const trimmed = query.trim().toLowerCase();
+      if (!trimmed) return;
+      const match = commands.find(
+        (c) => c.name.toLowerCase().startsWith(trimmed) && c.name.toLowerCase() !== trimmed,
+      );
+      if (match) {
+        setQuery(match.name);
+        setHint(match.name.slice(trimmed.length));
+      }
+      return;
     }
     if (e.key === 'Enter') {
       e.preventDefault();
       const cmd = filtered[cursor];
-      if (cmd) runCommand(cmd);
+      if (cmd) {
+        // Record in history (deduplicated, newest first, capped at 20)
+        setHistory((prev) => [cmd.name, ...prev.filter((h) => h !== cmd.name)].slice(0, 20));
+        setHistoryIndex(-1);
+        runCommand(cmd);
+      }
     }
   };
 
+  // Escape closes the panel regardless of where focus is
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close();
+      if (e.key !== 'Escape') return;
+      e.preventDefault();
+      closedByRef.current = true;
+      onClose();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, [open, onClose]);
 
   if (!rendered) return null;
 
@@ -185,12 +245,16 @@ export default function CommandPanel({
         </div>
 
         {/* Input */}
-        <div className="flex items-center gap-3 px-4 py-4 border-b border-[#161c24]">
+        <div className="relative flex items-center gap-3 px-4 py-4 border-b border-[#161c24]">
           <span className="font-mono text-[15px] text-[var(--accent)]">&gt;_</span>
           <input
             ref={inputRef}
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setHistoryIndex(-1);
+              if (hint) setHint('');
+            }}
             onKeyDown={onKeyDown}
             type="text"
             placeholder="type a command… e.g. projects"
@@ -199,6 +263,11 @@ export default function CommandPanel({
             autoComplete="off"
             spellCheck={false}
           />
+          {hint && (
+            <span className="absolute right-4 font-mono text-[13px] text-[var(--ink-faint)] pointer-events-none">
+              {hint}
+            </span>
+          )}
         </div>
 
         {/* Results */}
@@ -234,12 +303,20 @@ export default function CommandPanel({
           ))}
         </div>
 
+        {/* Recent history shortcut */}
+        {!query.trim() && history.length > 0 && (
+          <p className="px-4 pt-1 pb-2 font-mono text-[11px] text-[var(--ink-faint)]">
+            ↑ recall — {history.slice(0, 4).join(' · ')}
+            {history.length > 4 ? ' …' : ''}
+          </p>
+        )}
+
         <div className="px-4 py-3 border-t border-[#161c24] flex items-center justify-between">
           <span className="os-label" style={{ fontSize: 10, opacity: 0.5 }}>
-            ↑↓ SELECT · ENTER RUN
+            ↑↓ SELECT / RECALL · ENTER RUN · TAB COMPLETE
           </span>
           <span className="os-label" style={{ fontSize: 10, opacity: 0.5 }}>
-            {filtered.length} CMD
+            {filtered.length} CMD · {history.length} HIST
           </span>
         </div>
       </div>

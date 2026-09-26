@@ -58,6 +58,7 @@ export default function Achievements() {
                       src={a.image}
                       alt={a.title}
                       loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       style={{ filter: 'grayscale(0.45)' }}
                       onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(0)')}

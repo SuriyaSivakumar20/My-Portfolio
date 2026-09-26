@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import anime from 'animejs';
 import Reveal from '../../lib/anim/Reveal';
 import { prefersReducedMotion } from '../../lib/anim/reduced';
@@ -8,14 +8,48 @@ import ProjectModal from './ProjectModal';
 /**
  * Projects — rendered as running processes. Hovering a row expands it
  * and swaps the system preview on the right; clicking opens a full
- * process detail modal.
+ * process detail modal. Supports filtering by domain.
  */
+/** Filter tabs — derived once from the project data. */
+const DOMAINS = ['all', ...[...new Set(projects.map((p) => p.domain))].sort()];
+const FILTER_KEY = 'suriya_projects_filter';
+
+function readSavedFilter(): string {
+  try {
+    const saved = sessionStorage.getItem(FILTER_KEY);
+    if (saved && DOMAINS.includes(saved)) return saved;
+  } catch {
+    /* storage blocked — fall back to the default */
+  }
+  return 'all';
+}
+
 export default function Projects() {
   const [hovered, setHovered] = useState<number>(0);
   const [selected, setSelected] = useState<Project | null>(null);
+  const [filter, setFilter] = useState<string>(readSavedFilter);
   const previewImgRef = useRef<HTMLImageElement>(null);
   const previewMetaRef = useRef<HTMLDivElement>(null);
   const reduced = prefersReducedMotion();
+
+  // Persist the chosen filter for the session
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(FILTER_KEY, filter);
+    } catch {
+      /* storage blocked — filters simply don't persist */
+    }
+  }, [filter]);
+
+  // A smaller result set can leave `hovered` pointing past the end
+  useEffect(() => setHovered(0), [filter]);
+
+  const filteredProjects = filter === 'all'
+    ? projects
+    : projects.filter((p) => p.domain === filter);
+
+  // Clamp so the preview never references a row that no longer exists
+  const activeIndex = Math.max(0, Math.min(hovered, filteredProjects.length - 1));
 
   const swapPreview = (i: number) => {
     setHovered(i);
@@ -45,7 +79,7 @@ export default function Projects() {
     }
   };
 
-  const active = projects[hovered];
+  const active = filteredProjects[activeIndex];
 
   return (
     <section id="projects" data-section className="relative py-28 md:py-40 overflow-hidden">
@@ -62,7 +96,7 @@ export default function Projects() {
             color: 'transparent',
           }}
         >
-          {String(active.index).padStart(2, '0')}
+          {active ? String(active.index).padStart(2, '0') : '--'}
         </span>
       </div>
 
@@ -75,15 +109,39 @@ export default function Projects() {
           </Reveal>
           <Reveal y={14} delay={80}>
             <div className="os-label hidden sm:block" style={{ opacity: 0.5 }}>
-              {projects.length} PROCESSES · CLICK TO INSPECT
+              {filteredProjects.length === projects.length
+                ? `${projects.length} PROCESSES · CLICK TO INSPECT`
+                : `${filteredProjects.length} / ${projects.length} PROCESSES · CLICK TO INSPECT`}
             </div>
           </Reveal>
         </div>
 
+        {/* Filter Tabs */}
+        <Reveal delay={120} y={16}>
+          <div className="mb-10 flex flex-wrap gap-2" role="tablist" aria-label="Project filters">
+            {DOMAINS.map((domain) => (
+              <button
+                key={domain}
+                type="button"
+                role="tab"
+                aria-selected={filter === domain}
+                onClick={() => setFilter(domain)}
+                className={`font-mono text-[11px] tracking-[0.14em] uppercase px-4 py-2 border transition-colors duration-200 ${
+                  filter === domain
+                    ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent-soft)]'
+                    : 'border-[#1c232c] text-[var(--ink-muted)] hover:text-[var(--accent)] hover:border-[var(--accent-line)]'
+                }`}
+              >
+                {domain.toUpperCase()}
+              </button>
+            ))}
+          </div>
+        </Reveal>
+
         <div className="grid lg:grid-cols-[1.25fr,0.75fr] gap-10 lg:gap-16">
           {/* Process rows */}
           <div className="border-t border-[#161c24]">
-            {projects.map((p, i) => (
+            {filteredProjects.map((p, i) => (
               <Reveal key={p.id} delay={i * 70} y={22}>
                 <button
                   type="button"
@@ -91,20 +149,20 @@ export default function Projects() {
                   onMouseEnter={() => swapPreview(i)}
                   onClick={() => setSelected(p)}
                   className={`group w-full text-left border-b border-[#161c24] py-6 transition-colors duration-300 ${
-                    hovered === i ? 'bg-[var(--surface)]/50' : 'bg-transparent'
+                    activeIndex === i ? 'bg-[var(--surface)]/50' : 'bg-transparent'
                   }`}
                 >
                   <div className="flex items-center gap-4">
                     <span
                       className={`font-mono text-[12px] tabular-nums transition-colors duration-200 ${
-                        hovered === i ? 'text-[var(--accent)]' : 'text-[var(--ink-faint)]'
+                        activeIndex === i ? 'text-[var(--accent)]' : 'text-[var(--ink-faint)]'
                       }`}
                     >
-                      {String(i + 1).padStart(2, '0')}
+                      {String(projects.indexOf(p) + 1).padStart(2, '0')}
                     </span>
                     <h3
                       className={`font-display font-medium tracking-[-0.01em] transition-all duration-300 text-[clamp(19px,3vw,32px)] ${
-                        hovered === i ? 'text-[var(--ink-strong)] translate-x-2' : 'text-[var(--ink)]'
+                        activeIndex === i ? 'text-[var(--ink-strong)] translate-x-2' : 'text-[var(--ink)]'
                       }`}
                     >
                       {p.title}
@@ -123,7 +181,7 @@ export default function Projects() {
                     </span>
                     <span
                       className={`text-[var(--accent)] transition-transform duration-300 ${
-                        hovered === i ? 'translate-x-1 opacity-100' : 'opacity-40'
+                        activeIndex === i ? 'translate-x-1 opacity-100' : 'opacity-40'
                       }`}
                     >
                       →
@@ -133,7 +191,7 @@ export default function Projects() {
                   {/* Expanded metadata on hover (desktop) / always partial */}
                   <div
                     className={`grid transition-all duration-300 overflow-hidden ${
-                      hovered === i ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'
+                      activeIndex === i ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'
                     }`}
                   >
                     <div className="min-h-0">
@@ -158,6 +216,13 @@ export default function Projects() {
                 </button>
               </Reveal>
             ))}
+            {filteredProjects.length === 0 && (
+              <Reveal delay={100} className="py-10 text-center">
+                <p className="font-mono text-[13px] text-[var(--ink-muted)]">
+                  No processes found for this filter.
+                </p>
+              </Reveal>
+            )}
 
             <Reveal delay={120} className="mt-8">
               <p className="os-label" style={{ fontSize: 10, opacity: 0.45 }}>
@@ -174,15 +239,18 @@ export default function Projects() {
                   <div className="px-4 py-2.5 border-b border-[#161c24] flex items-center justify-between">
                     <span className="os-label" style={{ color: 'var(--accent)' }}>SYS.PREVIEW</span>
                     <span className="os-label" style={{ fontSize: 10 }}>
-                      PROC-{String(active.index).padStart(2, '0')}
+                      PROC-{active ? String(active.index).padStart(2, '0') : '--'}
                     </span>
                   </div>
                   <div className="aspect-[16/10] relative overflow-hidden bg-[#0a0d11]">
                     <img
                       ref={previewImgRef}
-                      src={active.image}
-                      alt={active.title}
+                      src={active?.image}
+                      alt={active?.title ?? 'Project preview'}
+                      width={900}
+                      height={600}
                       loading="lazy"
+                      decoding="async"
                       className="absolute inset-0 w-full h-full object-cover"
                       style={{ opacity: 1 }}
                     />
@@ -190,16 +258,16 @@ export default function Projects() {
                   </div>
                   <div ref={previewMetaRef} className="px-4 py-4">
                     <div className="os-label mb-2" style={{ fontSize: 10, opacity: 0.6 }}>
-                      {active.domain}
+                      {active?.domain}
                     </div>
                     <h4 className="font-display text-[20px] font-medium text-[var(--ink-strong)] tracking-[-0.01em]">
-                      {active.title}
+                      {active?.title}
                     </h4>
                     <p className="mt-2 text-[12px] leading-[1.65] text-[var(--ink-muted)] line-clamp-3">
-                      {active.description}
+                      {active?.description}
                     </p>
                     <div className="mt-3 flex flex-wrap gap-1.5">
-                      {active.stack.slice(0, 4).map((t) => (
+                      {active?.stack.slice(0, 4).map((t) => (
                         <span key={t} className="os-label text-[9px] border border-[#1c232c] px-2 py-0.5" style={{ fontSize: 9 }}>
                           {t}
                         </span>
@@ -215,7 +283,7 @@ export default function Projects() {
                     HOVER ROWS TO SWAP PREVIEW
                   </span>
                   <span className="os-label" style={{ fontSize: 10, color: 'var(--accent)' }}>
-                    {String(active.index).padStart(2, '0')}/{projects.length}
+                    {String(activeIndex + 1).padStart(2, '0')}/{filteredProjects.length}
                   </span>
                 </div>
               </Reveal>

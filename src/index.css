@@ -125,6 +125,12 @@ a { color: inherit; }
 /* Hover sheen used on interactive rows */
 .os-hover-target { transition: background-color 180ms ease, border-color 180ms ease; }
 
+/* --------------------- CURSOR RIPPLE --------------------- */
+@keyframes os-cursor-ripple {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
 /* --------------------- GRID + VIGNETTE --------------------- */
 .os-grid-overlay {
   position: fixed;

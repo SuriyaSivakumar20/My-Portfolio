@@ -13,7 +13,7 @@ import Stack from './components/sections/Stack';
 import Skills from './components/sections/Skills';
 import Achievements from './components/sections/Achievements';
 import Contact from './components/sections/Contact';
-import { links, sections } from './data/content';
+import { links, projects, sections, siteMeta } from './data/content';
 import { prefersReducedMotion } from './lib/anim/reduced';
 
 const PATH_TO_SECTION: Record<string, string> = {
@@ -108,6 +108,34 @@ export default function App() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  // Structured data for the project list (kept in sync with src/data/content.ts)
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.setAttribute('data-suriya', 'projects');
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Projects by Suriya Sivakumar',
+      description: siteMeta.description,
+      itemListElement: projects.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'CreativeWork',
+          name: p.title,
+          description: p.description,
+          image: p.image,
+          keywords: p.stack.join(', '),
+          ...(p.url ? { url: p.url } : {}),
+          author: { '@type': 'Person', '@id': 'https://suriyasivakumar20.vercel.app/#person' },
+        },
+      })),
+    });
+    document.head.appendChild(script);
+    return () => script.remove();
   }, []);
 
   // Deep-link scroll once booted

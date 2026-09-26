@@ -30,6 +30,15 @@ export const links = {
   telRaw: '+91 9176234640',
   resume: '/resume.pdf',
   map: 'https://maps.google.com/?q=Pondicherry,Puducherry,India',
+  site: 'https://suriyasivakumar20.vercel.app/',
+};
+
+/* Default document metadata — index.html and the dynamic per-section
+   title/description both read from here so they never drift apart. */
+export const siteMeta = {
+  title: 'Suriya Sivakumar — Software Engineer | SURIYA.OS',
+  description:
+    'Portfolio operating system of Suriya Sivakumar — CS Engineer, AI developer and freelance full-stack builder. Intern at CaratLane (A Tata Product). Building systems, automation and applications.',
 };
 
 export interface Experience {
@@ -122,6 +131,7 @@ export interface Project {
   problem?: string;
   solution?: string;
   url?: string;
+  github?: string;
   image: string;
   facts: { label: string; value: string }[];
 }
@@ -142,6 +152,7 @@ export const projects: Project[] = [
     status: 'LIVE',
     stack: ['Python', 'NLP', 'Machine Learning', 'TypeScript', 'Flask'],
     url: 'https://founderscircleai.vercel.app',
+    github: 'https://github.com/SuriyaSivakumar20/FoundersAICircle',
     image:
       'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&dpr=2',
     facts: [
@@ -160,6 +171,7 @@ export const projects: Project[] = [
     status: 'LIVE',
     stack: ['React', 'Node.js', 'Python', 'HTML', 'CSS'],
     url: 'https://suriyasivakumar20.github.io/Watch_Hub/',
+    github: 'https://github.com/SuriyaSivakumar20/Watch_Hub',
     image:
       'https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?auto=compress&cs=tinysrgb&w=900&h=600&dpr=2',
     facts: [
@@ -183,6 +195,7 @@ export const projects: Project[] = [
     status: 'LIVE',
     stack: ['HTML', 'CSS', 'JS'],
     url: 'https://suriyasivakumar20.github.io/Mail_Dispatcher/',
+    github: 'https://github.com/SuriyaSivakumar20/Mail_Dispatcher',
     image:
       'https://images.pexels.com/photos/4913769/pexels-photo-4913769.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&dpr=2',
     facts: [
@@ -205,6 +218,7 @@ export const projects: Project[] = [
     domain: 'AI / ML / NLP',
     status: 'PROJECT',
     stack: ['Python', 'ML', 'NLP', 'React'],
+    github: 'https://github.com/SuriyaSivakumar20/Resume-Screening',
     image:
       'https://images.pexels.com/photos/3760072/pexels-photo-3760072.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&dpr=2',
     facts: [
@@ -227,6 +241,7 @@ export const projects: Project[] = [
     domain: 'CYBERSECURITY / NLP',
     status: 'PROJECT',
     stack: ['Python', 'TensorFlow', 'Cybersecurity', 'NLP'],
+    github: 'https://github.com/SuriyaSivakumar20/Phishing-Detection',
     image:
       'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&dpr=2',
     facts: [
@@ -249,6 +264,7 @@ export const projects: Project[] = [
     domain: 'NETWORKING / RESEARCH',
     status: 'PROJECT',
     stack: ['Networking', 'Python', 'Protocol Design'],
+    github: 'https://github.com/SuriyaSivakumar20/IPv6-Transmission-Mechanism',
     image:
       'https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&dpr=2',
     facts: [

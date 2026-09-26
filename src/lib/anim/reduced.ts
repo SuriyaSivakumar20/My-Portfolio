@@ -17,3 +17,12 @@ export function listenToMotionPreference(cb: (reduced: boolean) => void): () => 
   mq.addEventListener('change', handler);
   return () => mq.removeEventListener('change', handler);
 }
+
+/**
+ * Animation duration helper — scales duration down when motion is reduced.
+ * Use this in anime.js calls instead of hardcoded durations.
+ */
+export function animationDuration(baseMs: number): number {
+  if (prefersReducedMotion()) return 0;
+  return baseMs;
+}
