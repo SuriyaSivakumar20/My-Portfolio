@@ -109,40 +109,44 @@ export default function Nav() {
         aria-hidden="true"
       />
 
-      <header className="shell px-5 sm:px-8 lg:px-12" data-solid={solid}>
+      <header className="shell !h-14 px-5 sm:px-8 lg:px-12" data-solid={solid}>
         <button
           onClick={() => go('home')}
-          className="flex items-center gap-2.5 min-h-[40px] group"
+          className="flex items-center min-h-[36px] group text-left"
           aria-label="Back to top"
         >
-          <span className="block w-3.5 h-3.5 bg-[var(--accent)] rotate-45 transition-transform duration-500 group-hover:rotate-[135deg]" />
-          <span className="font-display text-[15px] tracking-[0.16em] uppercase">
-            Suriya
+          <span className="font-display text-[12px] sm:text-[13px] tracking-[0.2em] uppercase font-black text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">
+            Suriya Sivakumar
           </span>
         </button>
 
-        <nav className="hidden md:flex items-center gap-7 ml-auto mr-7">
-          {LINKS.map((s) => (
+        <div className="hidden md:flex items-center mx-auto">
+          <nav className="flex items-center gap-6 px-6 py-1 rounded-full bg-[var(--paper)]/85 backdrop-blur-md border border-[var(--ink)]/15 shadow-sm">
+            {LINKS.map((s) => (
+              <button
+                key={s.id}
+                className="nav-link !py-1 text-[12px]"
+                data-active={active === s.id}
+                aria-current={active === s.id ? 'location' : undefined}
+                onClick={() => go(s.id)}
+              >
+                {s.label}
+              </button>
+            ))}
             <button
-              key={s.id}
-              className="nav-link"
-              data-active={active === s.id}
-              aria-current={active === s.id ? 'location' : undefined}
-              onClick={() => go(s.id)}
+              className="btn btn--primary !py-1.5 !px-4 !text-[11px] rounded-full"
+              onClick={() => go('contact')}
             >
-              {s.label}
+              <span>Contact</span>
+              <span className="btn__arrow" aria-hidden="true">
+                →
+              </span>
             </button>
-          ))}
-        </nav>
-
-        <div className="hidden md:block">
-          <button className="btn btn--primary btn--sm" onClick={() => go('contact')}>
-            <span>Contact</span>
-            <span className="btn__arrow" aria-hidden="true">
-              →
-            </span>
-          </button>
+          </nav>
         </div>
+
+        {/* Right side spacer to keep center nav perfectly balanced */}
+        <div className="hidden md:block w-[180px]" aria-hidden="true" />
 
         <button
           ref={toggleRef}

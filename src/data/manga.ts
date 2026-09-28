@@ -207,17 +207,28 @@ export const projects: MangaProject[] = [
     index: '02',
     title: 'CafeQuick',
     stack: ['React', 'TypeScript', 'Vercel', 'three.js'],
-    pending:
-      'This build is real, but no public description, stack or links have been written for it yet — slot left open rather than filled with filler.',
+    summary:
+      'CafeQuick is a modern web-based cafe ordering platform designed to reduce counter waiting time. Customers can browse the menu, search/filter items, add products to a cart, place orders, choose online or pickup payment, and track their order status. The platform focuses on a pickup-first ordering experience with token/order tracking for faster collection.',
+    bullets: [
+      'Browse the menu with search/filter capabilities.',
+      'Add products to a cart and place orders.',
+      'Choose online or pickup payment.',
+      'Track your order status.',
+    ],  
     live: "https://cafequick.vercel.app",
-      },
+  },
   {
     id: 'ctrlclub',
     index: '03',
     title: 'CtrlClub',
-    stack: [],
-    pending:
-      'This build is real, but no public description, stack or links have been written for it yet — slot left open rather than filled with filler.',
+    stack: ['React', 'TypeScript', 'Vercel'],
+    summary:
+      'CtrlClub is an interactive web experience built for a student-run technology community/studio. The website focuses heavily on visual storytelling, animations, and interactive navigation rather than being a conventional static portfolio. It uses animated transitions, scroll-based interactions, and a visually immersive interface to present the organization and its activities.',
+    bullets: [
+      'Interactive navigation with animated transitions.',
+      'Scroll-based interactions for a dynamic user experience.',
+      'Visually immersive interface to present the organization and its activities.',
+    ],
     live: "https://ctrlclub.vercel.app",
 
   },
