@@ -36,6 +36,15 @@ type RevealOptions = {
   each?: boolean;
 };
 
+/** `plain` slides up, `stamp` presses in like a rubber stamp, `wipe` prints
+    itself across the line (clip-path) — all settle at opacity 1. */
+type RevealKind = 'plain' | 'stamp' | 'wipe';
+
+const kindOf = (el: HTMLElement): RevealKind => {
+  const v = el.dataset.reveal;
+  return v === 'stamp' ? 'stamp' : v === 'wipe' ? 'wipe' : 'plain';
+};
+
 /** Fades/slides every [data-reveal] child in once the block is reached. */
 export function useReveal<T extends HTMLElement>(
   ref: RefObject<T | null>,
@@ -55,28 +64,70 @@ export function useReveal<T extends HTMLElement>(
       return;
     }
 
+    /* per-kind motion — every branch finishes inside the plain slide's
+       0.85s budget, so QA's 1600ms settle window still sees opacity 1.
+       clearProps on completion hands the element back to CSS (so the
+       card hover-lift and friends are not shadowed by inline styles). */
+    const fx: Record<
+      RevealKind,
+      { from: gsap.TweenVars; to: gsap.TweenVars }
+    > = {
+      plain: {
+        from: { opacity: 0, y },
+        to: { opacity: 1, y: 0, duration: 0.85, ease: 'power3.out', clearProps: 'all' },
+      },
+      stamp: {
+        from: { opacity: 0, scale: 1.55, rotate: -7 },
+        to: {
+          opacity: 1,
+          scale: 1,
+          rotate: 0,
+          duration: 0.5,
+          ease: 'back.out(1.9)',
+          clearProps: 'all',
+        },
+      },
+      wipe: {
+        from: { opacity: 0, clipPath: 'inset(0 100% 0 0)' },
+        to: {
+          opacity: 1,
+          clipPath: 'inset(0 0% 0 0)',
+          duration: 0.7,
+          delay: 0.05,
+          ease: 'power4.inOut',
+          clearProps: 'all',
+        },
+      },
+    };
+
     const ctx = gsap.context(() => {
-      gsap.set(targets, { opacity: 0, y });
+      const groups: Record<RevealKind, HTMLElement[]> = {
+        plain: [],
+        stamp: [],
+        wipe: [],
+      };
+      targets.forEach((t) => groups[kindOf(t)].push(t));
+
       if (each) {
         targets.forEach((t) => {
-          gsap.to(t, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out',
+          const k = kindOf(t);
+          gsap.fromTo(t, fx[k].from, {
+            ...fx[k].to,
             scrollTrigger: { trigger: t, start, once: true },
           });
         });
-      } else {
-        gsap.to(targets, {
-          opacity: 1,
-          y: 0,
-          duration: 0.85,
-          ease: 'power3.out',
+        return;
+      }
+
+      (Object.keys(groups) as RevealKind[]).forEach((k) => {
+        const items = groups[k];
+        if (!items.length) return;
+        gsap.fromTo(items, fx[k].from, {
+          ...fx[k].to,
           stagger,
           scrollTrigger: { trigger: root, start, once: true },
         });
-      }
+      });
     }, root);
 
     return () => ctx.revert();

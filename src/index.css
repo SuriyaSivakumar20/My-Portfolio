@@ -740,8 +740,10 @@ img { display: block; max-width: 100%; }
   position: fixed;
   top: 0;
   left: 0;
-  height: 3px;
-  background: var(--accent);
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+  box-shadow: 0 1px 9px rgba(196, 68, 31, 0.5);
   z-index: 70;
   transform-origin: left;
 }
@@ -991,4 +993,196 @@ img { display: block; max-width: 100%; }
   .hero__rule { margin-top: 6px; margin-bottom: 6px; }
   .hero__lead { font-size: 0.82rem; line-height: 1.5; }
   .hero__cta { margin-top: 12px; }
+}
+
+/* -------------------------- IMPRESSION FX --------------------------- */
+/* The flourishes that make the sheet feel printed and alive. All purely
+   decorative (aria-hidden in the markup), all still at rest, all off or
+   frozen under prefers-reduced-motion.                                  */
+
+/* cover burst: radiating action lines (集中線) printed under the type,
+   masked so they never cross the face at the centre. inset 0 keeps the
+   box inside the stage (raw-rect overflow probes stay clean).          */
+.hero__burst {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.16;
+  background: repeating-conic-gradient(
+    from 0deg at 50% 40%,
+    transparent 0 3.4deg,
+    rgba(26, 21, 18, 0.85) 3.4deg 3.75deg,
+    transparent 3.75deg 6.8deg,
+    rgba(26, 21, 18, 0.45) 6.8deg 7.1deg
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 40%,
+    transparent 0 26%,
+    #000 36% 74%,
+    transparent 96%
+  );
+  mask-image: radial-gradient(
+    circle at 50% 40%,
+    transparent 0 26%,
+    #000 36% 74%,
+    transparent 96%
+  );
+}
+/* a sparser spot-colour pass over the ink lines */
+.hero__burst::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-conic-gradient(
+    from 1.7deg at 50% 40%,
+    transparent 0 27deg,
+    rgba(196, 68, 31, 0.5) 27deg 27.55deg
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 40%,
+    transparent 0 30%,
+    #000 42% 78%,
+    transparent 97%
+  );
+  mask-image: radial-gradient(
+    circle at 50% 40%,
+    transparent 0 30%,
+    #000 42% 78%,
+    transparent 97%
+  );
+}
+
+/* impact sound — stamps in with the figure on load, then clears out.
+   opacity 0 in CSS: reduced-motion (and the shot probes at ≥2.6s) see
+   nothing at all.                                                       */
+.hero__don {
+  position: absolute;
+  left: 55%;
+  top: 6%;
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 6vw, 5.2rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  -webkit-text-stroke: 2px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 6px 7px 0 rgba(26, 21, 18, 0.85);
+  transform-origin: 40% 60%;
+}
+
+/* the ghost chapter numeral: giant outlined digits under the masthead.
+   z -1 paints it inside main's stacking context — behind every bit of
+   content, above the paper. data-speed drifts it against the scroll.   */
+.ghost-num {
+  position: absolute;
+  top: -0.16em;
+  left: -0.035em;
+  z-index: -1;
+  font-family: var(--font-display);
+  font-size: clamp(5.5rem, 13vw, 12rem);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(26, 21, 18, 0.15);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* velocity: ink speed-lines flare across the sheet while it moves.
+   Fixed + overflow-clipped, so it can never widen the document.        */
+.streaks {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+.streak {
+  position: absolute;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(26, 21, 18, 0.9) 16%,
+    rgba(26, 21, 18, 0.9) 84%,
+    transparent
+  );
+}
+.streak--accent {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent) 16%,
+    var(--accent) 84%,
+    transparent
+  );
+}
+
+/* ink-dot cursor: small dot + lagging ring, pointer:fine only. The
+   system cursor stays visible; this is only a flourish over it.        */
+.ink-cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+.ink-cursor__dot,
+.ink-cursor__ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+}
+.ink-cursor__dot {
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  background: var(--ink);
+}
+.ink-cursor__ring {
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 1.5px solid rgba(26, 21, 18, 0.55);
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+.ink-cursor[data-hot='true'] .ink-cursor__ring {
+  border-color: var(--accent);
+  background: rgba(196, 68, 31, 0.1);
+}
+
+/* card hover: a halftone dot sheen sweeps across the panel (the lift +
+   shadow live in the .panel--hover rules above). isolate keeps the
+   -1 layer under the card's own text, over its paper.                  */
+.panel--hover { isolation: isolate; }
+.panel--hover::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -12%;
+  bottom: -12%;
+  left: 0;
+  width: 36%;
+  background-image: radial-gradient(var(--accent) 1.1px, transparent 1.4px);
+  background-size: 9px 9px;
+  -webkit-mask-image: linear-gradient(100deg, transparent 0%, #000 45%, transparent 88%);
+  mask-image: linear-gradient(100deg, transparent 0%, #000 45%, transparent 88%);
+  transform: translateX(-150%) skewX(-16deg);
+  opacity: 0;
+  transition: transform 1.1s ease-in-out, opacity 0.3s ease;
+  pointer-events: none;
+}
+.panel--hover:hover::before {
+  transform: translateX(330%) skewX(-16deg);
+  opacity: 1;
 }

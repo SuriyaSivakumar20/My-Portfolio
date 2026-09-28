@@ -187,10 +187,9 @@ export interface MangaProject {
 
 export const projects: MangaProject[] = [
   {
-    id: 'bird',
+    id: 'FoundersCircle',
     index: '01',
-    title: 'B.I.R.D.',
-    subtitle: 'Business Intelligence & Resource Development',
+    title: 'FoundersCircle',
     date: 'Jul 2025 — March 2026',
     summary:
       'A full-stack Python AI platform that connects startups with venture capitalists — live on Vercel with active users, built to scale across roles and data volumes.',
@@ -210,7 +209,8 @@ export const projects: MangaProject[] = [
     stack: ['React', 'TypeScript', 'Vercel', 'three.js'],
     pending:
       'This build is real, but no public description, stack or links have been written for it yet — slot left open rather than filled with filler.',
-  },
+    live: "https://cafequick.vercel.app",
+      },
   {
     id: 'ctrlclub',
     index: '03',
@@ -218,6 +218,8 @@ export const projects: MangaProject[] = [
     stack: [],
     pending:
       'This build is real, but no public description, stack or links have been written for it yet — slot left open rather than filled with filler.',
+    live: "https://ctrlclub.vercel.app",
+
   },
   {
     id: 'phishing',

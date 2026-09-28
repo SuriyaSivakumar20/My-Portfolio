@@ -8,6 +8,8 @@ import ProjectsSection from './components/manga/ProjectsSection';
 import SkillsSection from './components/manga/SkillsSection';
 import ContactSection from './components/manga/ContactSection';
 import ScrollTransition from './components/manga/ScrollTransition';
+import MotionFx from './components/manga/MotionFx';
+import InkCursor from './components/manga/InkCursor';
 import { startScroll } from './lib/manga/scroll';
 import { useSectionFlow } from './lib/manga/hooks';
 import { navSections, projects, sectionIndex } from './data/manga';
@@ -73,6 +75,8 @@ export default function App() {
         Skip to content
       </a>
       <Nav />
+      <MotionFx />
+      <InkCursor />
 
       <main id="main" tabIndex={-1} className="relative z-10 outline-none">
         <HeroSection />

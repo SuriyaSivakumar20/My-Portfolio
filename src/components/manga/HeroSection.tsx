@@ -71,6 +71,25 @@ export default function HeroSection() {
           { y: 26, opacity: 0, duration: 0.7, stagger: 0.075, ease: 'power3.out' },
           '-=0.85',
         );
+
+      /* the cover lands with a manga impact: radiating action lines flare
+         behind the figure and settle into a faint print texture, while a
+         spot-colour "DON!" stamps over the panel and drops out of it.
+         Absolute positions — the chain above keeps its own rhythm.     */
+      tl.fromTo(
+        '.hero__burst',
+        { opacity: 0, scale: 0.55, transformOrigin: '50% 38%' },
+        { opacity: 0.6, scale: 1, duration: 0.5, ease: 'power2.out' },
+        0.12,
+      )
+        .to('.hero__burst', { opacity: 0.16, duration: 0.9, ease: 'power2.inOut' }, 0.95)
+        .fromTo(
+          '.hero__don',
+          { opacity: 0, scale: 2.4, rotate: -26 },
+          { opacity: 1, scale: 1, rotate: -8, duration: 0.45, ease: 'back.out(2.4)' },
+          0.75,
+        )
+        .to('.hero__don', { opacity: 0, scale: 0.94, duration: 0.45, ease: 'power2.in' }, 1.7);
     }, el);
 
     return () => ctx.revert();
@@ -138,6 +157,9 @@ export default function HeroSection() {
 
       {/* ---------------- stage ---------------- */}
       <div className="hero__stage relative flex-1 min-h-0">
+        {/* radiating action lines (集中線) printed under the type */}
+        <span className="hero__burst" aria-hidden="true" />
+
         {/* character sits in front of the type, exactly like the plate */}
         <img
           src="/art/hero-character.webp"
@@ -145,6 +167,11 @@ export default function HeroSection() {
           data-speed="0.35"
           className="hero__character absolute z-20 pointer-events-none select-none"
         />
+
+        {/* impact sound: stamps in with the figure, then clears the page */}
+        <span className="hero__don" aria-hidden="true">
+          DON!
+        </span>
 
         <span className="bracket bracket--tl hero__line absolute z-30 left-[5vw] top-[6%]" />
         <span className="bracket bracket--br hero__line absolute z-30 right-[6vw] bottom-[4%]" />

@@ -24,8 +24,15 @@ export default function SectionHeader({ n, kicker, title, accentLast, aside }: P
 
   return (
     <header className="relative">
+      {/* giant outlined chapter numeral printed under the type — drifts
+          a touch against the scroll (data-speed, picked up by the
+          section's parallax scope) */}
+      <span className="ghost-num" data-speed="0.12" aria-hidden="true">
+        {n}
+      </span>
+
       <div className="flex items-start justify-between gap-6">
-        <p className="kicker" data-reveal>
+        <p className="kicker" data-reveal="stamp">
           <span className="kicker__num tnum">{n}</span>
           <span className="kicker__rule" />
           <span>{kicker}</span>
@@ -39,7 +46,7 @@ export default function SectionHeader({ n, kicker, title, accentLast, aside }: P
       </div>
 
       <div className="mt-5 flex flex-col lg:flex-row lg:items-end justify-between gap-5">
-        <h2 className="display display--section min-w-0" data-reveal>
+        <h2 className="display display--section min-w-0" data-reveal="wipe">
           {head}
         </h2>
 
