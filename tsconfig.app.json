@@ -20,5 +20,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  /* legacy, never bundled (App renders src/components/manga only) — excluded
+     so the three unused packages can be pruned without breaking typecheck */
+  "exclude": [
+    "src/components/os",
+    "src/components/sections",
+    "src/lib/anim/Reveal.tsx",
+    "src/lib/anim/TextReveal.tsx"
+  ]
 }

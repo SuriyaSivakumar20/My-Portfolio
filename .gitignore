@@ -25,3 +25,10 @@ dist-ssr
 *.sw?
 .env
 .claude
+
+# analysis scratch for the redesign (frames, plates, OCR, QA screenshots)
+.ref
+
+# python build scripts
+__pycache__/
+*.pyc

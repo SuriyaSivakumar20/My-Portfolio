@@ -11,11 +11,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // Split stable vendor code into its own long-lived cache chunks so a
-        // content change doesn't invalidate React/anime on every deploy.
+        // content change doesn't invalidate React on every deploy.
         manualChunks: {
-          react: ['react', 'react-dom', 'react-router-dom'],
-          anime: ['animejs'],
-          icons: ['lucide-react'],
+          react: ['react', 'react-dom'],
         },
       },
     },

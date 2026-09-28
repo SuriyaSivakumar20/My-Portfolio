@@ -1,321 +1,812 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* =========================================================
-   SURIYA.OS — DESIGN SYSTEM
-   A dark technical workstation. Near-black canvas, off-white
-   ink, a single signal-cyan accent, hairline borders.
+   MANGA PORTFOLIO — DESIGN SYSTEM
+   Cream stock, warm ink black, one burnt-orange spot colour.
+   Everything is drawn with print vocabulary: rules, ticks,
+   corner brackets, halftone, registration marks, panels.
    ========================================================= */
 
 :root {
-  --bg:          #07090b;
-  --surface:     #0b0e12;
-  --surface-2:   #10151b;
-  --surface-3:   #161c24;
+  /* paper */
+  --paper:        #ede7da;
+  --paper-2:      #e5dfd1;
+  --paper-3:      #dbd3c3;
+  --paper-deep:   #cfc6b4;
 
-  --line:        rgba(226, 232, 240, 0.07);
-  --line-strong: rgba(226, 232, 240, 0.16);
+  /* ink */
+  --ink:          #1a1512;
+  --ink-2:        #3a322b;
+  --ink-3:        #6b6156;
+  --ink-4:        #948a7d;
 
-  --ink-strong:  #edf1f5;
-  --ink:         #c6cdd6;
-  --ink-muted:   #7b8490;
-  --ink-faint:   #4a515b;
+  /* spot colour */
+  --accent:       #c4441f;
+  --accent-dark:  #9c3314;
+  --accent-soft:  rgba(196, 68, 31, 0.14);
 
-  --accent:      #63d3f2;
-  --accent-soft: rgba(99, 211, 242, 0.12);
-  --accent-line: rgba(99, 211, 242, 0.35);
+  --rule:         rgba(26, 21, 18, 0.16);
+  --rule-strong:  rgba(26, 21, 18, 0.42);
 
-  --ok:          #5ee68c;
+  --font-display: 'Archivo Black', 'Arial Black', sans-serif;
+  --font-body:    'Archivo', 'Helvetica Neue', Arial, sans-serif;
 
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-mono:    'JetBrains Mono', monospace;
-  --font-body:    'Inter', sans-serif;
-
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-print:   cubic-bezier(0.16, 1, 0.3, 1);
+  --shell-h:      72px;
 }
 
-/* --------------------- RESET --------------------- */
+/* ------------------------------ RESET ------------------------------ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
-  background: var(--bg);
+  background: var(--paper);
   overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   font-family: var(--font-body);
   color: var(--ink);
-  background-color: var(--bg);
+  background: transparent;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-#root { min-height: 100vh; }
+#root { min-height: 100vh; isolation: isolate; }
 
-/* Fixed shell header overlaps section tops on anchor/deep-link scroll */
-[data-section] { scroll-margin-top: 4.5rem; }
+a { color: inherit; text-decoration: none; }
+button, input, textarea { font: inherit; color: inherit; }
+img { display: block; max-width: 100%; }
 
-::selection {
-  background: var(--accent);
-  color: #05070a;
-}
+::selection { background: var(--accent); color: var(--paper); }
 
-/* --------------------- SCROLLBAR --------------------- */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb {
-  background: #1c232c;
-  border: 2px solid var(--bg);
-}
-::-webkit-scrollbar-thumb:hover { background: #2a333e; }
-
-/* Fine scrollbar elsewhere */
-* { scrollbar-width: thin; scrollbar-color: #1c232c transparent; }
-
-/* --------------------- FOCUS --------------------- */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-a { color: inherit; }
+[data-section] { scroll-margin-top: 96px; }
 
-/* --------------------- TYPE --------------------- */
-.font-display { font-family: var(--font-display); }
-.font-mono { font-family: var(--font-mono); }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: var(--paper-2); }
+::-webkit-scrollbar-thumb { background: var(--ink-3); border: 3px solid var(--paper-2); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+* { scrollbar-width: thin; scrollbar-color: var(--ink-3) var(--paper-2); }
 
-/* Small technical label */
-.os-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
-.os-label--accent { color: var(--accent); }
-
-/* Large editorial heading */
-.os-heading {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 0.96;
-  color: var(--ink-strong);
-}
-
-/* Hairline divider */
-.os-rule {
-  border: none;
-  border-top: 1px solid var(--line);
-}
-
-/* Block with thin border + flat surface */
-.os-block {
-  background: linear-gradient(180deg, rgba(22,28,36,0.28), rgba(11,14,18,0.9));
-  border: 1px solid var(--line);
-}
-
-/* Hover sheen used on interactive rows */
-.os-hover-target { transition: background-color 180ms ease, border-color 180ms ease; }
-
-/* --------------------- CURSOR RIPPLE --------------------- */
-@keyframes os-cursor-ripple {
-  0% { transform: translate(-50%, -50%) scale(0); opacity: 0.6; }
-  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
-}
-
-/* --------------------- GRID + VIGNETTE --------------------- */
-.os-grid-overlay {
+/* --------------------------- PAPER STAGE --------------------------- */
+/* Fixed, full-bleed substrate: paper photo + printed distress + halftone
+   + grain. It drifts slower than the content (0.1x) so the page reads as
+   one sheet of paper being pulled past the camera.                       */
+.paper-stage {
   position: fixed;
-  inset: 0;
-  z-index: 0;
+  inset: -6vh -4vw;
+  z-index: -2;
   pointer-events: none;
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-color: var(--paper);
+}
+.paper-stage__photo {
+  position: absolute;
+  inset: 0;
+  background: url('/art/paper.webp') center / cover no-repeat;
+  opacity: 0.9;
+}
+.paper-stage__distress {
+  position: absolute;
+  inset: 0;
+  background: url('/art/distress.webp') center / cover no-repeat;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+.paper-stage__halftone {
+  position: absolute;
+  inset: 0;
+  background: url('/art/halftone.webp') repeat;
   background-size: 72px 72px;
-  -webkit-mask-image: radial-gradient(ellipse 120% 90% at 50% 0%, black 30%, transparent 78%);
-  mask-image: radial-gradient(ellipse 120% 90% at 50% 0%, black 30%, transparent 78%);
+  opacity: 0.16;
+}
+.paper-stage__grain {
+  position: absolute;
+  inset: 0;
+  background: url('/art/grain.webp') repeat;
+  background-size: 160px 160px;
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+}
+/* soft press-mark vignette so the sheet feels handled */
+.paper-stage__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255, 253, 247, 0.65), transparent 55%),
+    radial-gradient(100% 70% at 50% 110%, rgba(26, 21, 18, 0.1), transparent 60%);
 }
 
-.os-vignette {
+/* the continuous spine: one orange rule threading every section together */
+.spine {
   position: fixed;
-  inset: 0;
-  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: max(24px, calc((100vw - 1440px) / 2 - 34px));
+  width: 2px;
+  z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(99, 211, 242, 0.05), transparent 60%),
-    linear-gradient(180deg, transparent 60%, rgba(4,5,7,0.7) 100%);
+    repeating-linear-gradient(
+      to bottom,
+      var(--accent) 0 26px,
+      transparent 26px 40px
+    );
+  opacity: 0.5;
 }
+@media (max-width: 1180px) { .spine { display: none; } }
 
-/* --------------------- CURSOR --------------------- */
-body.os-cursor-on,
-body.os-cursor-on a,
-body.os-cursor-on button,
-body.os-cursor-on [data-cursor] {
-  cursor: none;
-}
-
-/* --------------------- CUSTOM CURSOR --------------------- */
-.os-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  pointer-events: none;
-  will-change: transform;
-}
-.os-cursor-dot {
-  position: fixed;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  transform: translate(-50%, -50%);
-  left: 0;
-  top: 0;
-  pointer-events: none;
-  mix-blend-mode: normal;
-}
-.os-cursor-ring {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px solid rgba(99, 211, 242, 0.55);
-  transform: translate(-50%, -50%);
+/* --------------------------- TYPOGRAPHY --------------------------- */
+.kicker {
   display: flex;
   align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.kicker__num { color: var(--accent-dark); font-weight: 700; }
+.kicker__rule {
+  width: clamp(34px, 6vw, 76px);
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.55;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.86;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.display--section {
+  font-size: clamp(3rem, 8.2vw, 7.5rem);
+}
+.display--accent { color: var(--accent); }
+
+/* the hero wordmark — spot colour printed with the sheet's own distress */
+.wordmark {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.8;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+  -webkit-text-stroke: 0;
+}
+.wordmark--textured {
+  color: transparent;
+  background-image: linear-gradient(var(--accent), var(--accent)),
+    url('/art/distress.webp');
+  background-size: cover, 640px auto;
+  background-blend-mode: multiply;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.lede {
+  font-size: clamp(0.95rem, 1.1vw, 1.06rem);
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 46ch;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.label--ink { color: var(--ink); }
+.label--accent { color: var(--accent-dark); }
+
+.body-copy {
+  font-size: 0.935rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.tnum { font-variant-numeric: tabular-nums; }
+
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+
+/* right-hand running head, exactly like the plates.
+   :where() keeps specificity at 0 so Tailwind's `hidden sm:grid`
+   visibility utilities are not overridden by the display rule.   */
+:where(.meta-list) {
+  display: grid;
+  gap: 5px;
+  justify-items: end;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  position: relative;
+  padding-right: 14px;
+}
+.meta-list::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 2px;
+  bottom: 2px;
+  width: 3px;
+  background: var(--accent);
+}
+
+/* ------------------------------ RULES ------------------------------ */
+.rule { height: 1px; background: var(--rule); border: 0; }
+.rule--strong { background: var(--rule-strong); }
+.rule--accent { background: var(--accent); height: 2px; }
+.rule--short { width: 74px; }
+
+/* torn / printed section seam — lets one section bleed into the next */
+.seam {
+  position: relative;
+  height: 0;
+  z-index: 3;
+}
+.seam::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0 14%,
+    var(--ink) 14% 15.4%,
+    transparent 15.4% 100%
+  );
+}
+
+/* diagonal hazard tape used as a margin accent */
+.hazard {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--ink) 0 7px,
+    transparent 7px 15px
+  );
+  opacity: 0.75;
+}
+
+/* --------------------------- PAGE TURN ----------------------------- */
+/* the editorial gutter between chapters: hazard tape + a press ticker
+   naming what comes next, slid sideways as the reader scrolls past     */
+.turn {
+  position: relative;
+  height: 96px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  gap: 12px;
+  overflow: hidden;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.turn__tape {
+  display: block;
+  height: 7px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--accent) 0 9px,
+    transparent 9px 20px
+  );
+  opacity: 0.85;
+}
+/* accent rule that draws itself across the gutter as the turn enters —
+   the visible "wink" between two chapters (scrubbed in ScrollTransition) */
+.turn__sweep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: var(--accent);
+  transform-origin: left center;
+}
+.turn__mask {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.turn__track {
+  display: inline-flex;
+  gap: 44px;
+}
+.turn__word {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.4vw, 2.4rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(26, 21, 18, 0.55);
+}
+.turn__word .tnum { color: var(--accent); -webkit-text-stroke: 0; }
+.turn__sep {
+  font-size: 0.62em;
+  color: var(--accent-dark);
+  -webkit-text-stroke: 0;
+}
+@media (max-width: 640px) { .turn { height: 78px; } }
+
+/* ----------------------------- BUTTONS ----------------------------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  min-height: 40px; /* guaranteed touch target — padding rounds sub-40 on some viewports */
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.35s var(--ease-print), border-color 0.35s var(--ease-print);
+}
+.btn > * { position: relative; z-index: 1; }
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform: translateY(101%);
+  transition: transform 0.42s var(--ease-print);
+}
+.btn:hover::after { transform: translateY(0); }
+.btn:hover { color: var(--paper); }
+
+.btn--primary {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  color: #fdf8f1;
+}
+.btn--primary::after { background: var(--ink); }
+.btn--primary:hover { border-color: var(--ink); }
+
+.btn--ghost-light { border-color: rgba(237, 231, 218, 0.55); color: var(--paper); }
+
+.btn__arrow { transition: transform 0.4s var(--ease-print); }
+.btn:hover .btn__arrow { transform: translateX(5px); }
+
+.btn--sm { padding: 10px 17px; font-size: 12px; letter-spacing: 0.16em; }
+
+/* ------------------------------ CHIPS ------------------------------ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 11px;
+  border: 1px solid var(--rule-strong);
+  background: rgba(255, 253, 247, 0.55);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.chip:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.chip--accent {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.chip--solid {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+/* ------------------------------ PANELS ------------------------------ */
+/* manga panel: hairline frame with clipped top-right corner + orange tab */
+.panel {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 253, 247, 0.78), rgba(237, 231, 218, 0.6));
+  border: 1.5px solid var(--ink);
+  clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
+  transition: transform 0.45s var(--ease-print), box-shadow 0.45s var(--ease-print);
+}
+.panel::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 27px;
+  height: 1.5px;
+  background: var(--ink);
+  transform-origin: top right;
+  transform: rotate(45deg) translateY(-0.5px);
+}
+.panel--hatched::before {
+  content: '';
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  width: 46px;
+  height: 12px;
+  background-image: repeating-linear-gradient(
+    -60deg,
+    var(--ink) 0 2px,
+    transparent 2px 6px
+  );
+  opacity: 0.55;
+}
+.panel--hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 10px 12px 0 rgba(26, 21, 18, 0.12);
+}
+
+.panel__tab {
+  position: absolute;
+  left: -1.5px;
+  top: -1.5px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px 7px 12px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 11px) 100%, 0 100%);
+}
+.panel__tab--accent { background: var(--accent-dark); }
+
+/* corner registration brackets (the video's framing marks) */
+.bracket {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--accent);
   pointer-events: none;
 }
-.os-cursor-label {
-  font-family: var(--font-mono);
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  color: var(--accent);
-  text-transform: uppercase;
-  opacity: 0;
-}
-.os-cursor[data-visible='false'] { display: none; }
+.bracket--tl { border-right: 0; border-bottom: 0; top: -10px; left: -10px; }
+.bracket--br { border-left: 0; border-top: 0; bottom: -10px; right: -10px; }
 
-@media (max-width: 900px), (hover: none) {
-  .os-cursor, .os-cursor-dot, .os-cursor-ring { display: none !important; }
-}
-
-/* --------------------- BOOT --------------------- */
-@keyframes os-blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-
-.os-caret {
-  display: inline-block;
-  width: 0.55em;
-  height: 1em;
-  background: var(--accent);
-  vertical-align: text-bottom;
-  animation: os-blink 1s steps(1) infinite;
-}
-
-@keyframes os-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
-}
-.os-pulse { animation: os-pulse 2.4s ease-in-out infinite; }
-
-/* --------------------- SCROLL TIMELINE ENGINE --------------------- */
-.os-timeline-num {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-}
-
-/* --------------------- SELECTABLE HIGHLIGHT ROW --------------------- */
-.select-row {
+/* ---------------------------- ART PANELS ---------------------------- */
+/* illustration column that bleeds off the left edge and dissolves into
+   the paper on the right. Sticky, so it travels at its own pace.        */
+.art-panel {
   position: relative;
-  transition: background-color 220ms ease, border-color 220ms ease;
+  pointer-events: none;
+  overflow: hidden;
 }
-.select-row::before {
+.art-panel--sticky {
+  position: sticky;
+  top: var(--shell-h);
+  align-self: start;
+  height: calc(100vh - var(--shell-h));
+  min-height: 420px;
+}
+.art-panel__img {
+  position: absolute;
+  left: 0;
+  top: -11%;
+  width: 100%;
+  height: 122%;
+  object-fit: cover;
+  object-position: left center;
+}
+/* soft seam where the plate dissolves into the paper */
+.art-panel::after {
   content: '';
   position: absolute;
-  inset: 0 auto 0 0;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(237, 231, 218, 0.55), transparent 16%),
+    linear-gradient(0deg, rgba(237, 231, 218, 0.4), transparent 14%);
+}
+
+@media (max-width: 1023px) {
+  .art-panel--sticky {
+    position: relative;
+    top: 0;
+    height: 44vh;
+    /* short phones: no rigid floor — the plate shrinks with the viewport */
+    min-height: min(220px, 46vh);
+  }
+}
+
+/* ------------------------------ TIMELINE ---------------------------- */
+.tl { position: relative; }
+.tl__rail {
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--rule-strong) 0 7px,
+    transparent 7px 13px
+  );
+}
+.tl__fill {
+  position: absolute;
+  left: 7px;
+  top: 6px;
   width: 2px;
   background: var(--accent);
-  transform: scaleY(0);
   transform-origin: top;
-  transition: transform 220ms var(--ease-out-expo);
+  transform: scaleY(0);
+  height: calc(100% - 12px);
 }
-.select-row[data-active='true']::before,
-.select-row:hover::before { transform: scaleY(1); }
+.tl__dot {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 3px solid var(--ink);
+}
+.tl__dot--live {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.tl__item { position: relative; padding-left: 44px; }
 
-/* --------------------- CHAR REVEAL --------------------- */
-.char-mask {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-}
-.char-mask > span {
-  display: inline-block;
-  will-change: transform;
+/* ------------------------------- CARDS ------------------------------ */
+.stat {
+  border-left: 3px solid var(--accent);
+  padding-left: 14px;
 }
 
-/* Outlined (hollow) display glyphs — SIVAKUMAR hero line */
-.hero-stroke {
-  color: transparent;
-  -webkit-text-stroke: 1.2px rgba(237, 241, 245, 0.62);
+.tick-list { display: grid; gap: 9px; }
+.tick-list li {
+  position: relative;
+  padding-left: 20px;
+  list-style: none;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-2);
 }
-@media (max-width: 768px) {
-  .hero-stroke { -webkit-text-stroke-width: 1px; }
-}
-
-/* --------------------- PROCESS MONITOR --------------------- */
-.proc-run { position: relative; }
-.proc-run::after {
+.tick-list li::before {
   content: '';
   position: absolute;
-  right: -18px;
-  top: 50%;
-  width: 7px;
+  left: 0;
+  top: 8px;
+  width: 9px;
+  height: 9px;
+  background: var(--accent);
+}
+
+/* ------------------------------ SKILLS ----------------------------- */
+/* rectangular ink tiles, the way the plates lay out the toolbox */
+.skill-tile {
+  display: inline-block;
+  padding: 8px 13px;
+  border: 1.5px solid var(--rule-strong);
+  background: rgba(255, 255, 255, 0.32);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: background 0.28s var(--ease-print), color 0.28s var(--ease-print),
+    border-color 0.28s var(--ease-print), transform 0.28s var(--ease-print);
+}
+.skill-tile:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+.skill-bar {
+  position: relative;
   height: 7px;
-  border-radius: 50%;
-  background: var(--ok);
-  transform: translateY(-50%);
-  box-shadow: 0 0 0 0 rgba(94, 230, 140, 0.4);
-  animation: os-pulse 2.2s infinite;
-}
-
-/* --------------------- UTILITY --------------------- */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
+  background: rgba(26, 21, 18, 0.12);
   overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
+}
+.skill-bar__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--accent);
+  transform-origin: left;
 }
 
-.no-scroll { overflow: hidden; }
+/* ------------------------------- FORM ------------------------------ */
+.field { position: relative; }
+.field__input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid var(--rule-strong);
+  padding: 11px 2px;
+  font-size: 0.95rem;
+  color: var(--ink);
+  transition: border-color 0.3s ease;
+}
+.field__input::placeholder { color: var(--ink-3); }
+.field__input:focus {
+  outline: 2px solid var(--accent-dark);
+  outline-offset: 2px;
+  border-bottom-color: var(--accent-dark);
+}
+.field--box .field__input {
+  border: 1.5px solid var(--rule-strong);
+  padding: 12px 14px;
+}
+.field--box .field__input:focus { border-color: var(--accent-dark); }
 
-/* Numeric / metadata cells */
-.cell { border: 1px solid var(--line); background: var(--surface); }
+/* --------------------------------- A11Y ------------------------------ */
+/* first stop on keyboard: hidden until it takes focus */
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  transform: translateY(-170%);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 12px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.18s ease;
+}
+.skip-link:focus-visible,
+.skip-link:focus {
+  transform: translateY(0);
+}
 
-/* Anchored sections clear the fixed shell */
-[data-section] { scroll-margin-top: 88px; }
+/* -------------------------------- NAV ------------------------------- */
+.shell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  height: var(--shell-h);
+  display: flex;
+  align-items: center;
+  transition: transform 0.45s var(--ease-print), background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+.shell[data-solid='true'] {
+  background: rgba(237, 231, 218, 0.93);
+  backdrop-filter: blur(7px);
+  box-shadow: 0 1px 0 var(--rule), 0 14px 30px -26px rgba(26, 21, 18, 0.7);
+}
+.shell[data-hidden='true'] { transform: translateY(-102%); }
 
-/* --------------------- REDUCED MOTION --------------------- */
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding: 6px 2px;
+  transition: color 0.25s ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 11px;
+  height: 2px;
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease-print);
+}
+.nav-link:hover { color: var(--ink); }
+.nav-link:hover::after,
+.nav-link[data-active='true']::after { transform: scaleX(1); }
+.nav-link[data-active='true'] { color: var(--ink); }
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  z-index: 70;
+  transform-origin: left;
+}
+
+/* --------------------------- MISC PRINT FX -------------------------- */
+.ink-wash {
+  position: absolute;
+  pointer-events: none;
+  background: var(--ink);
+  opacity: 0.9;
+  clip-path: polygon(
+    0 42%, 8% 22%, 19% 34%, 31% 12%, 44% 30%, 57% 6%, 71% 26%, 84% 10%,
+    100% 30%, 100% 100%, 0 100%
+  );
+}
+
+.dot-grid {
+  background-image: radial-gradient(var(--ink) 1.1px, transparent 1.2px);
+  background-size: 11px 11px;
+  opacity: 0.4;
+}
+
+.barcode {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--ink) 0 2px,
+    transparent 2px 4px,
+    var(--ink) 4px 5px,
+    transparent 5px 9px,
+    var(--ink) 9px 12px,
+    transparent 12px 14px
+  );
+}
+
+.leaf {
+  position: absolute;
+  top: -6vh;
+  width: 22px;
+  height: 13px;
+  background: #6f7a4a;
+  border-radius: 60% 5% 60% 5%;
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes leaf-drift {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  9% { opacity: 0.9; }
+  91% { opacity: 0.7; }
+  100% {
+    transform: translate3d(-18vw, 112vh, 0) rotate(470deg);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .leaf { display: none; }
+}
+
+/* ------------------------------ MOTION ------------------------------ */
+/* no persistent will-change: Reveal.tsx promotes each layer only while
+   it animates (willChange = 'auto' afterwards) — 40+ hidden elements
+   used to sit on their own compositor layer all session             */
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -323,9 +814,181 @@ body.os-cursor-on [data-cursor] {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001s !important;
   }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
 
-/* --------------------- MOBILE ADJUSTMENTS --------------------- */
-@media (max-width: 768px) {
-  .os-grid-overlay { background-size: 48px 48px; }
+/* -------------------------------- HERO ------------------------------ */
+/* the bottom rail sits over the illustration, so its copy is set inside a
+   manga caption box: printed stock, ink frame, clipped corner             */
+.hero-caption {
+  background: rgba(237, 231, 218, 0.94);
+  box-shadow: 9px 10px 0 rgba(26, 21, 18, 0.1);
+}
+.hero-tag {
+  background: rgba(237, 231, 218, 0.94);
+  padding: 9px 15px;
+}
+
+/* --------------------------- SMALL SCREENS -------------------------- */
+@media (max-width: 640px) {
+  :root { --shell-h: 60px; }
+  .display--section { font-size: clamp(2.4rem, 13vw, 3.6rem); }
+  .btn { padding: 12px 20px; }
+}
+
+/* ----------------------------- HERO FIT ----------------------------- */
+/* The cover has to close inside the fold. The stage absorbs whatever
+   height is left over after the rails (flex + no floor), the plate is
+   capped to the stage with a bounded bleed into the running head, and
+   short viewports tighten furniture only — never the copy.             */
+.hero__stage { min-height: 0; }
+
+/* size + anchor live here (not in Tailwind classes) so the short-screen
+   and landscape overrides below always win the cascade. The figure sits
+   dead-centre like the cover plate: the SURIYA type runs full width
+   behind it (the drawing is the middle of the composition), so the box
+   is centre-anchored with `translate` — the GSAP parallax keeps owning
+   `transform` and never fights the centring.                           */
+.hero__character {
+  bottom: -40px;
+  left: 50%;
+  translate: -50% 0;
+  width: min(64vw, 430px);
+  max-height: 78%;
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+@media (min-width: 640px) {
+  .hero__character { width: min(54vw, 470px); }
+}
+
+/* lg+: the box is printed full-page — stage top down to the fold (the
+   --hero-fig measure comes from HeroSection), so the entire drawing is
+   on the sheet, never cut in half. Bottom-centred with object-fit, the
+   bust stands exactly on the fold like the plate, and the box top can
+   never rise past the stage, so hair never touches the tag rail.       */
+@media (min-width: 1024px) {
+  .hero__character {
+    top: 0;
+    bottom: auto;
+    width: min(58vw, 900px);
+    height: var(--hero-fig, 70vh);
+    max-height: none;
+    object-position: bottom center;
+  }
+  /* the plate's red swatch: a corner bar beside the kicker, never under
+     the S — the type needs bare paper, like the reference              */
+  .hero__block {
+    left: 4vw;
+    top: 14%;
+    width: min(5vw, 68px);
+    max-width: 68px;
+    height: 22%;
+  }
+}
+
+/* below lg the wordmark hangs at the top of the stage and the figure
+   sits under it, so the name is never printed over the drawing        */
+@media (max-width: 1023px) {
+  .hero__wordmark { font-size: clamp(3rem, 15vw, 9rem); }
+}
+
+/* phones: trim the furniture so the whole cover fits one screen */
+@media (max-width: 639px) {
+  .hero { padding-top: calc(var(--shell-h) + 8px); }
+  .hero__tags { margin-top: 12px; gap: 6px; }
+  .hero__bottom { padding-top: 14px; padding-bottom: 18px; gap: 14px; }
+  .hero__caption { padding: 14px 16px 14px 16px; }
+  .hero__role { font-size: clamp(1.05rem, 5vw, 1.3rem); }
+  .hero__rule { margin-top: 8px; margin-bottom: 8px; }
+  .hero__lead { font-size: 0.85rem; line-height: 1.55; }
+  .hero__cta { margin-top: 14px; }
+}
+
+/* short laptops: same trims, so the plate keeps its size on the fold */
+@media (min-width: 1024px) and (max-height: 880px) {
+  .hero { padding-top: calc(var(--shell-h) + 8px); }
+  .hero__tags { margin-top: 12px; gap: 6px; }
+  .hero__bottom { padding-top: 14px; padding-bottom: 20px; }
+  .hero__caption { padding: 14px 20px; }
+  .hero__rule { margin-top: 8px; margin-bottom: 8px; }
+  .hero__lead { font-size: 0.86rem; line-height: 1.55; }
+  .hero__cta { margin-top: 14px; }
+}
+
+/* lg+: the cover-plate composition — the name runs the full width of
+   the sheet and the figure stands in front of it, dead-centre (the
+   reference's signature move). 21vw keeps the 3.914em of glyphs for
+   "SURIYA" inside the paper margin. The tag rail folds onto the kicker
+   line so it stays on bare paper above the type.                       */
+@media (min-width: 1024px) {
+  .hero__intro > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .hero__tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    margin-top: 0;
+  }
+  .hero__wordmark {
+    width: 100%;
+    text-align: center;
+    font-size: min(21vw, 34rem);
+  }
+}
+
+/* phones in landscape: one compact row per rail, the drawing moves to
+   the empty right margin beside the caption box                       */
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 1100px) {
+  .hero { padding-top: calc(var(--shell-h) + 6px); }
+  .hero__intro > div { display: flex; align-items: center; gap: 18px; }
+  .hero__tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    margin-top: 0;
+  }
+  .hero__meta { display: flex; align-items: center; gap: 14px; text-align: right; }
+  .hero__intro > .hero__aside { display: none; }
+  /* higher specificity than the `md:grid` utility (which is emitted
+     after this file), since there is no bare paper left for it here   */
+  .hero__stage .hero__foot-right { display: none; }
+  .hero__stage { min-height: 84px; }
+  .hero__wordmark { font-size: clamp(2.6rem, 12vw, 6rem); text-align: left; }
+  .hero__wordbox {
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 0;
+  }
+  .hero__character {
+    top: auto;
+    left: auto;
+    right: 3vw;
+    translate: none;
+    bottom: -100px;
+    width: auto;
+    height: min(204px, 52vh);
+    max-height: none;
+    object-position: bottom right;
+  }
+  .hero__bottom {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 16px;
+    padding-top: 6px;
+    padding-bottom: 10px;
+  }
+  .hero__caption {
+    max-width: min(440px, 54vw);
+    padding: 10px 14px;
+  }
+  .hero__rule { margin-top: 6px; margin-bottom: 6px; }
+  .hero__lead { font-size: 0.82rem; line-height: 1.5; }
+  .hero__cta { margin-top: 12px; }
 }

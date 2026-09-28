@@ -1,0 +1,88 @@
+{
+ "character": {
+  "file": "hero-character.webp",
+  "w": 582,
+  "h": 581,
+  "kb": 100.8
+ },
+ "forest": [
+  {
+   "file": "forest-l.webp",
+   "w": 234,
+   "h": 269,
+   "kb": 17.3
+  },
+  {
+   "file": "forest-r.webp",
+   "w": 494,
+   "h": 269,
+   "kb": 44.7
+  }
+ ],
+ "panels": [
+  {
+   "file": "art-about.webp",
+   "w": 462,
+   "h": 941,
+   "kb": 118.5
+  },
+  {
+   "file": "art-experience.webp",
+   "w": 542,
+   "h": 941,
+   "kb": 166.4
+  },
+  {
+   "file": "art-projects.webp",
+   "w": 580,
+   "h": 941,
+   "kb": 161.6
+  },
+  {
+   "file": "art-skills.webp",
+   "w": 588,
+   "h": 941,
+   "kb": 141.0
+  },
+  {
+   "file": "art-contact.webp",
+   "w": 644,
+   "h": 941,
+   "kb": 160.0
+  }
+ ],
+ "orange": {
+  "file": "orange-block.webp",
+  "w": 360,
+  "h": 640,
+  "kb": 5.6
+ },
+ "paper": [
+  {
+   "file": "paper.webp",
+   "w": 1600,
+   "h": 1000,
+   "kb": 27.2
+  },
+  {
+   "file": "distress.webp",
+   "w": 1600,
+   "h": 1000,
+   "kb": 21.7
+  }
+ ],
+ "tiles": [
+  {
+   "file": "halftone.webp",
+   "w": 72,
+   "h": 72,
+   "kb": 0.6
+  },
+  {
+   "file": "grain.webp",
+   "w": 160,
+   "h": 160,
+   "kb": 13.0
+  }
+ ]
+}
