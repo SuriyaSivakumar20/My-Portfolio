@@ -1186,3 +1186,13 @@ img { display: block; max-width: 100%; }
   transform: translateX(330%) skewX(-16deg);
   opacity: 1;
 }
+
+/* Ambient music equalizer visualizer */
+@keyframes equalizer {
+  0%, 100% {
+    height: 3px;
+  }
+  50% {
+    height: 12px;
+  }
+}

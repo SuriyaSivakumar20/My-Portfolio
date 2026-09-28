@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { navSections } from '../../data/manga';
 import { scrollToSection } from '../../lib/manga/scroll';
 import { useActiveSection } from '../../lib/manga/hooks';
+import AmbientAudio from './AmbientAudio';
 
 const LINKS = navSections.filter((s) => s.id !== 'contact');
 
@@ -145,30 +146,36 @@ export default function Nav() {
           </nav>
         </div>
 
-        {/* Right side spacer to keep center nav perfectly balanced */}
-        <div className="hidden md:block w-[180px]" aria-hidden="true" />
+        {/* Right side controls: Ambient forest audio toggle & balance spacer */}
+        <div className="hidden md:flex items-center justify-end w-[180px]">
+          <AmbientAudio variant="nav" />
+        </div>
 
-        <button
-          ref={toggleRef}
-          className="md:hidden ml-auto flex flex-col justify-center gap-[5px] min-h-[40px] p-2 -mr-2"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          aria-controls="site-menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span
-            className="block w-6 h-[2px] bg-[var(--ink)] transition-transform duration-300"
-            style={open ? { transform: 'translateY(7px) rotate(45deg)' } : undefined}
-          />
-          <span
-            className="block w-6 h-[2px] bg-[var(--ink)] transition-opacity duration-200"
-            style={{ opacity: open ? 0 : 1 }}
-          />
-          <span
-            className="block w-6 h-[2px] bg-[var(--accent)] transition-transform duration-300"
-            style={open ? { transform: 'translateY(-7px) rotate(-45deg)' } : undefined}
-          />
-        </button>
+        {/* Mobile controls: Audio toggle & hamburger button */}
+        <div className="flex md:hidden items-center gap-1.5 ml-auto">
+          <AmbientAudio variant="compact" />
+          <button
+            ref={toggleRef}
+            className="flex flex-col justify-center gap-[5px] min-h-[40px] p-2 -mr-2"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="site-menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span
+              className="block w-6 h-[2px] bg-[var(--ink)] transition-transform duration-300"
+              style={open ? { transform: 'translateY(7px) rotate(45deg)' } : undefined}
+            />
+            <span
+              className="block w-6 h-[2px] bg-[var(--ink)] transition-opacity duration-200"
+              style={{ opacity: open ? 0 : 1 }}
+            />
+            <span
+              className="block w-6 h-[2px] bg-[var(--accent)] transition-transform duration-300"
+              style={open ? { transform: 'translateY(-7px) rotate(-45deg)' } : undefined}
+            />
+          </button>
+        </div>
       </header>
 
       {/* mobile sheet — modal dialog, background is inert while open */}
@@ -201,7 +208,12 @@ export default function Nav() {
               </span>
             </button>
           ))}
-          <p className="label mt-8">{navSections.length} sections · one page</p>
+          
+          <div className="mt-6">
+            <AmbientAudio variant="drawer" />
+          </div>
+
+          <p className="label mt-6">{navSections.length} sections · one page</p>
         </div>
       </div>
     </>
