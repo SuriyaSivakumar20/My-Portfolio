@@ -2,16 +2,17 @@ import { FormEvent, useRef, useState } from 'react';
 import SectionShell from './SectionShell';
 import SectionHeader from './SectionHeader';
 import { contact } from '../../data/manga';
-import { links } from '../../data/content';
 import { useReveal } from '../../lib/manga/hooks';
 
-type Status = 'idle' | 'opening' | 'error';
+type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 /**
- * The real contact form. There is no backend on this site, so submitting
- * composes a mailto: to the address published in the CV and hands it to the
- * visitor's mail client — honest, and it actually sends.
+ * Contact form powered by Formspree.
+ * Replace FORMSPREE_ENDPOINT below with your own endpoint from formspree.io
+ * e.g. 'https://formspree.io/f/xyzabcde'
  */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xaqqrlbb';
+
 export default function ContactSection() {
   const formRef = useRef<HTMLFormElement>(null);
   const extraRef = useRef<HTMLDivElement>(null);
@@ -20,12 +21,11 @@ export default function ContactSection() {
 
   const [status, setStatus] = useState<Status>('idle');
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const name = String(data.get('name') ?? '').trim();
     const email = String(data.get('email') ?? '').trim();
-    const subject = String(data.get('subject') ?? '').trim();
     const message = String(data.get('message') ?? '').trim();
 
     if (!name || !email || !message) {
@@ -33,22 +33,21 @@ export default function ContactSection() {
       return;
     }
 
-    const body = [
-      message,
-      '',
-      '—',
-      `From: ${name}`,
-      `Reply to: ${email}`,
-    ].join('\n');
-
-    const href = `mailto:${links.emailRaw}?subject=${encodeURIComponent(
-      subject || `Portfolio enquiry from ${name}`,
-    )}&body=${encodeURIComponent(body)}`;
+    setStatus('sending');
 
     try {
-      window.location.href = href;
-      setStatus('opening');
-      formRef.current?.reset();
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data,
+      });
+
+      if (res.ok) {
+        setStatus('sent');
+        formRef.current?.reset();
+      } else {
+        setStatus('error');
+      }
     } catch {
       setStatus('error');
     }
@@ -120,19 +119,28 @@ export default function ContactSection() {
           </label>
 
           <div className="mt-7 flex flex-wrap items-center gap-5">
-            <button className="btn btn--primary" type="submit">
-              <span>{contact.button}</span>
-              <span className="btn__arrow" aria-hidden="true">
-                →
+            <button
+              className="btn btn--primary"
+              type="submit"
+              disabled={status === 'sending' || status === 'sent'}
+              style={{ opacity: status === 'sending' || status === 'sent' ? 0.6 : 1 }}
+            >
+              <span>
+                {status === 'sending' ? 'Sending…' : status === 'sent' ? 'Sent ✓' : contact.button}
               </span>
+              {status !== 'sending' && status !== 'sent' && (
+                <span className="btn__arrow" aria-hidden="true">→</span>
+              )}
             </button>
 
             <p className="label" role="status" aria-live="polite">
-              {status === 'opening'
-                ? 'Opening your mail client…'
-                : status === 'error'
-                  ? 'Name, email and message are required.'
-                  : 'Opens your mail app, addressed to me.'}
+              {status === 'sent'
+                ? '✓ Message sent! I will get back to you soon.'
+                : status === 'sending'
+                  ? 'Sending your message…'
+                  : status === 'error'
+                    ? 'Please fill in name, email and message.'
+                    : 'Your message goes straight to my inbox.'}
             </p>
           </div>
 
