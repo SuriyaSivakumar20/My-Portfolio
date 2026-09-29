@@ -146,8 +146,21 @@ export default function Nav() {
           </nav>
         </div>
 
-        {/* Right side controls: Ambient forest audio toggle & balance spacer */}
-        <div className="hidden md:flex items-center justify-end w-[180px]">
+        {/* Right side controls: Download Résumé + Ambient audio */}
+        <div className="hidden md:flex items-center justify-end gap-2 w-[220px]">
+          <a
+            href="/Suriya_S_Resume.pdf"
+            download="Suriya_S_Resume.pdf"
+            className="btn btn--primary !py-1.5 !px-4 !text-[11px] rounded-full inline-flex items-center justify-center gap-1.5 no-underline leading-none"
+            aria-label="Download resume"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span style={{ lineHeight: 1 }}>Resume</span>
+          </a>
           <AmbientAudio variant="nav" />
         </div>
 
@@ -208,7 +221,22 @@ export default function Nav() {
               </span>
             </button>
           ))}
-          
+
+          <a
+            href="/Suriya_S_Resume.pdf"
+            download="Suriya_S_Resume.pdf"
+            className="btn btn--primary !py-3 !px-6 !text-[13px] rounded-full inline-flex items-center justify-center gap-2 no-underline mt-6 w-fit leading-none"
+            aria-label="Download my resume"
+            onClick={() => setOpen(false)}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span style={{ lineHeight: 1 }}>Download Resume</span>
+          </a>
+
           <div className="mt-6">
             <AmbientAudio variant="drawer" />
           </div>

@@ -15,7 +15,7 @@ export default function AboutSection() {
         accentLast
         aside={
           <>
-            CS engineering student, class of 2026, shipping production code at CaratLane —
+            CS engineering student, class of 2026, shipping production code
             and open to freelance collaborations.
           </>
         }

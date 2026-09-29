@@ -94,7 +94,7 @@ export const timeline: TimelineEntry[] = [
     company: 'CaratLane — A Tata Product',
     place: 'Chennai, India',
     summary:
-      'Worked with the Pricing team on backend services and internal automation tools — building and maintaining scripts for reporting, invoicing and internal system syncs to improve operational efficiency across support workflows.',
+      'Worked with the Store apps team on fullstack services and internal automation tools — building and maintaining scripts for reporting, invoicing and internal system syncs to improve operational efficiency across support workflows.',
     bullets: [
       'Developed and maintained backend services using Golang.',
       'Built automation scripts for Freshservice and invoice-sync workflows.',
@@ -102,7 +102,7 @@ export const timeline: TimelineEntry[] = [
       'Performed root-cause analysis on live system failures and shipped fixes with the team.',
     ],
     panelTitle: 'Tech stack',
-    tags: ['Golang', 'Python', 'Oracle', 'Magento', 'Freshservice', 'Automation', 'Git', 'Linux'],
+    tags: ['Golang', 'Python', 'Oracle', 'Magento', 'Freshservice', 'Automation', 'Git', 'Linux', 'Ruby on rails', 'Typescript', 'Kafka', 'Redis', 'Strapi'],
     current: true,
   },
   {
@@ -165,7 +165,7 @@ export const timeline: TimelineEntry[] = [
       'Built a vision-based accessibility tool for the visually impaired in 48 hours.',
     ],
     panelTitle: 'Skills used',
-    tags: ['Python', 'Machine Learning', 'Team Leadership'],
+    tags: ['Python', 'Machine Learning', 'Team Leadership', 'Prompting', 'API', 'OpenAI', 'Google AI', 'Team Management'],
   },
 ];
 
@@ -280,7 +280,7 @@ export const skillGroups: SkillGroup[] = [
     index: '01',
     title: 'Languages',
     blurb: 'What I reach for when I start typing.',
-    items: ['Python', 'JavaScript', 'TypeScript', 'Go', 'Java', 'C', 'C++', 'SQL', 'Ruby'],
+    items: ['Python', 'JavaScript', 'TypeScript', 'Go', 'SQL', 'Ruby'],
   },
   {
     id: 'frameworks',
@@ -323,7 +323,7 @@ export const skillGroups: SkillGroup[] = [
     index: '04',
     title: 'Databases',
     blurb: 'Where the data actually lives.',
-    items: ['MySQL', 'PostgreSQL', 'MongoDB', 'Oracle', 'SQL'],
+    items: ['MySQL', 'Oracle', 'SQL'],
   },
   {
     id: 'other',
