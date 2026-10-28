@@ -16,8 +16,9 @@ export default function MangaBackground() {
 
     // the sheet drifts a touch slower than the content: background = 0.1x
     const tween = gsap.to(el, {
-      yPercent: 5,
+      yPercent: 4,
       ease: 'none',
+      force3D: true,
       scrollTrigger: {
         trigger: document.body,
         start: 'top top',
@@ -34,15 +35,8 @@ export default function MangaBackground() {
   }, []);
 
   return (
-    <>
-      <div ref={stage} className="paper-stage" aria-hidden="true">
-        <div className="paper-stage__photo" />
-        <div className="paper-stage__distress" />
-        <div className="paper-stage__halftone" />
-        <div className="paper-stage__grain" />
-        <div className="paper-stage__vignette" />
-      </div>
-      <div className="spine" aria-hidden="true" />
-    </>
+    <div ref={stage} className="paper-stage" aria-hidden="true">
+      <div className="paper-stage__photo" />
+    </div>
   );
 }

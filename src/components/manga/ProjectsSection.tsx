@@ -5,13 +5,7 @@ import { projects } from '../../data/manga';
 
 export default function ProjectsSection() {
   return (
-    <SectionShell
-      id="projects"
-      art={{
-        src: '/art/art-projects.webp',
-        alt: 'Manga illustration of Suriya beside a wall of numbered project panels',
-      }}
-    >
+    <SectionShell id="projects">
       <SectionHeader
         n="04"
         kicker="My work"
@@ -19,6 +13,7 @@ export default function ProjectsSection() {
         accentLast
         aside={
           <>
+            Selected production applications, AI platforms and web tools built with modern stacks.
           </>
         }
       />

@@ -27,12 +27,12 @@ const rect = (el) => {
   await page.waitForTimeout(400);
 
   out.heroOpening = await page.evaluate(() => {
-    const el = document.querySelector('.hero__wordmark');
+    const el = document.querySelector('.hero__artwork-wrap');
     return el ? getComputedStyle(el).transform : 'missing';
   });
   await page.waitForTimeout(2400);
   out.heroSettled = await page.evaluate(() => {
-    const el = document.querySelector('.hero__wordmark');
+    const el = document.querySelector('.hero__artwork-wrap');
     return el ? getComputedStyle(el).transform : 'missing';
   });
 
@@ -51,16 +51,12 @@ const rect = (el) => {
     return { total: all.length, visibleAfterNav: shown };
   });
 
-  /* sticky art + parallax: sample the same image across two scroll positions */
+  /* parallax: sample [data-speed] numeral across two scroll positions */
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForTimeout(600);
   const a = await page.evaluate(() => {
-    const img = document.querySelector('#experience .art-panel__img');
-    const panel = document.querySelector('#experience .art-panel');
-    return {
-      img: img ? getComputedStyle(img).transform : 'missing',
-      pos: panel ? getComputedStyle(panel).position : 'missing',
-    };
+    const el = document.querySelector('#experience [data-speed]');
+    return el ? getComputedStyle(el).transform : 'missing';
   });
   await page.evaluate(() => {
     const el = document.getElementById('experience');
@@ -68,10 +64,10 @@ const rect = (el) => {
   });
   await page.waitForTimeout(900);
   const b = await page.evaluate(() => {
-    const img = document.querySelector('#experience .art-panel__img');
-    return img ? getComputedStyle(img).transform : 'missing';
+    const el = document.querySelector('#experience [data-speed]');
+    return el ? getComputedStyle(el).transform : 'missing';
   });
-  out.parallax = { before: a.img, after: b.img, moved: a.img !== b.img, panelPosition: a.pos };
+  out.parallax = { before: a, after: b, moved: a !== b && a !== 'missing' };
   out.errors = errors;
   await page.close();
 

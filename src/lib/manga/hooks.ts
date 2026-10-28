@@ -217,16 +217,17 @@ export function useSectionFlow(): void {
       sections.forEach((s) => {
         gsap.fromTo(
           s,
-          { y: 56, opacity: 0 },
+          { y: 32, opacity: 0 },
           {
             y: 0,
             opacity: 1,
             ease: 'none',
+            force3D: true,
             scrollTrigger: {
               trigger: s,
-              start: 'top 96%',
-              end: 'top 46%',
-              scrub: 0.6,
+              start: 'top 94%',
+              end: 'top 65%',
+              scrub: 0.4,
             },
           },
         );

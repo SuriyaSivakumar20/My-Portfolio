@@ -5,13 +5,7 @@ import { skillGroups } from '../../data/manga';
 
 export default function SkillsSection() {
   return (
-    <SectionShell
-      id="skills"
-      art={{
-        src: '/art/art-skills.webp',
-        alt: 'Manga illustration of Suriya reviewing a wall of tool tiles',
-      }}
-    >
+    <SectionShell id="skills">
       <SectionHeader
         n="05"
         kicker="My toolbox"

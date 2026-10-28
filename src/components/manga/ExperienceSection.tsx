@@ -9,10 +9,7 @@ export default function ExperienceSection() {
   useDrawLine(fill);
 
   return (
-    <SectionShell
-      id="experience"
-      art={{ src: '/art/art-experience.webp', alt: 'Manga illustration of Suriya looking off into the distance' }}
-    >
+    <SectionShell id="experience">
       <SectionHeader
         n="03"
         kicker="My journey"
@@ -20,8 +17,6 @@ export default function ExperienceSection() {
         accentLast
         aside={
           <>
-            Turning ideas into real-world products through hands-on experience, continuous
-            learning and collaboration.
           </>
         }
       />

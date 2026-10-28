@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { navSections } from '../../data/manga';
 import { scrollToSection } from '../../lib/manga/scroll';
 import { useActiveSection } from '../../lib/manga/hooks';
-import AmbientAudio from './AmbientAudio';
 
 const LINKS = navSections.filter((s) => s.id !== 'contact');
 
@@ -146,8 +145,8 @@ export default function Nav() {
           </nav>
         </div>
 
-        {/* Right side controls: Download Résumé + Ambient audio */}
-        <div className="hidden md:flex items-center justify-end gap-2 w-[220px]">
+        {/* Right side controls: Download Résumé */}
+        <div className="hidden md:flex items-center justify-end">
           <a
             href="/Suriya_S_Resume.pdf"
             download="Suriya_S_Resume.pdf"
@@ -161,12 +160,10 @@ export default function Nav() {
             </svg>
             <span style={{ lineHeight: 1 }}>Resume</span>
           </a>
-          <AmbientAudio variant="nav" />
         </div>
 
-        {/* Mobile controls: Audio toggle & hamburger button */}
-        <div className="flex md:hidden items-center gap-1.5 ml-auto">
-          <AmbientAudio variant="compact" />
+        {/* Mobile controls: hamburger button */}
+        <div className="flex md:hidden items-center ml-auto">
           <button
             ref={toggleRef}
             className="flex flex-col justify-center gap-[5px] min-h-[40px] p-2 -mr-2"
@@ -236,10 +233,6 @@ export default function Nav() {
             </svg>
             <span style={{ lineHeight: 1 }}>Download Resume</span>
           </a>
-
-          <div className="mt-6">
-            <AmbientAudio variant="drawer" />
-          </div>
 
           <p className="label mt-6">{navSections.length} sections · one page</p>
         </div>

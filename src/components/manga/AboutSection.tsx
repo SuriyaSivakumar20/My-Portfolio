@@ -4,10 +4,7 @@ import { about } from '../../data/manga';
 
 export default function AboutSection() {
   return (
-    <SectionShell
-      id="about"
-      art={{ src: '/art/art-about.webp', alt: 'Manga portrait of Suriya against a burnt-orange ink block' }}
-    >
+    <SectionShell id="about">
       <SectionHeader
         n="02"
         kicker="About me"
@@ -21,14 +18,14 @@ export default function AboutSection() {
         }
       />
 
-      <p className="mt-9 text-[1.05rem] leading-[1.75] text-[var(--ink-2)] max-w-[64ch]" data-reveal>
-        <span className="float-left font-display text-[3.6rem] leading-[0.78] mr-3 mt-1.5 text-[var(--accent)]">
+      <p className="mt-9 text-[1.1rem] leading-[1.8] text-[var(--ink-2)] max-w-4xl" data-reveal>
+        <span className="float-left font-display text-[3.8rem] leading-[0.78] mr-3 mt-1.5 text-[var(--accent)]">
           {about.intro.slice(0, 1)}
         </span>
         {about.intro.slice(1)}
       </p>
 
-      <div className="mt-11 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {about.blocks.map((b, i) => (
           <article key={b.label} className="panel panel--hatched p-6 pt-9" data-reveal>
             <span className={`panel__tab ${i === 1 ? 'panel__tab--accent' : ''}`}>

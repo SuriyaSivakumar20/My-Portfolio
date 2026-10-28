@@ -33,9 +33,9 @@ export default function MotionFx() {
     const main = document.getElementById('main');
     if (!main) return;
 
-    const skewTo = gsap.quickTo(main, 'skewY', { duration: 0.4, ease: 'power3.out' });
+    const skewTo = gsap.quickTo(main, 'skewY', { duration: 0.3, ease: 'power2.out', force3D: true });
     const flareTo = gsap.quickTo('.streaks', 'opacity', { duration: 0.35, ease: 'power2.out' });
-    const driftTo = gsap.quickTo('.streaks', 'x', { duration: 0.55, ease: 'power2.out' });
+    const driftTo = gsap.quickTo('.streaks', 'x', { duration: 0.55, ease: 'power2.out', force3D: true });
 
     let lastY = window.scrollY;
     let vel = 0;
@@ -54,8 +54,8 @@ export default function MotionFx() {
       if (vel < 0.06) vel = 0;
 
       const flare = Math.min(1, vel / 34);
-      const skew = d === 0 || vel === 0 ? 0 : Math.max(-2.2, Math.min(2.2, d * 0.16));
-      const drift = d === 0 || vel === 0 ? 0 : -Math.sign(d) * Math.min(150, vel * 2.4);
+      const skew = d === 0 || vel === 0 ? 0 : Math.max(-0.8, Math.min(0.8, d * 0.05));
+      const drift = d === 0 || vel === 0 ? 0 : -Math.sign(d) * Math.min(120, vel * 2.0);
 
       /* change-gated calls — but a zero target always lands, so the rest
          state is exactly 0 (identity transform, opacity 0), never a

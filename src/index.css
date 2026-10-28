@@ -82,71 +82,35 @@ img { display: block; max-width: 100%; }
 }
 
 /* --------------------------- PAPER STAGE --------------------------- */
-/* Fixed, full-bleed substrate: paper photo + printed distress + halftone
-   + grain. It drifts slower than the content (0.1x) so the page reads as
-   one sheet of paper being pulled past the camera.                       */
+/* Fixed, full-bleed substrate: vintage parchment texture framing all non-home pages.
+   Drifts slower than content (0.1x) to create subtle tactile parallax. */
 .paper-stage {
   position: fixed;
-  inset: -6vh -4vw;
+  inset: -6vh -2vw;
   z-index: -2;
   pointer-events: none;
-  background-color: var(--paper);
+  background-color: #ebe5d8;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .paper-stage__photo {
   position: absolute;
   inset: 0;
-  background: url('/art/paper.webp') center / cover no-repeat;
-  opacity: 0.9;
+  background: url('/art/page-bg.jpg') center / cover no-repeat;
+  opacity: 1;
 }
-.paper-stage__distress {
-  position: absolute;
-  inset: 0;
-  background: url('/art/distress.webp') center / cover no-repeat;
-  opacity: 0.5;
-  mix-blend-mode: multiply;
-}
-.paper-stage__halftone {
-  position: absolute;
-  inset: 0;
-  background: url('/art/halftone.webp') repeat;
-  background-size: 72px 72px;
-  opacity: 0.16;
-}
-.paper-stage__grain {
-  position: absolute;
-  inset: 0;
-  background: url('/art/grain.webp') repeat;
-  background-size: 160px 160px;
-  opacity: 0.3;
-  mix-blend-mode: overlay;
-}
-/* soft press-mark vignette so the sheet feels handled */
+.paper-stage__distress,
+.paper-stage__halftone,
+.paper-stage__grain,
 .paper-stage__vignette {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(120% 80% at 50% 0%, rgba(255, 253, 247, 0.65), transparent 55%),
-    radial-gradient(100% 70% at 50% 110%, rgba(26, 21, 18, 0.1), transparent 60%);
+  display: none;
 }
 
-/* the continuous spine: one orange rule threading every section together */
+/* spine is hidden to keep the new background artwork clean and unobstructed */
 .spine {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: max(24px, calc((100vw - 1440px) / 2 - 34px));
-  width: 2px;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      var(--accent) 0 26px,
-      transparent 26px 40px
-    );
-  opacity: 0.5;
+  display: none;
 }
-@media (max-width: 1180px) { .spine { display: none; } }
 
 /* --------------------------- TYPOGRAPHY --------------------------- */
 .kicker {
@@ -271,13 +235,16 @@ img { display: block; max-width: 100%; }
   left: 0;
   right: 0;
   top: -1px;
-  height: 3px;
+  height: 2px;
   background: linear-gradient(
     90deg,
-    var(--accent) 0 14%,
-    var(--ink) 14% 15.4%,
-    transparent 15.4% 100%
+    transparent 0%,
+    var(--accent) 15%,
+    var(--rule-strong) 50%,
+    var(--accent) 85%,
+    transparent 100%
   );
+  opacity: 0.55;
 }
 
 /* diagonal hazard tape used as a margin accent */
@@ -431,7 +398,9 @@ img { display: block; max-width: 100%; }
 /* manga panel: hairline frame with clipped top-right corner + orange tab */
 .panel {
   position: relative;
-  background: linear-gradient(180deg, rgba(255, 253, 247, 0.78), rgba(237, 231, 218, 0.6));
+  background: linear-gradient(180deg, rgba(255, 253, 247, 0.88), rgba(245, 239, 227, 0.82));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1.5px solid var(--ink);
   clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
   transition: transform 0.45s var(--ease-print), box-shadow 0.45s var(--ease-print);
@@ -1103,6 +1072,15 @@ img { display: block; max-width: 100%; }
   overflow: hidden;
   pointer-events: none;
   opacity: 0;
+  transform: translate3d(0, 0, 0);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+#main {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .streak {
   position: absolute;
@@ -1185,14 +1163,4 @@ img { display: block; max-width: 100%; }
 .panel--hover:hover::before {
   transform: translateX(330%) skewX(-16deg);
   opacity: 1;
-}
-
-/* Ambient music equalizer visualizer */
-@keyframes equalizer {
-  0%, 100% {
-    height: 3px;
-  }
-  50% {
-    height: 12px;
-  }
 }

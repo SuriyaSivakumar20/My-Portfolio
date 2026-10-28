@@ -54,13 +54,7 @@ export default function ContactSection() {
   }
 
   return (
-    <SectionShell
-      id="contact"
-      art={{
-        src: '/art/art-contact.webp',
-        alt: 'Manga illustration of Suriya at a desk, writing at the workspace',
-      }}
-    >
+    <SectionShell id="contact">
       <SectionHeader
         n="06"
         kicker="Get in touch"
@@ -69,7 +63,7 @@ export default function ContactSection() {
         aside={<>{contact.intro[0]}</>}
       />
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_264px]">
+      <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
         <form ref={formRef} onSubmit={onSubmit} noValidate data-reveal className="min-w-0">
           <div className="grid gap-6 sm:grid-cols-2">
             <label className="field">

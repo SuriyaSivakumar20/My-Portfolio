@@ -57,13 +57,14 @@ export const experience: Experience[] = [
     id: 'caratlane',
     role: 'Software Developer Intern',
     company: 'CaratLane — A Tata Product',
-    period: 'Dec 2025 — Ongoing',
+    period: 'Dec 2025 — Sept 2026',
     verbs: ['SYSTEMS', 'AUTOMATION', 'BACKEND'],
     lines: [
       'Working on real-world backend systems in a production environment.',
       'Contributing to feature development and system optimization.',
       'Collaborating with experienced engineers while improving the EZ Sales app experience.',
     ],
+    
     tags: ['SQL', 'Node', 'Go'],
     current: true,
   },

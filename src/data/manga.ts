@@ -52,17 +52,18 @@ export const about = {
       ],
     },
     {
-      label: 'Experience',
-      value: 'SDE Intern',
-      meta: 'Dec 2025 — Ongoing',
-      lines: ['CaratLane — A Tata Product', 'Full stack Engineering & automation'],
+      label: 'Current Role',
+      value: 'Associate Software Engineer',
+      meta: 'Nov 2026 — Present',
+      lines: ['Red-Kite Solutions', 'Full stack Engineering & automation'],
     },
     {
       label: 'Location',
-      value: 'India',
-      meta: 'Open to remote',
-      lines: ['Pondicherry, Puducherry, India'],
+      value: 'Bangalore, India',
+      meta: 'Remote / On-site',
+      lines: ['Bangalore, India'],
     },
+    
   ],
   interests: [
     'Building Products',
@@ -89,8 +90,8 @@ export interface TimelineEntry {
 export const timeline: TimelineEntry[] = [
   {
     id: 'caratlane',
-    date: 'Dec 2025 — Jun 2026',
-    role: 'SDE Intern',
+    date: 'Dec 2025 — Sept 2026',
+    role: 'Software Developer Intern',
     company: 'CaratLane — A Tata Product',
     place: 'Chennai, India',
     summary:
